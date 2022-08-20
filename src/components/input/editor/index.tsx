@@ -1,5 +1,6 @@
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import ButtonIcon from "components/button/icon";
 import { useController, useFormContext } from "react-hook-form";
 import ArrowGoBackLineIcon from "remixicon-react/ArrowGoBackLineIcon";
 import ArrowGoForwardLineIcon from "remixicon-react/ArrowGoForwardLineIcon";
@@ -44,11 +45,19 @@ const Nav = () => {
   const size = "1.8rem";
   return (
     <NavContainer>
-      <ArrowGoBackLineIcon size={size} />
-      <ArrowGoForwardLineIcon size={size} />
+      <ButtonIcon onClick={() => {}}>
+        <ArrowGoBackLineIcon size={size} />
+      </ButtonIcon>
+      <ButtonIcon>
+        <ArrowGoForwardLineIcon size={size} />
+      </ButtonIcon>
       <NavDivider />
-      <BoldIcon size={size} />
-      <ItalicIcon size={size} />
+      <ButtonIcon>
+        <BoldIcon size={size} />
+      </ButtonIcon>
+      <ButtonIcon>
+        <ItalicIcon size={size} />
+      </ButtonIcon>
     </NavContainer>
   );
 };

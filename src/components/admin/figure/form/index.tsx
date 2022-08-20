@@ -11,6 +11,12 @@ import Text from "components/text";
 // styles
 import { Container, Section } from "./styles";
 
+interface IAdminFigureForm {
+  name: string;
+  price: number;
+  info: string;
+}
+
 const AdminFigureForm = ({
   title,
   submitButtonLabel,
@@ -20,13 +26,13 @@ const AdminFigureForm = ({
   title: string;
   submitButtonLabel: string;
   onSubmit: (data: any) => void;
-  formProps?: UseFormProps;
+  formProps?: UseFormProps<IAdminFigureForm>;
 }) => {
-  const methods = useForm(formProps);
+  const formMethods = useForm<IAdminFigureForm>(formProps);
 
   return (
-    <FormProvider {...methods}>
-      <Container onSubmit={methods.handleSubmit(onSubmit)}>
+    <FormProvider {...formMethods}>
+      <Container onSubmit={formMethods.handleSubmit(onSubmit)}>
         <Text variant="title-3">{title}</Text>
         <Input label="Product name *" name="name" />
         <InputCurrency label="Price *" name="price" />

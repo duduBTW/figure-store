@@ -1,4 +1,4 @@
-import { prisma } from "../db/client";
+import { prisma } from "../client";
 
 const getProduct = async (id: string) =>
   prisma.product.findUnique({
@@ -9,9 +9,9 @@ const getProduct = async (id: string) =>
 
 const getProductList = async () => prisma.product.findMany();
 
-const services = {
+const dbServices = {
   getProduct,
   getProductList,
 } as const;
 
-export default services;
+export default dbServices;

@@ -10,7 +10,10 @@ export const mq = {
 };
 
 export const colors = {
-  primary: "#327DF0",
+  primary: {
+    main: "#327DF0",
+    light: "#E6EFFD",
+  },
   content: "#FFFFFF",
   background: "#F3F5F8",
   text: {

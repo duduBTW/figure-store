@@ -4,14 +4,7 @@ import { authOptions as nextAuthOptions } from "../auth/[...nextauth]";
 import dbServices from "server/db/services";
 
 const apiGetProduct = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getServerSession(req, res, nextAuthOptions);
-  if (!session)
-    res.status(401).send({
-      error:
-        "You must be signed in to view the protected content on this page.",
-    });
-
-  const id = req.query["id"];
+  const id = req.body["id"];
   if (typeof id !== "string") {
     return res.status(400).send("id is required");
   }

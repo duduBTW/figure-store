@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 import route from "server/clientRoutes";
-import services from "server/services";
+import dbServices from "server/db/services";
 
 const OrderPage: NextPage = () => {
   return <div>Order</div>;
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = (context) =>
           notFound: true,
         };
 
-      const figure = await services.getProduct(id);
+      const figure = await dbServices.getProduct(id);
       if (!figure)
         return {
           notFound: true,

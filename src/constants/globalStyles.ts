@@ -3,7 +3,8 @@ import { colors } from "./theme";
 
 const globalStyles = css`
   :root {
-    --color-primary: ${colors.primary};
+    --color-primary: ${colors.primary.main};
+    --color-primary-l: ${colors.primary.light};
     --color-background: ${colors.background};
     --color-content: ${colors.content};
     --color-divider: ${colors.divider};

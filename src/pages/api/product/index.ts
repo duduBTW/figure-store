@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession as getServerSession } from "next-auth";
 import { authOptions as nextAuthOptions } from "../auth/[...nextauth]";
-import services from "server/services";
+import dbServices from "server/db/services";
 
 const apiGetProductList = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, nextAuthOptions);
@@ -11,7 +11,7 @@ const apiGetProductList = async (req: NextApiRequest, res: NextApiResponse) => {
         "You must be signed in to view the protected content on this page.",
     });
 
-  return res.send(await services.getProductList());
+  return res.send(await dbServices.getProductList());
 };
 
 export default apiGetProductList;

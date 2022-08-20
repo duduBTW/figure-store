@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { mq } from "constants/theme";
 import { TextVariant } from ".";
 
 interface ContainerProps {
@@ -19,8 +20,13 @@ export const title2 = css`
   font-family: "Poppins";
   font-style: normal;
   font-weight: 275;
-  font-size: 4.2rem;
-  line-height: 4.8rem;
+  font-size: 3.8rem;
+  line-height: 4.2rem;
+
+  ${mq.fromMobileLg} {
+    font-size: 4.2rem;
+    line-height: 4.8rem;
+  }
 `;
 
 const getStyles = (variant: TextVariant) => {
@@ -42,8 +48,13 @@ const getStyles = (variant: TextVariant) => {
         font-family: "Poppins";
         font-style: normal;
         font-weight: 700;
-        font-size: 2.8rem;
-        line-height: 4rem;
+        font-size: 2.2rem;
+        line-height: 3.2rem;
+
+        ${mq.fromMobileLg} {
+          font-size: 2.8rem;
+          line-height: 4rem;
+        }
       `;
 
     case "title-4":
@@ -51,9 +62,14 @@ const getStyles = (variant: TextVariant) => {
         font-family: "Poppins";
         font-style: normal;
         font-weight: 700;
-        font-size: 2.2rem;
-        line-height: 3.2rem;
         letter-spacing: 0.02em;
+        font-size: 2rem;
+        line-height: 3rem;
+
+        ${mq.fromMobileLg} {
+          font-size: 2.2rem;
+          line-height: 3.2rem;
+        }
       `;
 
     case "title-5":

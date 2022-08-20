@@ -25,7 +25,7 @@ const ImageUploadList = () => {
     <ImageUploadItemContainer key={file.name}>
       <ImageUploadItemMiniature src={file.content} alt={file.name} />
       <Text variant="subtitle-1">
-        {index + 1} - {file.name}
+        {index + 1}. {file.name}
       </Text>
     </ImageUploadItemContainer>
   );
