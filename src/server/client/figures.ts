@@ -1,4 +1,4 @@
-export interface FigureApiResponse {
+export interface FigureListApiResponse {
   id: string;
   name: string;
   color: string;
@@ -7,9 +7,11 @@ export interface FigureApiResponse {
   images: string[];
 }
 
-export const getProductList = async (): Promise<FigureApiResponse[]> => {
-  return new Promise((res) =>
-    res([
+export const getProductList = async (
+  searchValue?: string
+): Promise<FigureListApiResponse[]> => {
+  return new Promise((res) => {
+    const items = [
       {
         id: "1",
         name: "Altria Pendragon",
@@ -32,6 +34,33 @@ export const getProductList = async (): Promise<FigureApiResponse[]> => {
           "https://images.goodsmile.info/cgm/images/product/20220715/12980/101520/large/345c11e1ae1cc73be9a7cf2b7a29590c.jpg",
         ],
       },
-    ])
-  );
+    ];
+
+    var result = searchValue
+      ? items.filter((item) => !item.name.search(searchValue))
+      : items;
+
+    res(result);
+  });
+};
+
+export interface FigureApiResponse {
+  id: string;
+  name: string;
+  color: string;
+  price: number;
+  description: { html: string };
+}
+export const getProduct = async (id?: string): Promise<FigureApiResponse> => {
+  return new Promise((res) => {
+    res({
+      id: "1",
+      name: "Altria Pendragon",
+      color: "#6A4DA9",
+      description: {
+        html: "<p>Poggers</p>",
+      },
+      price: 200,
+    });
+  });
 };

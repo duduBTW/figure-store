@@ -3,27 +3,14 @@ import Text from "components/text";
 import { mq } from "constants/theme";
 
 export const Container = styled.div`
-  box-sizing: border-box;
-  background: var(--color-content);
-  width: 100%;
-  padding: 3.2rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
-
-  ${mq.fromTabletMd} {
-    margin: 2rem auto;
-    max-width: 80rem;
-    border-radius: 1.2rem;
-  }
-
-  ${mq.fromMobileLg} {
-    padding: 4rem 3.2rem;
-  }
+  gap: 1.6rem;
+  margin-top: 3.2rem;
 `;
 
 // Figure item
-export const FigureContainer = styled.a`
+export const FigureContainer = styled.div`
   cursor: pointer;
   display: grid;
   grid-template-areas:
@@ -45,6 +32,19 @@ export const FigureContainer = styled.a`
     margin: 0 -2rem;
     background: var(--color-divider);
   }
+
+  ${mq.fromMobileLg} {
+    grid-template-areas:
+      "miniature name name"
+      "miniature sold stock";
+    grid-template-columns: 22rem 1fr 1.6fr;
+    grid-template-rows: 12rem 12rem;
+
+    &::after {
+      width: 100%;
+      margin: 0;
+    }
+  }
 `;
 export const FigureMiniature = styled.img`
   grid-area: miniature;
@@ -62,19 +62,29 @@ export const FigureName = styled(Text)<IFigureName>`
   margin-top: 0.8rem;
   grid-area: name;
   color: ${({ color }) => color};
+
+  ${mq.fromMobileLg} {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width: 80%;
+  }
 `;
 
 export const FigureInformation = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  margin-top: 1.6rem;
+
+  ${mq.fromMobileLg} {
+    margin: 0 0 2rem 2rem;
+    align-self: flex-end;
+  }
 `;
 
 export const FigureStock = styled(FigureInformation)`
   grid-area: stock;
-  margin-top: 1.6rem;
 `;
 export const FigureSold = styled(FigureInformation)`
   grid-area: sold;
-  margin-top: 1.6rem;
 `;

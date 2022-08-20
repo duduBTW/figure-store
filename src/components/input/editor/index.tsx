@@ -10,21 +10,24 @@ import ItalicIcon from "remixicon-react/ItalicIcon";
 // styles
 import { Content, Container, NavContainer, NavDivider } from "./styles";
 
-const InputEditor = ({ name }: { name: string }) => {
+const InputEditor = ({
+  name,
+  defaultValue,
+}: {
+  name: string;
+  defaultValue?: string;
+}) => {
   const { control } = useFormContext();
   const {
     field: { onChange, onBlur, value, ref },
   } = useController({
     control,
     name,
-    defaultValue: {
-      html: "<p>Hello World!</p>",
-    },
   });
 
   const editor = useEditor({
     extensions: [StarterKit],
-    content: value.html,
+    content: defaultValue,
     onUpdate: ({ editor }) => {
       onChange({
         json: editor.getJSON(),

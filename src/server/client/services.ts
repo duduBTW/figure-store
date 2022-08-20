@@ -1,8 +1,9 @@
-import { getProductList } from "./figures";
+import { getProductList, getProduct } from "./figures";
 
 const service = {
   getProductList,
+  getProduct,
 };
 
-export type { FigureApiResponse } from "./figures";
+export type { FigureListApiResponse, FigureApiResponse } from "./figures";
 export default service;

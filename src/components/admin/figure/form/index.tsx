@@ -15,6 +15,7 @@ interface IAdminFigureForm {
   name: string;
   price: number;
   info: string;
+  description: { html: string };
 }
 
 const AdminFigureForm = ({
@@ -38,14 +39,17 @@ const AdminFigureForm = ({
         <InputCurrency label="Price *" name="price" />
 
         <Section>
-          <Text variant="title-4">Images</Text>
-          <ImageUploadList />
+          <Text variant="title-4">Information</Text>
+          <InputEditor
+            defaultValue={formProps?.defaultValues?.description?.html}
+            name="info"
+          />
         </Section>
 
-        <Section>
-          <Text variant="title-4">Information</Text>
-          <InputEditor name="info" />
-        </Section>
+        {/* <Section>
+          <Text variant="title-4">Images</Text>
+          <ImageUploadList />
+        </Section> */}
 
         <Button type="submit">{submitButtonLabel}</Button>
       </Container>

@@ -6,6 +6,21 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 0.4rem;
 `;
+
+export const ContentContainer = styled.div`
+  position: relative;
+`;
+
+export const EndIconContainer = styled.div`
+  position: absolute;
+  right: 1.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: cenetr;
+  color: var(--color-divider);
+`;
+
 export const Content = styled.input`
   transition: box-shadow 0.1s ease-in-out;
   border: 0.1rem solid var(--color-divider);
