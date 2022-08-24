@@ -2,10 +2,10 @@
 import Search2LineIcon from "remixicon-react/Search2LineIcon";
 import Button from "components/button";
 import AddLineIcon from "remixicon-react/AddLineIcon";
+import Link from "next/link";
 
 // styles
-import { Container, SearchInput } from "./styles";
-import Link from "next/link";
+import { Container, SearchInput, Filters } from "./styles";
 
 const AdminFigureListHeader = ({
   onSearchChange,
@@ -15,22 +15,23 @@ const AdminFigureListHeader = ({
   onSearchChange: (value: string) => void;
 }) => {
   return (
-    <Container>
-      <Link href={"/admin/figure/create"}>
-        <a>
+    <>
+      <Container>
+        <Link href={"/admin/figure/create"} passHref>
           <Button color="primary-l" dense>
             <AddLineIcon fontSize={"1.6rem"} />
           </Button>
-        </a>
-      </Link>
-      <SearchInput
-        value={searchValue}
-        onChange={(e) => onSearchChange(e.target.value)}
-        name="search"
-        placeholder="Name..."
-        endIcon={<Search2LineIcon />}
-      />
-    </Container>
+        </Link>
+        <SearchInput
+          value={searchValue}
+          onChange={(e) => onSearchChange(e.target.value)}
+          name="search"
+          placeholder="Name..."
+          endIcon={<Search2LineIcon />}
+        />
+      </Container>
+      <Filters variant="button-outlined">Advanced filters</Filters>
+    </>
   );
 };
 

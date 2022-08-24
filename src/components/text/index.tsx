@@ -7,6 +7,7 @@ export type TextVariant =
   | "title-3"
   | "title-5"
   | "title-4"
+  | "button-outlined"
   | "subtitle-1"
   | "subtitle-2"
   | "body-1"

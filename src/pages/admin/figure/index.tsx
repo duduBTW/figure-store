@@ -13,6 +13,8 @@ import AdminFigureListError from "components/admin/figure/list/error";
 
 import AdminLayout from "components/admin/layout";
 import AdminFigureListHeader from "components/admin/figure/list/header";
+import AdminTabs from "components/admin/figure/tabs";
+import AdminFigureContainer from "components/admin/figure/container";
 
 interface PageProps {
   data: { figures: FigureListApiResponse[] };
@@ -31,16 +33,7 @@ const useFigureList = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = (context) =>
-  route.public(context, async () => {
-    const figures = await service.getProductList();
-
-    return {
-      figures,
-    };
-  });
-
-const AdminFigurePage: NextPage<PageProps> = ({ data: { figures } }) => {
+const AdminFigurePage = ({ data: { figures } }: PageProps) => {
   const [searchValue, setSearchValue] = useState("");
   const { data, isLoading, error } = useFigureList({
     initialData: figures,
@@ -50,17 +43,26 @@ const AdminFigurePage: NextPage<PageProps> = ({ data: { figures } }) => {
   if (isLoading) return <AdminFigureListLoading />;
   if (error) return <AdminFigureListError />;
   return (
-    <>
+    <AdminFigureContainer>
+      <AdminTabs selected="product" />
       <AdminFigureListHeader
         searchValue={searchValue}
         onSearchChange={(value) => setSearchValue(value)}
       />
       <AdminFigureList figures={data} />
-    </>
+    </AdminFigureContainer>
   );
 };
 
-// @ts-ignore
 AdminFigurePage.Layout = AdminLayout;
+
+export const getServerSideProps: GetServerSideProps = (context) =>
+  route.public(context, async () => {
+    const figures = await service.getProductList();
+
+    return {
+      figures,
+    };
+  });
 
 export default AdminFigurePage;

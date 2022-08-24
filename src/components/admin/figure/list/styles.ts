@@ -5,8 +5,23 @@ import { mq } from "constants/theme";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 2rem;
   margin-top: 3.2rem;
+`;
+
+interface IFigureName {
+  color: string;
+}
+export const FigureName = styled(Text)<IFigureName>`
+  margin-top: 0.8rem;
+  grid-area: name;
+  color: ${({ color }) => color};
+
+  ${mq.fromMobileLg} {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width: 80%;
+  }
 `;
 
 // Figure item
@@ -34,6 +49,7 @@ export const FigureContainer = styled.div`
   }
 
   ${mq.fromMobileLg} {
+    padding-bottom: 0rem;
     grid-template-areas:
       "miniature name name"
       "miniature sold stock";
@@ -41,8 +57,9 @@ export const FigureContainer = styled.div`
     grid-template-rows: 12rem 12rem;
 
     &::after {
-      width: 100%;
+      width: calc(100% - 21.2rem);
       margin: 0;
+      left: 21.2rem;
     }
   }
 `;
@@ -53,21 +70,6 @@ export const FigureMiniature = styled.img`
   object-fit: cover;
   object-position: 50% 20%;
   border-radius: 1.2rem;
-`;
-
-interface IFigureName {
-  color: string;
-}
-export const FigureName = styled(Text)<IFigureName>`
-  margin-top: 0.8rem;
-  grid-area: name;
-  color: ${({ color }) => color};
-
-  ${mq.fromMobileLg} {
-    margin-top: 2rem;
-    margin-left: 2rem;
-    width: 80%;
-  }
 `;
 
 export const FigureInformation = styled.div`

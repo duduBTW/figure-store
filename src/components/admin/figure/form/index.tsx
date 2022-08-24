@@ -1,8 +1,8 @@
 import { useForm, FormProvider, UseFormProps } from "react-hook-form";
+import { FigureApiRequest } from "server/client/figures";
 
 // components
 import Button from "components/button";
-import ImageUploadList from "components/image/upload/list";
 import Input from "components/input";
 import InputCurrency from "components/input/currency";
 import InputEditor from "components/input/editor";
@@ -11,45 +11,30 @@ import Text from "components/text";
 // styles
 import { Container, Section } from "./styles";
 
-interface IAdminFigureForm {
-  name: string;
-  price: number;
-  info: string;
-  description: { html: string };
-}
-
 const AdminFigureForm = ({
-  title,
   submitButtonLabel,
   onSubmit,
   formProps,
 }: {
-  title: string;
   submitButtonLabel: string;
-  onSubmit: (data: any) => void;
-  formProps?: UseFormProps<IAdminFigureForm>;
+  onSubmit: (data: FigureApiRequest) => void;
+  formProps?: UseFormProps<FigureApiRequest>;
 }) => {
-  const formMethods = useForm<IAdminFigureForm>(formProps);
+  const formMethods = useForm<FigureApiRequest>(formProps);
 
   return (
     <FormProvider {...formMethods}>
       <Container onSubmit={formMethods.handleSubmit(onSubmit)}>
-        <Text variant="title-3">{title}</Text>
-        <Input label="Product name *" name="name" />
+        <Input label="Name *" name="name" />
         <InputCurrency label="Price *" name="price" />
 
         <Section>
-          <Text variant="title-4">Information</Text>
+          <Text variant="subtitle-2">Details</Text>
           <InputEditor
             defaultValue={formProps?.defaultValues?.description?.html}
             name="info"
           />
         </Section>
-
-        {/* <Section>
-          <Text variant="title-4">Images</Text>
-          <ImageUploadList />
-        </Section> */}
 
         <Button type="submit">{submitButtonLabel}</Button>
       </Container>

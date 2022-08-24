@@ -19,6 +19,7 @@ export const EndIconContainer = styled.div`
   display: flex;
   align-items: cenetr;
   color: var(--color-divider);
+  pointer-events: none;
 `;
 
 export const Content = styled.input`
@@ -27,7 +28,7 @@ export const Content = styled.input`
   outline: none;
   box-sizing: border-box;
   width: 100%;
-  padding: 1rem 1.6em;
+  padding: 1rem 1.4em;
   border-radius: 0.8rem;
 
   font-family: "Poppins";

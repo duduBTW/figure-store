@@ -53,14 +53,58 @@ export interface FigureApiResponse {
 }
 export const getProduct = async (id?: string): Promise<FigureApiResponse> => {
   return new Promise((res) => {
-    res({
-      id: "1",
-      name: "Altria Pendragon",
-      color: "#6A4DA9",
-      description: {
-        html: "<p>Poggers</p>",
-      },
-      price: 200,
-    });
+    setTimeout(() => {
+      res({
+        id: "1",
+        name: "Altria Pendragon",
+        color: "#6A4DA9",
+        description: {
+          html: "<p>Poggers</p>",
+        },
+        price: 200,
+      });
+    }, 2000);
+  });
+};
+
+export interface FigureApiRequest {
+  name: string;
+  price: number;
+  info: string;
+  description: { html: string };
+}
+export const insertProduct = async (
+  data: FigureApiRequest
+): Promise<FigureApiResponse> => {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res({
+        id: "1",
+        name: "Altria Pendragon",
+        color: "#6A4DA9",
+        description: {
+          html: "<p>Poggers</p>",
+        },
+        price: 200,
+      });
+    }, 1000);
+  });
+};
+
+export const editProduct = async (
+  data: FigureApiRequest
+): Promise<FigureApiResponse> => {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res({
+        id: "1",
+        name: "Altria Pendragon",
+        color: "#6A4DA9",
+        description: {
+          html: "<p>Poggers</p>",
+        },
+        price: 200,
+      });
+    }, 1000);
   });
 };

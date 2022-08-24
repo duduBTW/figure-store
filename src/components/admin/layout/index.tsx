@@ -12,10 +12,7 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Container>
-        <AdminTabs />
-        {children}
-      </Container>
+      <Container>{children}</Container>
     </QueryClientProvider>
   );
 };

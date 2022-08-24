@@ -17,16 +17,20 @@ const Tabs = ({
   );
 
   return (
-    <div>
+    <>
       <Container>
         {tabs.map((tab, index) => (
-          <TabItem selected={activeTab === index} key={tab}>
+          <TabItem
+            onClick={() => setActiveTab(index)}
+            selected={activeTab === index}
+            key={tab}
+          >
             {tab}
           </TabItem>
         ))}
       </Container>
       {selectedContent}
-    </div>
+    </>
   );
 };
 

@@ -3,11 +3,10 @@ import styled from "@emotion/styled";
 import { mq } from "constants/theme";
 
 export const Container = styled.div`
-  background: var(--color-content);
-  margin: 0 auto;
   display: flex;
   overflow-x: auto;
-  box-sizing: border-box;
+  margin: -1.2rem -2rem 3.2rem;
+  padding-bottom: 0.4rem;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -15,7 +14,7 @@ export const Container = styled.div`
     display: none;
   }
 
-  /* position: relative;
+  position: relative;
   &::after {
     content: "";
     position: absolute;
@@ -25,23 +24,17 @@ export const Container = styled.div`
     width: calc(100% + 4rem);
     margin: 0 -2rem;
     background: var(--color-divider);
-  } */
+  }
 
-  ${mq.fromTabletMd} {
-    max-width: 80rem;
-    border-radius: 1.2rem;
-    margin: 2rem auto;
-
-    &::after {
-      display: none;
-    }
+  ${mq.fromMobileLg} {
+    margin: -1.2rem -3.2rem 3.2rem;
   }
 `;
 
 interface ITabItem {
   selected?: boolean;
 }
-export const TabItem = styled.button<ITabItem>`
+export const TabItem = styled.div<ITabItem>`
   cursor: pointer;
   text-align: center;
   padding: 1.2rem 2rem;
@@ -68,7 +61,7 @@ export const TabItem = styled.button<ITabItem>`
       &:after {
         content: "";
         position: absolute;
-        bottom: -0rem;
+        bottom: -0.4rem;
         left: 50%;
         transform: translateX(-50%);
         width: 6rem;

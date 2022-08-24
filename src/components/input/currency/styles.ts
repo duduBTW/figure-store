@@ -7,6 +7,8 @@ export const Content = styled(CurrencyFormat)`
   padding: 0;
   border: none;
   color: var(--text-primary);
-
   ${title2}
+
+  // oh no, !important, heck (っ °Д °;)っ
+  line-height: 100% !important;
 `;

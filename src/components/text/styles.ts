@@ -112,6 +112,21 @@ const getStyles = (variant: TextVariant) => {
         line-height: 2.4rem;
         letter-spacing: 0.02em;
       `;
+
+    case "button-outlined":
+      return css`
+        cursor: pointer;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+        text-underline-offset: 0.2rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      `;
   }
 };
 
