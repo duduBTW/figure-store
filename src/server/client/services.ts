@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   getProductList,
   getProduct,
@@ -5,6 +6,10 @@ import {
   editProduct,
 } from "./figures";
 import { getOrderList } from "./order";
+
+export const api = axios.create({
+  baseURL: "http://localhost:3000/",
+});
 
 const service = {
   getProductList,

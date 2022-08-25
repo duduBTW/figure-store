@@ -4,8 +4,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import service, { FigureApiResponse } from "server/client/services";
 
 // components
-import AdminFigureForm from "components/admin/figure/form";
 import Tabs from "components/tabs";
+import AdminFigureForm from "components/admin/figure/form";
 import AdminFigureImages from "components/admin/figure/images";
 import AdminFigureHeader from "components/admin/figure/header";
 import AdminLayout from "components/admin/layout";
@@ -35,7 +35,7 @@ const EditFigurePage = ({
     initialData: figureInitialData,
     id,
   });
-  const { mutate, isLoading } = useMutation(service.editProduct, {
+  const { mutate, isLoading } = useMutation(service.editProduct(id), {
     onSuccess: () => refetch(),
   });
 
@@ -70,8 +70,8 @@ EditFigurePage.Layout = AdminLayout;
 export const getServerSideProps: GetServerSideProps<PageProps> = (context) =>
   route.public(context, async () => {
     return {
-      figure: await service.getProduct("1"),
-      id: String(context.params?.id),
+      figure: await service.getProduct(String(context.params?.figureId)),
+      id: String(context.params?.figureId),
     };
   });
 

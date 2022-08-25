@@ -1,4 +1,4 @@
-import { useEditor } from "@tiptap/react";
+import { Content as EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ButtonIcon from "components/button/icon";
 import { useController, useFormContext } from "react-hook-form";
@@ -15,11 +15,11 @@ const InputEditor = ({
   defaultValue,
 }: {
   name: string;
-  defaultValue?: string;
+  defaultValue?: EditorContent;
 }) => {
   const { control } = useFormContext();
   const {
-    field: { onChange, onBlur, value, ref },
+    field: { onChange, onBlur, ref },
   } = useController({
     control,
     name,
@@ -30,7 +30,7 @@ const InputEditor = ({
     content: defaultValue,
     onUpdate: ({ editor }) => {
       onChange({
-        json: editor.getJSON(),
+        json: JSON.stringify(editor.getJSON()),
         html: editor.getHTML(),
       });
     },

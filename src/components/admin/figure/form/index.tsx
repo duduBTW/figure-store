@@ -20,6 +20,7 @@ const AdminFigureForm = ({
   onSubmit: (data: FigureApiRequest) => void;
   formProps?: UseFormProps<FigureApiRequest>;
 }) => {
+  const editorDefaultValue = formProps?.defaultValues?.description?.json;
   const formMethods = useForm<FigureApiRequest>(formProps);
 
   return (
@@ -31,8 +32,10 @@ const AdminFigureForm = ({
         <Section>
           <Text variant="subtitle-2">Details</Text>
           <InputEditor
-            defaultValue={formProps?.defaultValues?.description?.html}
-            name="info"
+            defaultValue={
+              editorDefaultValue ? JSON.parse(editorDefaultValue) : ""
+            }
+            name="description"
           />
         </Section>
 

@@ -43,7 +43,13 @@ const Figure = ({
 }: FigureListApiResponse) => {
   return (
     <FigureContainer>
-      <FigureMiniature src={images[0]} alt={`Miniature 0 for figure ${name}`} />
+      <FigureMiniature
+        src={
+          images[0] ??
+          "https://pbs.twimg.com/media/FZjjnUqaAAEZ9aU?format=jpg&name=medium"
+        }
+        alt={`Miniature 0 for figure ${name}`}
+      />
       <FigureName color={color} variant="title-3">
         {name}
       </FigureName>

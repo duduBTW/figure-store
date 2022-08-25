@@ -66,11 +66,12 @@ model VerificationToken {
 }
 
 model Product {
-    id          String @id @default(cuid())
-    name        String
-    color       String @default("#383838")
-    price       Float
-    description String
+    id              String  @id @default(cuid())
+    name            String
+    color           String? @default("#383838")
+    price           Float
+    descriptionJson String
+    descriptionHtml String
 
     images Image[]
     order  Order[]
