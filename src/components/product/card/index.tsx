@@ -1,14 +1,17 @@
 import { useMemo } from "react";
-import Text from "components/text";
-import { Container, Miniature } from "./styles";
 import Link from "next/link";
+
+// styles
+import { Container, Miniature, Title } from "./styles";
 
 const ProductCard = ({
   price,
   miniature,
+  color,
 }: {
   price: number;
   miniature: string;
+  color: string;
 }) => {
   const formatedPrice = useMemo(
     () =>
@@ -21,9 +24,9 @@ const ProductCard = ({
 
   return (
     <Link href={"/figure/1"} passHref>
-      <Container>
+      <Container figureColor={color}>
         <Miniature src={miniature} />
-        <Text variant="title-5">{formatedPrice}</Text>
+        <Title variant="title-5">{formatedPrice}</Title>
       </Container>
     </Link>
   );

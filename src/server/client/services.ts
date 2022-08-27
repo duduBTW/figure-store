@@ -4,6 +4,7 @@ import {
   getProduct,
   insertProduct,
   editProduct,
+  getNewProductList,
 } from "./figures";
 import { getOrderList } from "./order";
 
@@ -17,6 +18,7 @@ const service = {
   insertProduct,
   editProduct,
   getOrderList,
+  getNewProductList,
 };
 
 export type { OrderListApiResponse } from "./order";

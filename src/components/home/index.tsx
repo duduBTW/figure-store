@@ -1,8 +1,8 @@
 // components
-import Alert from "components/alert";
+import AlertCard from "components/alert/card";
 import ProductCard from "components/product/card";
 import Text from "components/text";
-import Banner from "./banner";
+import HomeBanner from "./banner";
 
 // styles
 import { AlertList, Container, ProductGrid, Section } from "./styles";
@@ -16,12 +16,11 @@ const alerts = [
 const Home = () => {
   return (
     <Container>
-      <Banner />
       <AlertList>
         {alerts.map((alert) => (
-          <Alert type="warning" key={alert}>
+          <AlertCard type="warning" key={alert}>
             {alert}
-          </Alert>
+          </AlertCard>
         ))}
       </AlertList>
       <Section>

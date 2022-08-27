@@ -1,9 +1,44 @@
-import { Content } from "./styles";
+import { Pagination, Navigation } from "swiper";
 
-const Banner = () => {
+// components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// styles
+import { Content, Container } from "./styles";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+const HomeBanner = ({ slides }: { slides: string[] }) => {
+  const getSlide = (slide: string) => (
+    <SwiperSlide
+      key={slide}
+      style={{
+        maxWidth: "120rem",
+      }}
+    >
+      <Content src={slide} />
+    </SwiperSlide>
+  );
+
   return (
-    <Content src="https://pbs.twimg.com/media/FZjkT28acAEOTBN?format=jpg&name=4096x4096" />
+    <Container>
+      <Swiper
+        pagination={{
+          clickable: true,
+        }}
+        navigation={{
+          enabled: true,
+        }}
+        modules={[Pagination, Navigation]}
+        slidesPerView={"auto"}
+        spaceBetween={16}
+        centeredSlides
+      >
+        {slides.map(getSlide)}
+      </Swiper>
+    </Container>
   );
 };
 
-export default Banner;
+export default HomeBanner;

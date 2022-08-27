@@ -23,7 +23,7 @@ const getIcon = (type: AlertType) => {
   }
 };
 
-const Alert = ({
+const AlertCard = ({
   children,
   type,
 }: PropsWithChildren<{
@@ -37,4 +37,4 @@ const Alert = ({
   );
 };
 
-export default Alert;
+export default AlertCard;

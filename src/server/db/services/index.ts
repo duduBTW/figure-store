@@ -30,6 +30,17 @@ const getProductList = async ({ name }: { name?: string }) =>
       : undefined,
   });
 
+const getNewProductList = async () =>
+  prisma.product.findMany({
+    select: {
+      id: true,
+      name: true,
+      images: true,
+      color: true,
+      price: true,
+    },
+  });
+
 // -- MANIPULATE figure -- //
 export const figureScheme = z.object({
   name: z.string(),
@@ -95,6 +106,7 @@ const dbServices = {
   getProductList,
   insertProduct,
   updateProduct,
+  getNewProductList,
 } as const;
 
 export default dbServices;

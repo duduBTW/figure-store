@@ -5,6 +5,7 @@ export interface FigureListApiResponse {
   id: string;
   name: string;
   color: string;
+  price: number;
   sold?: number;
   stock?: number;
   images: string[];
@@ -15,6 +16,11 @@ export const getProductList = async (
   const response = await api.get<FigureListApiResponse[]>(
     `/api/figure?name=${searchValue}`
   );
+  return response.data;
+};
+
+export const getNewProductList = async (): Promise<FigureListApiResponse[]> => {
+  const response = await api.get<FigureListApiResponse[]>(`/api/figure/new`);
   return response.data;
 };
 
