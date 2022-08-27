@@ -30,6 +30,7 @@ export interface FigureApiResponse {
   color: string;
   price: number;
   description: { html: string };
+  details: { html: string };
 }
 export const getProduct = async (id?: string): Promise<FigureApiResponse> => {
   const response = await api.get<FigureApiResponse>(`/api/figure/${id}`);

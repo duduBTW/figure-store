@@ -8,10 +8,12 @@ const ProductCard = ({
   price,
   miniature,
   color,
+  id,
 }: {
   price: number;
   miniature: string;
   color: string;
+  id: string;
 }) => {
   const formatedPrice = useMemo(
     () =>
@@ -23,7 +25,7 @@ const ProductCard = ({
   );
 
   return (
-    <Link href={"/figure/1"} passHref>
+    <Link href={`/figure/${id}`} passHref>
       <Container figureColor={color}>
         <Miniature src={miniature} />
         <Title variant="title-5">{formatedPrice}</Title>

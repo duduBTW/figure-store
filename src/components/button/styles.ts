@@ -8,6 +8,7 @@ interface Content {
   loading?: boolean;
 }
 export const Content = styled.button<Content>`
+  box-sizing: border-box;
   border: none;
   outline: none;
 

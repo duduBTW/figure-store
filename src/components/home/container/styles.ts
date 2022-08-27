@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mq } from "constants/theme";
 
 export const Container = styled.div`
   padding-top: 2rem;
@@ -7,5 +8,9 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   max-width: 120rem;
-  margin: 0 auto;
+  margin: 0 2rem;
+
+  ${mq.fromDesktopSm} {
+    margin: 0 auto;
+  }
 `;
