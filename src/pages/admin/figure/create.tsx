@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import AdminFigureForm from "components/admin/figure/form";
 import AdminFigureHeader from "components/admin/figure/header";
 import AdminLayout from "components/admin/layout";
-import AdminLoading from "components/admin/loading";
 import AdminSuccess from "components/admin/success";
 
 const CreateFigurePage = () => {
@@ -21,9 +20,14 @@ const CreateFigurePage = () => {
 
   const getFormBody = () => {
     if (isSuccess) return <AdminSuccess />;
-    if (isLoading) return <AdminLoading />;
 
-    return <AdminFigureForm submitButtonLabel="Create" onSubmit={mutate} />;
+    return (
+      <AdminFigureForm
+        loading={isLoading}
+        submitButtonLabel="Create"
+        onSubmit={mutate}
+      />
+    );
   };
 
   return (

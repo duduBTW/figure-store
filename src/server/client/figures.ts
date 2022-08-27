@@ -5,8 +5,8 @@ export interface FigureListApiResponse {
   id: string;
   name: string;
   color: string;
-  sold: number;
-  stock: number;
+  sold?: number;
+  stock?: number;
   images: string[];
 }
 export const getProductList = async (
@@ -31,10 +31,17 @@ export const getProduct = async (id?: string): Promise<FigureApiResponse> => {
 };
 
 // -- MANIPULATE figure -- //
+interface EditorContent {
+  html: string;
+  json: string;
+}
+
 export interface FigureApiRequest {
   name: string;
+  color: string;
   price: number;
-  description: { html: string; json: string };
+  description: EditorContent;
+  details: EditorContent;
 }
 
 export const insertProduct = async (

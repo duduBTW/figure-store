@@ -62,6 +62,9 @@ export const FigureContainer = styled.div`
       left: 21.2rem;
     }
   }
+
+  &:hover {
+  }
 `;
 export const FigureMiniature = styled.img`
   grid-area: miniature;

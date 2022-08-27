@@ -1,11 +1,15 @@
 import ImageUploadList from "components/image/upload/list";
-import AdminFigureContainer from "../container";
+import Text from "components/text";
+
+// styles
+import { Section } from "./styles";
 
 const AdminFigureImages = () => {
   return (
-    <AdminFigureContainer>
+    <Section>
+      <Text variant="subtitle-2">Add Images</Text>
       <ImageUploadList />
-    </AdminFigureContainer>
+    </Section>
   );
 };
 

@@ -15,6 +15,7 @@ export const Content = styled(EditorContent)`
 
     p {
       ${body1Styles}
+      padding: 0.6rem 0;
     }
   }
 `;

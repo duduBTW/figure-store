@@ -29,15 +29,7 @@ const apiGetProduct = async (req: NextApiRequest, res: NextApiResponse) => {
       const figure = await dbServices.getProduct(id);
       if (!figure) return res.status(404).send({});
 
-      return res.send({
-        id: figure.id,
-        name: figure.name,
-        price: figure.price,
-        description: {
-          html: figure.descriptionHtml,
-          json: figure.descriptionJson,
-        },
-      });
+      return res.send(figure);
 
     default:
       return res.status(404).send({});

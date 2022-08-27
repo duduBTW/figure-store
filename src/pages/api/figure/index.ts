@@ -21,7 +21,7 @@ const apiGetProductList = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
     case "GET":
-      return res.send(await dbServices.getProductList());
+      return res.send(await dbServices.getProductList(req.query));
 
     default:
       return res.status(404).send({});

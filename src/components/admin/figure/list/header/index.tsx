@@ -9,9 +9,7 @@ import { Container, SearchInput, Filters } from "./styles";
 
 const AdminFigureListHeader = ({
   onSearchChange,
-  searchValue,
 }: {
-  searchValue: string;
   onSearchChange: (value: string) => void;
 }) => {
   return (
@@ -23,7 +21,7 @@ const AdminFigureListHeader = ({
           </Button>
         </Link>
         <SearchInput
-          value={searchValue}
+          data-tcy="search"
           onChange={(e) => onSearchChange(e.target.value)}
           name="search"
           placeholder="Name..."

@@ -5,6 +5,7 @@ import { ButtonColor } from ".";
 interface Content {
   dense?: boolean;
   color?: ButtonColor;
+  loading?: boolean;
 }
 export const Content = styled.button<Content>`
   border: none;
@@ -51,5 +52,13 @@ export const Content = styled.button<Content>`
           color: var(--color-primary);
         `;
     }
+  }}
+  
+  ${({ loading }) => {
+    if (loading)
+      return css`
+        pointer-events: none;
+        z-index: 4;
+      `;
   }}
 `;

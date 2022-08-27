@@ -9,6 +9,7 @@ import service, { FigureListApiResponse } from "server/client/services";
 // components
 import AdminLayout from "components/admin/layout";
 import AdminTabs from "components/admin/figure/tabs";
+import AdminFigureContainer from "components/admin/figure/container";
 
 interface PageProps {
   data: { figures: FigureListApiResponse[] };
@@ -36,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = (context) =>
     };
   });
 
-const AdminOrderPage: NextPage<PageProps> = ({ data: { figures } }) => {
+const AdminOrderPage = ({ data: { figures } }: PageProps) => {
   const [searchValue, setSearchValue] = useState("");
   const { data, isLoading, error } = useOrderList({
     initialData: figures,
@@ -44,13 +45,12 @@ const AdminOrderPage: NextPage<PageProps> = ({ data: { figures } }) => {
   });
 
   return (
-    <>
+    <AdminFigureContainer>
       <AdminTabs selected="orders" />
-    </>
+    </AdminFigureContainer>
   );
 };
 
-// @ts-ignore
 AdminOrderPage.Layout = AdminLayout;
 
 export default AdminOrderPage;

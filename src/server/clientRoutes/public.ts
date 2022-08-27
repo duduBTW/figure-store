@@ -5,7 +5,7 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 
 export const publicRoute = async <T = any>(
   context: GetServerSidePropsContext,
-  getProps?: (context: GetServerSidePropsContext) => Promise<T>
+  getProps?: (context: GetServerSidePropsContext) => Promise<T> | "notfound"
 ): Promise<GetServerSidePropsResult<any>> => {
   const { req, res } = context;
 
@@ -19,6 +19,10 @@ export const publicRoute = async <T = any>(
   });
 
   const data = await getProps?.(context);
+  if (data === "notfound")
+    return {
+      notFound: true,
+    };
 
   return {
     props: {

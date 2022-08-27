@@ -39,27 +39,23 @@ const EditFigurePage = ({
     onSuccess: () => refetch(),
   });
 
-  const getFormBody = () => {
-    if (isLoading || isFetching) return <div>Loading...</div>;
-
-    return (
-      <AdminFigureForm
-        key={0}
-        submitButtonLabel="Save"
-        onSubmit={mutate}
-        formProps={{
-          defaultValues: figure,
-        }}
-      />
-    );
-  };
-
   return (
     <>
       <AdminFigureHeader>Edit figure</AdminFigureHeader>
       <Tabs
         tabs={["information", "Images", "Orders"]}
-        content={[getFormBody(), <AdminFigureImages key={1} />]}
+        content={[
+          <AdminFigureForm
+            loading={isLoading || isFetching}
+            key={0}
+            submitButtonLabel="Save"
+            onSubmit={mutate}
+            formProps={{
+              defaultValues: figure,
+            }}
+          />,
+          <AdminFigureImages key={1} />,
+        ]}
       />
     </>
   );
@@ -69,10 +65,16 @@ EditFigurePage.Layout = AdminLayout;
 
 export const getServerSideProps: GetServerSideProps<PageProps> = (context) =>
   route.public(context, async () => {
-    return {
-      figure: await service.getProduct(String(context.params?.figureId)),
-      id: String(context.params?.figureId),
-    };
+    try {
+      const figure = await service.getProduct(String(context.params?.figureId));
+
+      return {
+        figure,
+        id: String(context.params?.figureId),
+      };
+    } catch (error) {
+      return "notfound";
+    }
   });
 
 export default EditFigurePage;

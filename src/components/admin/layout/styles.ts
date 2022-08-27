@@ -12,3 +12,9 @@ export const Container = styled.div`
     margin-top: 4rem;
   }
 `;
+
+export const Nav = styled.nav`
+  height: 6rem;
+  width: 100%;
+  background: var(--color-content);
+`;

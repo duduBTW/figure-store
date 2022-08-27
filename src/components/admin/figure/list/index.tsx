@@ -40,27 +40,29 @@ const Figure = ({
   name,
   sold,
   stock,
+  id,
 }: FigureListApiResponse) => {
   return (
-    <FigureContainer>
+    <FigureContainer data-tcy-id={id} data-tcy="figure-card">
       <FigureMiniature
-        src={
-          images[0] ??
-          "https://pbs.twimg.com/media/FZjjnUqaAAEZ9aU?format=jpg&name=medium"
-        }
+        src={images[0] ?? "/waifu-placeholder.png"}
         alt={`Miniature 0 for figure ${name}`}
       />
       <FigureName color={color} variant="title-3">
         {name}
       </FigureName>
-      <FigureSold>
-        <Text variant="subtitle-2">Sold</Text>
-        <Text variant="body-2">{sold}</Text>
-      </FigureSold>
-      <FigureStock>
-        <Text variant="subtitle-2">Stock</Text>
-        <Text variant="body-2">{stock}</Text>
-      </FigureStock>
+      {sold && (
+        <FigureSold>
+          <Text variant="subtitle-2">Sold</Text>
+          <Text variant="body-2">{sold}</Text>
+        </FigureSold>
+      )}
+      {stock && (
+        <FigureStock>
+          <Text variant="subtitle-2">Stock</Text>
+          <Text variant="body-2">{stock}</Text>
+        </FigureStock>
+      )}
     </FigureContainer>
   );
 };

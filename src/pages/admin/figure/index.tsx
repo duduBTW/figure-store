@@ -1,7 +1,8 @@
-import { useState } from "react";
+import type { GetServerSideProps } from "next";
+import { useMemo, useState } from "react";
 import route from "server/clientRoutes";
+import debounce from "lodash.debounce";
 import { useQuery } from "@tanstack/react-query";
-import type { GetServerSideProps, NextPage } from "next";
 
 // server
 import service, { FigureListApiResponse } from "server/client/services";
@@ -10,7 +11,6 @@ import service, { FigureListApiResponse } from "server/client/services";
 import AdminFigureList from "components/admin/figure/list";
 import AdminFigureListLoading from "components/admin/figure/list/loading";
 import AdminFigureListError from "components/admin/figure/list/error";
-
 import AdminLayout from "components/admin/layout";
 import AdminFigureListHeader from "components/admin/figure/list/header";
 import AdminTabs from "components/admin/figure/tabs";
@@ -22,11 +22,11 @@ interface PageProps {
 
 const useFigureList = ({
   initialData,
-  searchValue,
-}: { initialData?: FigureListApiResponse[]; searchValue?: string } = {}) => {
+  search,
+}: { initialData?: FigureListApiResponse[]; search?: string } = {}) => {
   return useQuery(
-    ["figure-list", searchValue],
-    async () => service.getProductList(searchValue),
+    ["figure-list", search],
+    async () => service.getProductList(search),
     {
       initialData,
     }
@@ -34,22 +34,30 @@ const useFigureList = ({
 };
 
 const AdminFigurePage = ({ data: { figures } }: PageProps) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [search, setSearch] = useState("");
   const { data, isLoading, error } = useFigureList({
     initialData: figures,
-    searchValue,
+    search,
   });
 
-  if (isLoading) return <AdminFigureListLoading />;
+  const onSearchChange = useMemo(
+    () =>
+      debounce((value: string) => {
+        setSearch(value);
+      }, 250),
+    []
+  );
+
   if (error) return <AdminFigureListError />;
   return (
     <AdminFigureContainer>
       <AdminTabs selected="product" />
-      <AdminFigureListHeader
-        searchValue={searchValue}
-        onSearchChange={(value) => setSearchValue(value)}
-      />
-      <AdminFigureList figures={data} />
+      <AdminFigureListHeader onSearchChange={onSearchChange} />
+      {isLoading ? (
+        <AdminFigureListLoading />
+      ) : (
+        <AdminFigureList figures={data} />
+      )}
     </AdminFigureContainer>
   );
 };
@@ -58,7 +66,7 @@ AdminFigurePage.Layout = AdminLayout;
 
 export const getServerSideProps: GetServerSideProps = (context) =>
   route.public(context, async () => {
-    const figures = await service.getProductList();
+    const figures = await service.getProductList("");
 
     return {
       figures,

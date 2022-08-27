@@ -66,15 +66,28 @@ model VerificationToken {
 }
 
 model Product {
-    id              String  @id @default(cuid())
-    name            String
-    color           String? @default("#383838")
-    price           Float
-    descriptionJson String
-    descriptionHtml String
+    id    String  @id @default(cuid())
+    name  String
+    color String? @default("#383838")
+    price Float
+
+    descEditorId String?
+    description  Editor? @relation(fields: [descEditorId], references: [id], name: "description")
+
+    detEditorId String?
+    details     Editor? @relation(fields: [detEditorId], references: [id], name: "details")
 
     images Image[]
     order  Order[]
+}
+
+model Editor {
+    id   String @id @default(cuid())
+    json String
+    html String
+
+    DescriptionProduct Product[] @relation(name: "description")
+    DetailsProduct     Product[] @relation(name: "details")
 }
 
 model Image {

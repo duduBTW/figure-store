@@ -18,7 +18,7 @@ export const Container = styled.div`
   &::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: 0.2rem;
     left: 0;
     height: 0.1rem;
     width: calc(100% + 4rem);
@@ -27,7 +27,7 @@ export const Container = styled.div`
   }
 
   ${mq.fromMobileLg} {
-    margin: -1.2rem -3.2rem 3.2rem;
+    margin: -2rem -3.2rem 3.2rem;
   }
 `;
 
