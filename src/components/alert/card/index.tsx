@@ -31,7 +31,7 @@ const AlertCard = ({
 }>) => {
   return (
     <Container type={type}>
-      {getIcon(type)}
+      <div>{getIcon(type)}</div>
       <Text variant="body-1">{children}</Text>
     </Container>
   );

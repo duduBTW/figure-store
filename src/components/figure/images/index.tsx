@@ -1,11 +1,15 @@
+import { Container, Content } from "./styles";
+
 const FigureImages = () => {
   return (
-    <img
-      src="https://pbs.twimg.com/media/FbK59D5UsAYZwdo?format=jpg&name=4096x4096"
-      style={{
-        maxWidth: "100%",
-      }}
-    />
+    <Container>
+      <Content
+        src="https://pbs.twimg.com/media/FbKHE3XVQAIbAYQ?format=jpg&name=large"
+        style={{
+          maxWidth: "100%",
+        }}
+      />
+    </Container>
   );
 };
 

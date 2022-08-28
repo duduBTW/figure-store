@@ -3,14 +3,17 @@ import Link from "next/link";
 
 // styles
 import { Container, Miniature, Title } from "./styles";
+import FigureTooltip from "components/figure/tooltip";
 
 const ProductCard = ({
   price,
   miniature,
   color,
   id,
+  name,
 }: {
   price: number;
+  name: string;
   miniature: string;
   color: string;
   id: string;
@@ -26,10 +29,18 @@ const ProductCard = ({
 
   return (
     <Link href={`/figure/${id}`} passHref>
-      <Container figureColor={color}>
-        <Miniature src={miniature} />
-        <Title variant="title-5">{formatedPrice}</Title>
-      </Container>
+      <a>
+        <FigureTooltip
+          placement="right-start"
+          figureColor={color}
+          figureName={name}
+        >
+          <Container figureColor={color}>
+            <Miniature src={miniature} />
+            <Title variant="title-5">{formatedPrice}</Title>
+          </Container>
+        </FigureTooltip>
+      </a>
     </Link>
   );
 };

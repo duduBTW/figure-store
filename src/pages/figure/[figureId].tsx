@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import type { GetServerSideProps } from "next";
 import route from "server/clientRoutes";
 import service, {
@@ -7,33 +6,49 @@ import service, {
 } from "server/client/services";
 import parse from "html-react-parser";
 
+// styles
+import { FigureContent } from "components/figure/container/styles";
+
 // components
 import FigureImages from "components/figure/images";
 import FigureHtml from "components/figure/html";
 import FigurePrice from "components/figure/price";
 import FigureActions from "components/figure/actions";
 import ProductGrid from "components/product/grid";
+import FigureContainer from "components/figure/container";
+import FigureName from "components/figure/name";
+import UserLayout from "components/user/layout";
 
-const OrderPage = ({
+const FigurePage = ({
   data: { figure, relatedFigures },
 }: {
   data: { figure: FigureApiResponse; relatedFigures: FigureListApiResponse[] };
 }) => {
   return (
     <>
-      <FigureImages />
-      <FigurePrice price={figure.price} />
-      <FigureActions />
-      {figure.description?.html && (
-        <FigureHtml>{parse(figure.description.html)}</FigureHtml>
-      )}
-      {figure.details?.html && (
-        <FigureHtml>{parse(figure.details.html)}</FigureHtml>
-      )}
+      <FigureContainer>
+        <FigureImages />
+        <FigureName color={figure.color} name={figure.name} />
+        <FigurePrice price={figure.price} />
+        <FigureActions />
+        {figure.description?.html && (
+          <FigureHtml color={figure.color}>
+            {parse(figure.description.html)}
+          </FigureHtml>
+        )}
+        {figure.details?.html && (
+          <FigureHtml color={figure.color}>
+            {parse(figure.details.html)}
+          </FigureHtml>
+        )}
+      </FigureContainer>
+
       <ProductGrid figures={relatedFigures} title="Related" />
     </>
   );
 };
+
+FigurePage.Layout = UserLayout;
 
 export const getServerSideProps: GetServerSideProps = (context) =>
   route.public(context, async ({ query }) => {
@@ -59,4 +74,4 @@ export const getServerSideProps: GetServerSideProps = (context) =>
     }
   });
 
-export default OrderPage;
+export default FigurePage;

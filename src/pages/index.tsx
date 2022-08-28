@@ -6,6 +6,7 @@ import service, { FigureListApiResponse } from "server/client/services";
 import HomeBanner from "components/home/banner";
 import AlertList from "components/alert/list";
 import ProductGrid from "components/product/grid";
+import UserLayout from "components/user/layout";
 
 const HomePage = ({
   data: { alerts, slides, newFigures },
@@ -24,6 +25,8 @@ const HomePage = ({
     </>
   );
 };
+
+HomePage.Layout = UserLayout;
 
 export const getServerSideProps: GetServerSideProps = (context) =>
   route.public(context, async () => {

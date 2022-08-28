@@ -1,19 +1,28 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { mq } from "constants/theme";
-import { TextVariant } from ".";
-
-interface ContainerProps {
-  variant: TextVariant;
-}
+import { ColorVariant, TextVariant } from ".";
 
 export const body1Styles = css`
   font-family: "Nunito";
   font-style: normal;
   font-weight: 400;
-  font-size: 1.8rem;
-  line-height: 2.8rem;
+  font-size: 1.6rem;
+  line-height: 2.6rem;
   letter-spacing: 0.02em;
+
+  ${mq.fromMobileSm} {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+  }
+`;
+
+export const subtitle1 = css`
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 `;
 
 export const title2 = css`
@@ -26,6 +35,19 @@ export const title2 = css`
   ${mq.fromMobileLg} {
     font-size: 4.2rem;
     line-height: 4.8rem;
+  }
+`;
+
+export const title3 = css`
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 3.2rem;
+
+  ${mq.fromMobileLg} {
+    font-size: 2.8rem;
+    line-height: 4rem;
   }
 `;
 
@@ -44,18 +66,7 @@ const getStyles = (variant: TextVariant) => {
       return title2;
 
     case "title-3":
-      return css`
-        font-family: "Poppins";
-        font-style: normal;
-        font-weight: 700;
-        font-size: 2.2rem;
-        line-height: 3.2rem;
-
-        ${mq.fromMobileLg} {
-          font-size: 2.8rem;
-          line-height: 4rem;
-        }
-      `;
+      return title3;
 
     case "title-4":
       return css`
@@ -82,14 +93,18 @@ const getStyles = (variant: TextVariant) => {
         letter-spacing: 0.02em;
       `;
 
-    case "subtitle-1":
+    case "title-6":
       return css`
         font-family: "Poppins";
         font-style: normal;
-        font-weight: 600;
-        font-size: 1.4rem;
-        line-height: 2.4rem;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+        letter-spacing: 0.02em;
       `;
+
+    case "subtitle-1":
+      return subtitle1;
 
     case "subtitle-2":
       return css`
@@ -130,6 +145,23 @@ const getStyles = (variant: TextVariant) => {
   }
 };
 
+interface ContainerProps {
+  variant: TextVariant;
+  colorText: ColorVariant;
+}
+
 export const Container = styled.div<ContainerProps>`
   ${({ variant }) => getStyles(variant)};
+  color: ${({ colorText }) => {
+    switch (colorText) {
+      case "textPrimary":
+        return "var(--text-primary)";
+
+      case "primary":
+        return "var(--color-primary)";
+
+      default:
+        return colorText;
+    }
+  }};
 `;

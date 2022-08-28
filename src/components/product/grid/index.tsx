@@ -15,8 +15,9 @@ const ProductGrid = ({
   title?: string;
   figures: FigureListApiResponse[];
 }) => {
-  const getFigure = ({ price, color, id }: FigureListApiResponse) => (
+  const getFigure = ({ price, color, id, name }: FigureListApiResponse) => (
     <ProductCard
+      name={name}
       miniature="https://placewaifu.com/image/400/400"
       price={price}
       color={color}

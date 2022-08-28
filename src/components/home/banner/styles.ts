@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { mq } from "constants/theme";
 
 export const Container = styled.div`
-  padding-top: 4rem;
+  padding-top: 2rem;
   background: var(--color-content);
 `;
 

@@ -1,10 +1,17 @@
-import { Container, FigureActionsButton } from "./styles";
+import {
+  Container,
+  FigureActionsButton,
+  FigureActionsCardButton,
+} from "./styles";
+import ShoppingBagLineIcon from "remixicon-react/ShoppingBagLineIcon";
 
 const FigureActions = () => {
   return (
     <Container>
       <FigureActionsButton>Buy now</FigureActionsButton>
-      <FigureActionsButton color="primary-l">Add to cart</FigureActionsButton>
+      <FigureActionsCardButton color="primary-l">
+        <span>Add to card</span> <ShoppingBagLineIcon />
+      </FigureActionsCardButton>
     </Container>
   );
 };

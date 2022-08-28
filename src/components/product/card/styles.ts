@@ -6,7 +6,7 @@ export const Title = styled(Text)``;
 interface ContainerProps {
   figureColor: string;
 }
-export const Container = styled.a<ContainerProps>`
+export const Container = styled.div<ContainerProps>`
   cursor: pointer;
   text-underline-offset: 0.4rem;
 

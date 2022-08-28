@@ -24,6 +24,7 @@ export const Content = styled.button<Content>`
   line-height: 3rem;
   text-align: center;
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
 

@@ -6,11 +6,7 @@ html {
   font-size: 62.5%;
 }
 
-@media screen and (min-width: 768px) {
-  html {
-    margin-right: calc(100% - 100vw);
-  }
-}
+
 
 body {
   font: 1.6rem 'Poppins', sans-serif;
