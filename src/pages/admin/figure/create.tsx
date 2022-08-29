@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { useMutation } from "@tanstack/react-query";
-import route from "server/clientRoutes";
+import route from "server/client/routes";
 import service from "server/client/services";
 import { useRouter } from "next/router";
 
