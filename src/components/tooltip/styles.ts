@@ -3,22 +3,24 @@ import { keyframes } from "@emotion/react";
 
 const zoomIn = keyframes`
   0% {
-    transform: scale(0.94);
+    transform: translateY(0.4rem);
   }
   
   100% {
-    transform: scale(1);
+    transform: translateY(0);
   }
 `;
 
 export const Content = styled.div`
   animation: ${zoomIn} 0.2s ease-in-out forwards;
-  background: #222;
+  background: var(--color-content);
+  color: var(--color-primary-d);
   pointer-events: none;
-  border-radius: 1.2rem;
-  padding: 1.6rem 2rem;
-  width: 24rem;
+  border-radius: 0.6rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.4rem;
+  letter-spacing: 0.02rem;
+  border: 0.1rem solid var(--color-primary-l);
 
-  background-color: var(--color-content);
   filter: drop-shadow(0px 4px 8px rgba(108, 8, 45, 0.14));
 `;

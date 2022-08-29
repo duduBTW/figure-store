@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { mq } from "constants/theme";
 import SearchLineIcon from "remixicon-react/SearchLineIcon";
-import ShoppingBagLineIcon from "remixicon-react/ShoppingBagLineIcon";
 
 export const Container = styled.nav``;
 export const UserNavContainer = styled.div`
@@ -70,6 +69,7 @@ export const SearchButton = styled(SearchLineIcon)`
   }
 `;
 
-export const CartButton = styled(ShoppingBagLineIcon)`
-  margin-left: 2.4rem;
+export const Separator = styled.div`
+  width: 2.8rem;
+  pointer-events: none;
 `;

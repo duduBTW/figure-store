@@ -6,9 +6,6 @@ import service, {
 } from "server/client/services";
 import parse from "html-react-parser";
 
-// styles
-import { FigureContent } from "components/figure/container/styles";
-
 // components
 import FigureImages from "components/figure/images";
 import FigureHtml from "components/figure/html";

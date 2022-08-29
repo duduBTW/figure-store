@@ -27,7 +27,9 @@ export const AdminFigureBack = ({ children }: PropsWithChildren) => {
     <Link href="/admin/figure" passHref>
       <AdminFigureBackContainer>
         <AdminFigureBackIcon />
-        <Text variant="button-outlined">{children}</Text>
+        <Text color="primary" variant="button-outlined">
+          {children}
+        </Text>
       </AdminFigureBackContainer>
     </Link>
   );

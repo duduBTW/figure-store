@@ -14,22 +14,17 @@ import {
 } from "@floating-ui/react-dom-interactions";
 import { mergeRefs } from "react-merge-refs";
 
-// components
-import Text from "components/text";
-
 // styles
 import { Content } from "./styles";
 
-const FigureTooltip = ({
+const Tooltip = ({
   children,
-  figureName,
-  figureColor,
   placement = "top",
+  label,
 }: {
-  figureName: string;
-  figureColor: string;
   placement?: Placement;
   children: JSX.Element;
+  label: string;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -37,14 +32,7 @@ const FigureTooltip = ({
     placement,
     open,
     onOpenChange: setOpen,
-    middleware: [
-      offset({
-        alignmentAxis: 24,
-        mainAxis: 12,
-      }),
-      flip(),
-      shift({ padding: 8 }),
-    ],
+    middleware: [offset(8), flip(), shift({ padding: 8 })],
     whileElementsMounted: autoUpdate,
   });
 
@@ -74,13 +62,11 @@ const FigureTooltip = ({
           }}
           {...getFloatingProps()}
         >
-          <Text variant="title-6" color={figureColor}>
-            {figureName}
-          </Text>
+          {label}
         </Content>
       )}
     </>
   );
 };
 
-export default FigureTooltip;
+export default Tooltip;

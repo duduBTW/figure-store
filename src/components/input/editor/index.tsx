@@ -61,44 +61,56 @@ const Nav = ({ editor }: { editor: Editor | null }) => {
   return (
     <NavContainer>
       <ButtonIcon
+        tooltip="Undo"
         onClick={() => editor.chain().focus().undo().run()}
         type="button"
+        tabIndex={-1}
       >
         <ArrowGoBackLineIcon size={size} />
       </ButtonIcon>
       <ButtonIcon
+        tooltip="Redo"
         onClick={() => editor.chain().focus().redo().run()}
         type="button"
+        tabIndex={-1}
       >
         <ArrowGoForwardLineIcon size={size} />
       </ButtonIcon>
       <NavDivider />
       <ButtonIcon
+        tooltip="Bold"
         onClick={() => editor.chain().focus().toggleBold().run()}
         active={editor.isActive("bold")}
         type="button"
+        tabIndex={-1}
       >
         <BoldIcon size={size} />
       </ButtonIcon>
       <ButtonIcon
+        tooltip="Italic"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         active={editor.isActive("italic")}
         type="button"
+        tabIndex={-1}
       >
         <ItalicIcon size={size} />
       </ButtonIcon>
       <NavDivider />
       <ButtonIcon
+        tooltip="Title"
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         active={editor.isActive("heading", { level: 3 })}
         type="button"
+        tabIndex={-1}
       >
         <HeadingIcon size={size} />
       </ButtonIcon>
       <ButtonIcon
+        tooltip="Label"
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
         active={editor.isActive("heading", { level: 4 })}
         type="button"
+        tabIndex={-1}
       >
         <PriceTag2LineIcon size={size} />
       </ButtonIcon>

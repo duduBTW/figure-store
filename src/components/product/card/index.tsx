@@ -28,7 +28,7 @@ const ProductCard = ({
   );
 
   return (
-    <Link href={`/figure/${id}`} passHref>
+    <Link href={`/figure/${id}`}>
       <a>
         <FigureTooltip
           placement="right-start"

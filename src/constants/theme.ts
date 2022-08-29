@@ -11,6 +11,7 @@ export const mq = {
 
 export const colors = {
   primary: {
+    dark: "#2263c7",
     main: "#327DF0",
     light: "#E6EFFD",
   },

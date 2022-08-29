@@ -16,7 +16,7 @@ const AdminFigureListHeader = ({
     <>
       <Container>
         <Link href={"/admin/figure/create"} passHref>
-          <Button color="primary-l" dense>
+          <Button tooltip="Add new figure" color="primary-l" dense>
             <AddLineIcon fontSize={"1.6rem"} />
           </Button>
         </Link>

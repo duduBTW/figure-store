@@ -16,9 +16,9 @@ export const Content = styled.div`
     "description"
     "details";
 
-  ${mq.fromDesktopSm} {
+  ${mq.fromTabletMd} {
     max-width: 120rem;
-    grid-column-gap: 4rem;
+    grid-column-gap: 2rem;
     grid-template-areas:
       "images title"
       "images price"
@@ -27,10 +27,8 @@ export const Content = styled.div`
       "images details";
     margin: 0 auto;
   }
-`;
 
-export const FigureContent = styled.div`
   ${mq.fromDesktopSm} {
-    margin-left: 4rem;
+    grid-column-gap: 4rem;
   }
 `;

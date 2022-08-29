@@ -22,7 +22,7 @@ export const Content = styled.button<ContentProps>`
     return "";
   }}
 
-  &:hover {
+  &:hover, &:focus {
     background: var(--color-primary-l);
   }
 `;

@@ -8,8 +8,9 @@ interface Content {
   loading?: boolean;
 }
 export const Content = styled.button<Content>`
+  transition: background 0.14s ease;
   box-sizing: border-box;
-  border: none;
+  border: 0.1rem solid transparent;
   outline: none;
 
   cursor: pointer;
@@ -46,12 +47,27 @@ export const Content = styled.button<Content>`
         return css`
           background: var(--color-primary);
           color: var(--color-content);
+
+          &:hover {
+            background: var(--color-primary-d);
+          }
+
+          &:focus {
+            background: var(--color-primary-d);
+            box-shadow: 0 0 0.4rem var(--color-primary);
+          }
         `;
 
       case "primary-l":
         return css`
+          transition: background 0 ease;
           background: var(--color-primary-l);
           color: var(--color-primary);
+
+          &:hover,
+          &:focus {
+            border: 0.1rem solid var(--color-primary);
+          }
         `;
     }
   }}

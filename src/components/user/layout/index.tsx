@@ -1,5 +1,7 @@
+import ButtonIcon from "components/button/icon";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
+import ShoppingBagLineIcon from "remixicon-react/ShoppingBagLineIcon";
 
 // styles
 import {
@@ -10,7 +12,7 @@ import {
   UserProfilePictureContent,
   SearchInputContent,
   SearchButton,
-  CartButton,
+  Separator,
 } from "./styles";
 
 const UserLayout = ({ children }: PropsWithChildren) => {
@@ -33,9 +35,12 @@ const UserNav = () => {
 
       <Spacer />
       <SearchInput />
-      <div>
-        <CartButton color="var(--color-primary)" />
-      </div>
+      <Separator />
+      <Link href={"/cart"} passHref>
+        <ButtonIcon tooltip="Cart">
+          <ShoppingBagLineIcon color="var(--color-primary)" />
+        </ButtonIcon>
+      </Link>
       <UserProfilePicture />
     </UserNavContainer>
   );
@@ -45,9 +50,9 @@ const SearchInput = () => {
   return (
     <>
       <SearchInputContent placeholder="Search..." type="text" name="" id="" />
-      <div>
+      <ButtonIcon>
         <SearchButton color="var(--color-primary)" />
-      </div>
+      </ButtonIcon>
     </>
   );
 };

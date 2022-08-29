@@ -11,15 +11,19 @@ export const Container = styled.div`
 
 export const ProductContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 1.6rem;
 
-  ${mq.fromMobileLg} {
+  ${mq.fromMobileSm} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  ${mq.fromTabletSm} {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
 
-  ${mq.fromDesktopSm} {
+  ${mq.fromTabletLg} {
     grid-template-columns: repeat(4, 1fr);
     gap: 4rem;
   }

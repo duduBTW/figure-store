@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import Text from "components/text";
 
-export const Title = styled(Text)``;
+export const Title = styled(Text)`
+  transition: color 0.1s ease;
+`;
 
 interface ContainerProps {
   figureColor: string;
