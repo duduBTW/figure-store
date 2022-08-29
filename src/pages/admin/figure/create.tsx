@@ -40,9 +40,8 @@ const CreateFigurePage = () => {
 
 CreateFigurePage.Layout = AdminLayout;
 
-export const getServerSideProps: GetServerSideProps = (context) =>
-  route.public(context, async () => {
-    return {};
-  });
+export const getServerSideProps = route.admin(async () => {
+  return {};
+});
 
 export default CreateFigurePage;

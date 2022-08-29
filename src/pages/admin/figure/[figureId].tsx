@@ -63,18 +63,17 @@ const EditFigurePage = ({
 
 EditFigurePage.Layout = AdminLayout;
 
-export const getServerSideProps: GetServerSideProps<PageProps> = (context) =>
-  route.public(context, async () => {
-    try {
-      const figure = await service.getProduct(String(context.params?.figureId));
+export const getServerSideProps = route.public(async (context) => {
+  try {
+    const figure = await service.getProduct(String(context.params?.figureId));
 
-      return {
-        figure,
-        id: String(context.params?.figureId),
-      };
-    } catch (error) {
-      return "notfound";
-    }
-  });
+    return {
+      figure,
+      id: String(context.params?.figureId),
+    };
+  } catch (error) {
+    return 404;
+  }
+});
 
 export default EditFigurePage;

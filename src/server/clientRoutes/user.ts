@@ -1,36 +1,26 @@
-import { unstable_getServerSession as getServerSession } from "next-auth";
-import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { prisma } from "server/db/client";
-import { authOptions } from "pages/api/auth/[...nextauth]";
+import type { GetServerSidePropsContext } from "next";
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "server/session";
 
-export const restrictRouteUser = async <T = any>(
-  context: GetServerSidePropsContext,
-  getProps?: (context: GetServerSidePropsContext) => Promise<T>
-): Promise<GetServerSidePropsResult<any>> => {
-  const { req, res } = context;
+export function restrictRouteUser<
+  P extends { [key: string]: unknown } = { [key: string]: unknown }
+>(handler: (context: GetServerSidePropsContext) => Promise<P>) {
+  return withIronSessionSsr(async (context) => {
+    const user = context.req.session.user;
+    const data = await handler(context);
+    console.log("user", user);
+    console.log("data", data);
 
-  const session = await getServerSession(req, res, authOptions);
-  if (!session)
+    if (!user?.userId) {
+      return {
+        notFound: true,
+      };
+    }
+
     return {
-      notFound: true,
+      props: {
+        data,
+      },
     };
-
-  const user = prisma.user.findFirst({
-    where: {
-      id: session?.user?.id,
-      role: "user",
-    },
-  });
-  if (!user)
-    return {
-      notFound: true,
-    };
-
-  const data = await getProps?.(context);
-
-  return {
-    props: {
-      data,
-    },
-  };
-};
+  }, sessionOptions);
+}

@@ -28,26 +28,25 @@ const HomePage = ({
 
 HomePage.Layout = UserLayout;
 
-export const getServerSideProps: GetServerSideProps = (context) =>
-  route.public(context, async () => {
-    const alerts = [
-      "Shipping method suspension and resumption updates (Updated Jul 29, 2022)",
-      "COVID-19 shipping restrictions (Updated Mar 10, 2022)",
-    ];
+export const getServerSideProps = route.public(async () => {
+  const alerts = [
+    "Shipping method suspension and resumption updates (Updated Jul 29, 2022)",
+    "COVID-19 shipping restrictions (Updated Mar 10, 2022)",
+  ];
 
-    const slides = [
-      "https://pbs.twimg.com/media/FZjkT28acAEOTBN?format=jpg&name=4096x4096",
-      "https://pbs.twimg.com/media/FbKuuXragAAZ6fu?format=jpg&name=4096x4096",
-      "https://pbs.twimg.com/media/FbI9FsLUUAAuqkV?format=jpg&name=medium",
-    ];
+  const slides = [
+    "https://pbs.twimg.com/media/FZjkT28acAEOTBN?format=jpg&name=4096x4096",
+    "https://pbs.twimg.com/media/FbKuuXragAAZ6fu?format=jpg&name=4096x4096",
+    "https://pbs.twimg.com/media/FbI9FsLUUAAuqkV?format=jpg&name=medium",
+  ];
 
-    const newFigures = await service.getNewProductList();
+  const newFigures = await service.getNewProductList();
 
-    return {
-      slides,
-      alerts,
-      newFigures,
-    };
-  });
+  return {
+    slides,
+    alerts,
+    newFigures,
+  };
+});
 
 export default HomePage;

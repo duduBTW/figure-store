@@ -47,20 +47,17 @@ const FigurePage = ({
 
 FigurePage.Layout = UserLayout;
 
-export const getServerSideProps: GetServerSideProps = (context) =>
-  route.public(context, async ({ query }) => {
-    {
-      const id = query["figureId"];
-      if (typeof id !== "string")
-        return {
-          notFound: true,
-        };
+export const getServerSideProps = route.public(async ({ query }) => {
+  {
+    const id = query["figureId"];
+    if (typeof id !== "string")
+      return {
+        notFound: true,
+      };
 
+    try {
       const figure = await service.getProduct(id);
-      if (!figure)
-        return {
-          notFound: true,
-        };
+      if (!figure) return 404;
 
       const relatedFigures = await service.getNewProductList();
 
@@ -68,7 +65,10 @@ export const getServerSideProps: GetServerSideProps = (context) =>
         figure,
         relatedFigures,
       };
+    } catch (error) {
+      return 404;
     }
-  });
+  }
+});
 
 export default FigurePage;

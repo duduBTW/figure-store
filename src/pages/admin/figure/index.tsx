@@ -64,13 +64,12 @@ const AdminFigurePage = ({ data: { figures } }: PageProps) => {
 
 AdminFigurePage.Layout = AdminLayout;
 
-export const getServerSideProps: GetServerSideProps = (context) =>
-  route.public(context, async () => {
-    const figures = await service.getProductList("");
+export const getServerSideProps = route.admin(async () => {
+  const figures = await service.getProductList("");
 
-    return {
-      figures,
-    };
-  });
+  return {
+    figures,
+  };
+});
 
 export default AdminFigurePage;

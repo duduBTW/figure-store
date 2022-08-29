@@ -28,7 +28,7 @@ export const Spacer = styled.div`
   flex: 1 1 100%;
 `;
 
-export const UserProfilePictureContent = styled.img`
+export const UserProfilePicture = styled.img`
   width: 3.6rem;
   height: 3.6rem;
   margin-left: 2.4rem;
