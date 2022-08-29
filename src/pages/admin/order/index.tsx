@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { GetServerSideProps, NextPage } from "next";
-import route from "server/clientRoutes";
+import type { GetServerSideProps } from "next";
+import route from "server/client/routes";
 import { useQuery } from "@tanstack/react-query";
 
 // server
@@ -28,14 +28,13 @@ const useOrderList = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = (context) =>
-  route.public(context, async () => {
-    const figures = await service.getOrderList();
+export const getServerSideProps = route.public(async (context) => {
+  const figures = await service.getOrderList();
 
-    return {
-      figures,
-    };
-  });
+  return {
+    figures,
+  };
+});
 
 const AdminOrderPage = ({ data: { figures } }: PageProps) => {
   const [searchValue, setSearchValue] = useState("");

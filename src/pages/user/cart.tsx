@@ -1,4 +1,4 @@
-import route from "server/clientRoutes";
+import route from "server/client/routes";
 
 // components
 

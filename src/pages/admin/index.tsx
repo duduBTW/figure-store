@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
-import route from "server/clientRoutes";
+import route from "server/client/routes";
 
 const HomePage: NextPage = () => {
   return (
@@ -9,10 +9,5 @@ const HomePage: NextPage = () => {
     </div>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = (context) =>
-  route.public(context, async () => {
-    return {};
-  });
 
 export default HomePage;

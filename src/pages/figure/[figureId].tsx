@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from "next";
-import route from "server/clientRoutes";
+import route from "server/client/routes";
 import service, {
   FigureApiResponse,
   FigureListApiResponse,

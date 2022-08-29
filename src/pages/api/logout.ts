@@ -1,10 +1,7 @@
-import { withIronSessionApiRoute } from "iron-session/next";
-import { sessionOptions } from "server/session";
 import { NextApiRequest, NextApiResponse } from "next";
+import apiRoute from "server/api/routes";
 
-export default withIronSessionApiRoute(logoutRoute, sessionOptions);
-
-async function logoutRoute(req: NextApiRequest, res: NextApiResponse) {
+export default apiRoute.public((req: NextApiRequest, res: NextApiResponse) => {
   req.session.destroy();
   res.send({ ok: true });
-}
+});

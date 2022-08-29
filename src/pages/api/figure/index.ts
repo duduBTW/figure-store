@@ -1,31 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { unstable_getServerSession as getServerSession } from "next-auth";
-import { authOptions as nextAuthOptions } from "../auth/[...nextauth]";
 import dbServices from "server/db/services";
+import apiRoute from "server/api/routes";
 
-const apiGetProductList = async (req: NextApiRequest, res: NextApiResponse) => {
-  // const session = await getServerSession(req, res, nextAuthOptions);
-  // if (!session)
-  //   res.send({
-  //     error:
-  //       "You must be signed in to view the protected content on this page.",
-  //   });
+export default apiRoute.admin(
+  async (req: NextApiRequest, res: NextApiResponse) => {
+    switch (req.method) {
+      case "POST":
+        try {
+          return res.send(await dbServices.insertProduct(req.body));
+        } catch (error) {
+          console.error(error);
+          return res.status(500).send(error);
+        }
 
-  switch (req.method) {
-    case "POST":
-      try {
-        return res.send(await dbServices.insertProduct(req.body));
-      } catch (error) {
-        console.error(error);
-        return res.status(500).send(error);
-      }
+      case "GET":
+        return res.send(await dbServices.getProductList(req.query));
 
-    case "GET":
-      return res.send(await dbServices.getProductList(req.query));
-
-    default:
-      return res.status(404).send({});
+      default:
+        return res.status(404).send({});
+    }
   }
-};
-
-export default apiGetProductList;
+);

@@ -1,21 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import apiRoute from "server/api/routes";
 import dbServices from "server/db/services";
 
-const apiGetProductList = async (req: NextApiRequest, res: NextApiResponse) => {
-  // const session = await getServerSession(req, res, nextAuthOptions);
-  // if (!session)
-  //   res.send({
-  //     error:
-  //       "You must be signed in to view the protected content on this page.",
-  //   });
+export default apiRoute.public(
+  async (req: NextApiRequest, res: NextApiResponse) => {
+    switch (req.method) {
+      case "GET":
+        return res.send(await dbServices.getNewProductList());
 
-  switch (req.method) {
-    case "GET":
-      return res.send(await dbServices.getNewProductList());
-
-    default:
-      return res.status(404).send({});
+      default:
+        return res.status(404).send({});
+    }
   }
-};
-
-export default apiGetProductList;
+);

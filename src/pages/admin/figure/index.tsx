@@ -1,11 +1,12 @@
 import type { GetServerSideProps } from "next";
 import { useMemo, useState } from "react";
-import route from "server/clientRoutes";
+import route from "server/client/routes";
 import debounce from "lodash.debounce";
 import { useQuery } from "@tanstack/react-query";
 
 // server
 import service, { FigureListApiResponse } from "server/client/services";
+import got from "got";
 
 // components
 import AdminFigureList from "components/admin/figure/list";
@@ -64,7 +65,7 @@ const AdminFigurePage = ({ data: { figures } }: PageProps) => {
 
 AdminFigurePage.Layout = AdminLayout;
 
-export const getServerSideProps = route.admin(async () => {
+export const getServerSideProps = route.admin(async ({ req }) => {
   const figures = await service.getProductList("");
 
   return {

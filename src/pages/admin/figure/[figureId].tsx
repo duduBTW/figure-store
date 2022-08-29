@@ -1,5 +1,4 @@
-import type { GetServerSideProps } from "next";
-import route from "server/clientRoutes";
+import route from "server/client/routes";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import service, { FigureApiResponse } from "server/client/services";
 
@@ -63,7 +62,7 @@ const EditFigurePage = ({
 
 EditFigurePage.Layout = AdminLayout;
 
-export const getServerSideProps = route.public(async (context) => {
+export const getServerSideProps = route.admin(async (context) => {
   try {
     const figure = await service.getProduct(String(context.params?.figureId));
 
