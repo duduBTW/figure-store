@@ -51,6 +51,20 @@ export const title3 = css`
   }
 `;
 
+export const title4 = css`
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: 2rem;
+  line-height: 3rem;
+
+  ${mq.fromMobileLg} {
+    font-size: 2.2rem;
+    line-height: 3.2rem;
+  }
+`;
+
 const getStyles = (variant: TextVariant) => {
   switch (variant) {
     case "title-1":
@@ -69,19 +83,7 @@ const getStyles = (variant: TextVariant) => {
       return title3;
 
     case "title-4":
-      return css`
-        font-family: "Poppins";
-        font-style: normal;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        font-size: 2rem;
-        line-height: 3rem;
-
-        ${mq.fromMobileLg} {
-          font-size: 2.2rem;
-          line-height: 3.2rem;
-        }
-      `;
+      return title4;
 
     case "title-5":
       return css`
@@ -156,6 +158,9 @@ export const Container = styled.div<ContainerProps>`
     switch (colorText) {
       case "textPrimary":
         return "var(--text-primary)";
+
+      case "textSecondary":
+        return "var(--text-secondary)";
 
       case "primary":
         return "var(--color-primary)";

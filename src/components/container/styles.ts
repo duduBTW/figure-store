@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
 import { mq } from "constants/theme";
 
-export const Container = styled.div`
+interface ContainerProps {
+  gap: number;
+}
+export const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   background: var(--color-content);
   width: 100%;
   padding: 3.2rem 2rem;
   display: flex;
+  gap: ${({ gap }) => `${gap}rem`};
   flex-direction: column;
 
   ${mq.fromTabletMd} {

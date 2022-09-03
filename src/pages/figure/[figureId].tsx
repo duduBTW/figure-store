@@ -1,10 +1,11 @@
-import type { GetServerSideProps } from "next";
 import route from "server/client/routes";
 import service, {
   FigureApiResponse,
   FigureListApiResponse,
 } from "server/client/services";
 import parse from "html-react-parser";
+import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
 
 // components
 import FigureImages from "components/figure/images";
@@ -21,13 +22,25 @@ const FigurePage = ({
 }: {
   data: { figure: FigureApiResponse; relatedFigures: FigureListApiResponse[] };
 }) => {
+  const { push } = useRouter();
+  const { mutate, isLoading, isSuccess } = useMutation(service.insertCart, {
+    onSuccess: () => {
+      push(`/user/cart`);
+    },
+  });
+
+  const addToCart = () =>
+    mutate({
+      figureId: figure.id,
+    });
+
   return (
     <>
       <FigureContainer>
         <FigureImages />
         <FigureName color={figure.color} name={figure.name} />
         <FigurePrice price={figure.price} />
-        <FigureActions />
+        <FigureActions onClick={addToCart} loading={isLoading || isSuccess} />
         {figure.description?.html && (
           <FigureHtml color={figure.color}>
             {parse(figure.description.html)}

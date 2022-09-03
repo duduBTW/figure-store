@@ -1,11 +1,6 @@
 import axios from "axios";
-import {
-  getProductList,
-  getProduct,
-  insertProduct,
-  editProduct,
-  getNewProductList,
-} from "./figures";
+import * as figureServices from "./figures";
+import * as cartServices from "./cart";
 import { getOrderList } from "./order";
 
 export const api = axios.create({
@@ -13,12 +8,9 @@ export const api = axios.create({
 });
 
 const service = {
-  getProductList,
-  getProduct,
-  insertProduct,
-  editProduct,
+  ...figureServices,
+  ...cartServices,
   getOrderList,
-  getNewProductList,
 };
 
 export type { OrderListApiResponse } from "./order";

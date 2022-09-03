@@ -46,7 +46,8 @@ export const TabItem = styled.div<ITabItem>`
   line-height: 2.4rem;
   border-radius: 1.2rem;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--color-primary-l);
   }
 

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { mq } from "constants/theme";
-import AdminFigureContainer from "../container";
+import AdminFigureContainer from "../../../container";
 import ArrowLeftLineIcon from "remixicon-react/ArrowLeftLineIcon";
 
 export const Container = styled(AdminFigureContainer)`

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import AdminFigureContainer from "../container";
+import AdminFigureContainer from "../../../container";
 
 export const Section = styled(AdminFigureContainer)`
   display: flex;

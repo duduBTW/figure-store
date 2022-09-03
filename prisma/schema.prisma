@@ -22,14 +22,7 @@ model User {
     phone          Int?
     role           String  @default("user")
     Order          Order[]
-}
-
-model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
-
-    @@unique([identifier, token])
+    Cart           Cart[]
 }
 
 model Product {
@@ -46,6 +39,7 @@ model Product {
 
     images Image[]
     order  Order[]
+    Cart   Cart[]
 }
 
 model Editor {
@@ -106,4 +100,14 @@ model Adress {
 model Payment {
     id     String  @id @default(cuid())
     orders Order[]
+}
+
+model Cart {
+    id String @id @default(cuid())
+
+    product   Product @relation(fields: [productId], references: [id])
+    productId String
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
 }

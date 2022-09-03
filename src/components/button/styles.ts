@@ -33,7 +33,7 @@ export const Content = styled.button<Content>`
     if (!dense) return "";
 
     return css`
-      padding: 1rem 1.2rem;
+      padding: 0.4rem 1.2rem;
       max-height: 100%;
       font-size: 1.6rem;
     `;
@@ -67,6 +67,18 @@ export const Content = styled.button<Content>`
           &:hover,
           &:focus {
             border: 0.1rem solid var(--color-primary);
+          }
+        `;
+
+      case "error-l":
+        return css`
+          transition: background 0 ease;
+          background: var(--color-error-l);
+          color: var(--color-error);
+
+          &:hover,
+          &:focus {
+            border: 0.1rem solid var(--color-error);
           }
         `;
     }

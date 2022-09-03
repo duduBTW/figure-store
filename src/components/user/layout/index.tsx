@@ -1,8 +1,11 @@
-import ButtonIcon from "components/button/icon";
-import Link from "next/link";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { User } from "pages/api/user";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
+
+// components
+import Link from "next/link";
 import ShoppingBagLineIcon from "remixicon-react/ShoppingBagLineIcon";
+import ButtonIcon from "components/button/icon";
 
 // styles
 import {
@@ -20,11 +23,15 @@ const UserLayout = ({
   children,
   user,
 }: PropsWithChildren<{ user: User | null }>) => {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
-    <Container>
-      <UserNav user={user} />
-      {children}
-    </Container>
+    <QueryClientProvider client={queryClient}>
+      <Container>
+        <UserNav user={user} />
+        {children}
+      </Container>
+    </QueryClientProvider>
   );
 };
 

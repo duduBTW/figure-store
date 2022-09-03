@@ -1,6 +1,5 @@
 import { api } from "./services";
 
-// -- GET figure -- //
 export interface FigureListApiResponse {
   id: string;
   name: string;
@@ -10,6 +9,29 @@ export interface FigureListApiResponse {
   stock?: number;
   images: string[];
 }
+
+interface EditorContent {
+  html: string;
+  json: string;
+}
+
+export interface FigureApiRequest {
+  name: string;
+  color: string;
+  price: number;
+  description: EditorContent;
+  details: EditorContent;
+}
+
+export interface FigureApiResponse {
+  id: string;
+  name: string;
+  color: string;
+  price: number;
+  description: { html: string };
+  details: { html: string };
+}
+
 export const getProductList = async (
   searchValue?: string
 ): Promise<FigureListApiResponse[]> => {
@@ -24,32 +46,10 @@ export const getNewProductList = async (): Promise<FigureListApiResponse[]> => {
   return response.data;
 };
 
-export interface FigureApiResponse {
-  id: string;
-  name: string;
-  color: string;
-  price: number;
-  description: { html: string };
-  details: { html: string };
-}
 export const getProduct = async (id?: string): Promise<FigureApiResponse> => {
   const response = await api.get<FigureApiResponse>(`/api/figure/${id}`);
   return response.data;
 };
-
-// -- MANIPULATE figure -- //
-interface EditorContent {
-  html: string;
-  json: string;
-}
-
-export interface FigureApiRequest {
-  name: string;
-  color: string;
-  price: number;
-  description: EditorContent;
-  details: EditorContent;
-}
 
 export const insertProduct = async (
   newFigure: FigureApiRequest
@@ -62,7 +62,7 @@ export const insertProduct = async (
 export const editProduct =
   (id: string) =>
   async (updatedFaigure: FigureApiRequest): Promise<FigureApiResponse> => {
-    const response = await api.put(`/api/figure/${id}`, updatedFaigure);
+    const response = await api.put(`/api/figure/${id}/edit`, updatedFaigure);
 
     return response.data;
   };

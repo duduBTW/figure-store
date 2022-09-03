@@ -15,7 +15,7 @@ import AdminFigureListError from "components/admin/figure/list/error";
 import AdminLayout from "components/admin/layout";
 import AdminFigureListHeader from "components/admin/figure/list/header";
 import AdminTabs from "components/admin/figure/tabs";
-import AdminFigureContainer from "components/admin/figure/container";
+import Container from "components/container";
 
 interface PageProps {
   data: { figures: FigureListApiResponse[] };
@@ -51,7 +51,7 @@ const AdminFigurePage = ({ data: { figures } }: PageProps) => {
 
   if (error) return <AdminFigureListError />;
   return (
-    <AdminFigureContainer>
+    <Container>
       <AdminTabs selected="product" />
       <AdminFigureListHeader onSearchChange={onSearchChange} />
       {isLoading ? (
@@ -59,7 +59,7 @@ const AdminFigurePage = ({ data: { figures } }: PageProps) => {
       ) : (
         <AdminFigureList figures={data} />
       )}
-    </AdminFigureContainer>
+    </Container>
   );
 };
 

@@ -14,7 +14,11 @@ export type TextVariant =
   | "body-1"
   | "body-2";
 
-export type ColorVariant = (string & {}) | "textPrimary" | "primary";
+export type ColorVariant =
+  | (string & {})
+  | "textPrimary"
+  | "primary"
+  | "textSecondary";
 
 const Text = ({
   color = "textPrimary",

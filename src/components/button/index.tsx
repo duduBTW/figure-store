@@ -6,7 +6,7 @@ import Tooltip from "components/tooltip";
 // styles
 import { Content } from "./styles";
 
-export type ButtonColor = "primary" | "primary-l" | "secondary";
+export type ButtonColor = "primary" | "primary-l" | "secondary" | "error-l";
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   dense?: boolean;
   loading?: boolean;
