@@ -1,6 +1,5 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { User } from "pages/api/user";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
 
 // components
 import Link from "next/link";
@@ -23,15 +22,11 @@ const UserLayout = ({
   children,
   user,
 }: PropsWithChildren<{ user: User | null }>) => {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <Container>
-        <UserNav user={user} />
-        {children}
-      </Container>
-    </QueryClientProvider>
+    <Container>
+      <UserNav user={user} />
+      {children}
+    </Container>
   );
 };
 
@@ -58,9 +53,11 @@ const UserNav = ({ user }: { user: User | null }) => {
               <ShoppingBagLineIcon color="var(--color-primary)" />
             </ButtonIcon>
           </Link>
-          <UserProfilePicture
-            src={user.profilePicture ?? "https://placewaifu.com/image/48/48"}
-          />
+          <Link href={"/user/profile"} passHref>
+            <UserProfilePicture
+              src={user.profilePicture ?? "https://placewaifu.com/image/48/48"}
+            />
+          </Link>
         </>
       )}
     </UserNavContainer>
@@ -71,7 +68,7 @@ const SearchInput = () => {
   return (
     <>
       <SearchInputContent placeholder="Search..." type="text" name="" id="" />
-      <ButtonIcon>
+      <ButtonIcon tabIndex={-1}>
         <SearchButton color="var(--color-primary)" />
       </ButtonIcon>
     </>

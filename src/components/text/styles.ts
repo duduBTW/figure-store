@@ -65,6 +65,24 @@ export const title4 = css`
   }
 `;
 
+export const title5 = css`
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+  letter-spacing: 0.02em;
+`;
+
+export const body2Styles = css`
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  letter-spacing: 0.02em;
+`;
+
 const getStyles = (variant: TextVariant) => {
   switch (variant) {
     case "title-1":
@@ -86,14 +104,7 @@ const getStyles = (variant: TextVariant) => {
       return title4;
 
     case "title-5":
-      return css`
-        font-family: "Poppins";
-        font-style: normal;
-        font-weight: 500;
-        font-size: 1.8rem;
-        line-height: 2.8rem;
-        letter-spacing: 0.02em;
-      `;
+      return title5;
 
     case "title-6":
       return css`
@@ -121,14 +132,7 @@ const getStyles = (variant: TextVariant) => {
       return body1Styles;
 
     case "body-2":
-      return css`
-        font-family: "Nunito";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 1.6rem;
-        line-height: 2.4rem;
-        letter-spacing: 0.02em;
-      `;
+      return body2Styles;
 
     case "button-outlined":
       return css`

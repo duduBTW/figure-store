@@ -15,14 +15,15 @@ datasource db {
 }
 
 model User {
-    id             String  @id @default(cuid())
+    id             String   @id @default(cuid())
     name           String?
     profilePicture String?
-    email          String? @unique
+    email          String?  @unique
     phone          Int?
-    role           String  @default("user")
+    role           String   @default("user")
     Order          Order[]
     Cart           Cart[]
+    Adress         Adress[]
 }
 
 model Product {
@@ -93,8 +94,14 @@ model Order {
 }
 
 model Adress {
-    id     String  @id @default(cuid())
-    orders Order[]
+    id       String @id @default(cuid())
+    cep      String
+    street   String
+    province String
+
+    user   User    @relation(fields: [userId], references: [id])
+    userId String
+    Order  Order[]
 }
 
 model Payment {

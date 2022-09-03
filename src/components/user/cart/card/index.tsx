@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Button from "components/button";
+import { useRouter } from "next/router";
 import { CartApiItem } from "server/client/cart";
 import service from "server/client/services";
+import useNewOrderState from "state/newOrder";
 import usePrice from "utils/usePrice";
 
 // styles
@@ -14,12 +16,14 @@ const UserCartCard = ({
   cart: CartApiItem;
   refetch: () => void;
 }) => {
+  const { push } = useRouter();
   const { mutate, isLoading, isSuccess } = useMutation(
     () => service.deleteCart(cart.id),
     {
       onSuccess: () => refetch(),
     }
   );
+  const addFigures = useNewOrderState((state) => state.addFigures);
   const formatedPrice = usePrice(cart.product.price);
 
   return (
@@ -36,8 +40,15 @@ const UserCartCard = ({
         >
           Delete
         </Button>
-        <Button dense color="primary-l">
-          Save for later
+        <Button
+          onClick={() => {
+            push("/user/order/new");
+            addFigures([cart.product]);
+          }}
+          dense
+          color="primary-l"
+        >
+          Buy now
         </Button>
       </Actions>
     </Container>

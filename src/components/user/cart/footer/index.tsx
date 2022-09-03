@@ -5,9 +5,14 @@ import Text from "components/text";
 
 // styles
 import { Container, Continue, Total } from "./styles";
-import Button from "components/button";
 
-const UserCartFooter = ({ total }: { total: number }) => {
+const UserCartFooter = ({
+  total,
+  onClick,
+}: {
+  total: number;
+  onClick: () => void;
+}) => {
   const totalFormatted = usePrice(total);
 
   return (
@@ -16,7 +21,9 @@ const UserCartFooter = ({ total }: { total: number }) => {
         <Text variant="title-5">Total:</Text>
         <Text variant="title-5">{totalFormatted}</Text>
       </Total>
-      <Continue dense>Continue order</Continue>
+      <Continue onClick={onClick} dense>
+        Continue order
+      </Continue>
     </Container>
   );
 };

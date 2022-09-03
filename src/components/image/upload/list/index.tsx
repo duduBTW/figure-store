@@ -13,7 +13,6 @@ import {
   ImageUploadItemContainer,
   ImageUploadItemMiniature,
 } from "./styles";
-import Button from "components/button";
 
 const ImageUploadList = () => {
   const [openFileSelector, { filesContent, clear }] = useFilePicker({

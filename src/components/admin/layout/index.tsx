@@ -1,17 +1,14 @@
-import { PropsWithChildren, useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { PropsWithChildren } from "react";
 
 // styles
 import { Container, Nav } from "./styles";
 
 const AdminLayout = ({ children }: PropsWithChildren) => {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <AdminNav />
       <Container>{children}</Container>
-    </QueryClientProvider>
+    </>
   );
 };
 

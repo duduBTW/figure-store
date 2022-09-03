@@ -12,6 +12,8 @@ import Text from "components/text";
 import UserCartFooter from "components/user/cart/footer";
 import Button from "components/button";
 import Link from "next/link";
+import useNewOrderState from "state/newOrder";
+import { useRouter } from "next/router";
 
 const useCartList = ({
   initialData,
@@ -28,9 +30,16 @@ const UserCartPage = ({
     cart: CartApiListResponse;
   };
 }) => {
+  const { push } = useRouter();
+  const addFigures = useNewOrderState((state) => state.addFigures);
   const { data, isLoading, refetch } = useCartList({
     initialData,
   });
+
+  const startOder = () => {
+    addFigures(data!.cartList.map((cart) => cart.product));
+    push("/user/order/new");
+  };
 
   if (isLoading) return <div>...</div>;
   if (data!.cartList.length <= 0) {
@@ -54,7 +63,7 @@ const UserCartPage = ({
     <Container gap={2}>
       <Text variant="title-1">Cart</Text>
       <UserCartList refetch={refetch} cartList={data!.cartList} />
-      <UserCartFooter total={data!.total} />
+      <UserCartFooter onClick={startOder} total={data!.total} />
     </Container>
   );
 };

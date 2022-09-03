@@ -66,6 +66,7 @@ export const SearchButton = styled(SearchLineIcon)`
 
   ${mq.fromTabletMd} {
     display: none;
+    pointer-events: none;
   }
 `;
 

@@ -3,7 +3,7 @@ import { keyframes } from "@emotion/react";
 
 const zoomIn = keyframes`
   0% {
-    transform: translateY(0.4rem);
+    transform: translateY(0.2rem);
   }
   
   100% {
@@ -21,6 +21,4 @@ export const Content = styled.div`
   font-size: 1.4rem;
   letter-spacing: 0.02rem;
   border: 0.1rem solid var(--color-primary-l);
-
-  filter: drop-shadow(0px 4px 8px rgba(108, 8, 45, 0.14));
 `;
