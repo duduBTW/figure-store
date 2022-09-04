@@ -69,3 +69,5 @@ describe("Admin figure list", () => {
     });
   });
 });
+
+export {};

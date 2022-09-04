@@ -76,3 +76,5 @@ describe("Admin figure list", () => {
     cy.get("[data-tcy=figure-card]").should("have.length", figureList.length);
   });
 });
+
+export {};
