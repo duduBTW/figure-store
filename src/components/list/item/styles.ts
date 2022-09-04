@@ -71,6 +71,8 @@ export const SecondaryText = styled(Text)`
 export const EndAction = styled.div`
   margin-top: 2rem;
   grid-area: endAction;
+  display: flex;
+  gap: 0.8rem;
 
   ${mq.fromTabletMd} {
     margin-top: 0rem;

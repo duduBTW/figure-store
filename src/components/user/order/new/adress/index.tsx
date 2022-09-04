@@ -7,9 +7,9 @@ import { Continue, Section } from "./styles";
 import ListItem from "components/list/item";
 import Text from "components/text";
 import MapPinLineIcon from "remixicon-react/MapPinLineIcon";
-import RadioButtonLineIcon from "remixicon-react/RadioButtonLineIcon";
 import Button from "components/button";
 import RadioList from "components/radio/list";
+import RadioItem from "components/radio/item";
 
 const OrderNewAdress = () => {
   const { deliver, setDeliver, setActiveStep } = useNewOrderState((state) => ({
@@ -55,17 +55,10 @@ const OrderNewAdress = () => {
           ]}
         >
           {({ name, price, id }, selected) => (
-            <ListItem
+            <RadioItem
               key={id}
               selected={selected}
               onClick={changeDeliver(id)}
-              startAction={
-                selected ? (
-                  <RadioButtonLineIcon color="var(--color-primary)" />
-                ) : (
-                  <RadioButtonLineIcon />
-                )
-              }
               primary={name}
               secondary={price}
             />

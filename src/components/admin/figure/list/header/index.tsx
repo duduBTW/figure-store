@@ -6,6 +6,7 @@ import Link from "next/link";
 
 // styles
 import { Container, SearchInput, Filters } from "./styles";
+import ButtonIcon from "components/button/icon";
 
 const AdminFigureListHeader = ({
   onSearchChange,
@@ -16,9 +17,11 @@ const AdminFigureListHeader = ({
     <>
       <Container>
         <Link href={"/admin/figure/create"} passHref>
-          <Button tooltip="Add new figure" color="primary-l" dense>
-            <AddLineIcon fontSize={"1.6rem"} />
-          </Button>
+          <a>
+            <ButtonIcon tooltip="Add new figure" color="primary-l">
+              <AddLineIcon fontSize={"1.6rem"} />
+            </ButtonIcon>
+          </a>
         </Link>
         <SearchInput
           data-tcy="search"

@@ -3,6 +3,7 @@ import { colors } from "./theme";
 
 const globalStyles = css`
   :root {
+    --swiper-theme-color: ${colors.primary.main};
     --color-primary: ${colors.primary.main};
     --color-primary-d: ${colors.primary.dark};
     --color-primary-l: ${colors.primary.light};

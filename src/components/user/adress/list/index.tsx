@@ -1,8 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import ListItem from "components/list/item";
+
+// components
 import RadioList from "components/radio/list";
-import RadioButtonLineIcon from "remixicon-react/RadioButtonLineIcon";
-import AddCircleLineIcon from "remixicon-react/RadioButtonFillIcon";
+import DeleteBin7LineIcon from "remixicon-react/DeleteBin7LineIcon";
+import Edit2LineIcon from "remixicon-react/Edit2LineIcon";
+import Button from "components/button";
+import RadioItem from "components/radio/item";
 
 const AdressList = () => {
   const { mutate } = useMutation(() => {
@@ -27,19 +30,22 @@ const AdressList = () => {
       ]}
     >
       {({ name, price, id }, selected) => (
-        <ListItem
+        <RadioItem
           key={id}
           selected={selected}
           onClick={mutate}
-          startAction={
-            selected ? (
-              <RadioButtonLineIcon color="var(--color-primary)" />
-            ) : (
-              <AddCircleLineIcon />
-            )
-          }
           primary={name}
           secondary={price}
+          endAction={
+            <>
+              <Button dense color="primary-l">
+                <Edit2LineIcon />
+              </Button>
+              <Button dense color="error-l">
+                <DeleteBin7LineIcon />
+              </Button>
+            </>
+          }
         />
       )}
     </RadioList>

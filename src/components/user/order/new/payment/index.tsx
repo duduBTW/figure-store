@@ -1,8 +1,11 @@
-import ListItem from "components/list/item";
+import useNewOrderState from "state/newOrder";
+
+// components
+import RadioItem from "components/radio/item";
 import RadioList from "components/radio/list";
 import Text from "components/text";
-import RadioButtonLineIcon from "remixicon-react/RadioButtonLineIcon";
-import useNewOrderState from "state/newOrder";
+
+// styles
 import { Continue } from "./styles";
 
 const OrderNewPayment = () => {
@@ -44,17 +47,10 @@ const OrderNewPayment = () => {
         ]}
       >
         {({ name, price, id }, selected) => (
-          <ListItem
+          <RadioItem
             key={id}
             selected={selected}
             onClick={changePayment(id)}
-            startAction={
-              selected ? (
-                <RadioButtonLineIcon color="var(--color-primary)" />
-              ) : (
-                <RadioButtonLineIcon />
-              )
-            }
             primary={name}
             secondary={price}
           />

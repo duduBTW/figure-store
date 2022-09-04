@@ -21,9 +21,7 @@ const UserCartFooter = ({
         <Text variant="title-5">Total:</Text>
         <Text variant="title-5">{totalFormatted}</Text>
       </Total>
-      <Continue onClick={onClick} dense>
-        Continue order
-      </Continue>
+      <Continue onClick={onClick}>Continue order</Continue>
     </Container>
   );
 };

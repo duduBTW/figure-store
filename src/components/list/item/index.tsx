@@ -9,6 +9,16 @@ import {
   StartAction,
 } from "./styles";
 
+export interface ListItemProps {
+  startAction?: ReactElement;
+  endAction?: ReactElement;
+  primary: string;
+  secondary?: string;
+  selected?: boolean;
+  onClick?: () => void;
+  hideBorder?: boolean;
+}
+
 const ListItem = ({
   startAction,
   endAction,
@@ -17,15 +27,7 @@ const ListItem = ({
   selected,
   onClick,
   hideBorder,
-}: {
-  startAction?: ReactElement;
-  endAction?: ReactElement;
-  primary: string;
-  secondary?: string;
-  selected?: boolean;
-  onClick?: () => void;
-  hideBorder?: boolean;
-}) => {
+}: ListItemProps) => {
   return (
     <ListItemContainer
       tabIndex={onClick ? 0 : -1}

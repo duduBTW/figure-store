@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Text from "components/text";
-import { subtitle1, title4 } from "components/text/styles";
+import { subtitle1, title4, title5 } from "components/text/styles";
 import { mq } from "constants/theme";
 
 export const Container = styled.div`
@@ -23,7 +23,7 @@ interface TitleProps {
   color: string;
 }
 export const Title = styled.h2<TitleProps>`
-  ${subtitle1}
+  ${title5}
   margin-left: 1.2rem;
   min-height: 8rem;
   width: 80%;

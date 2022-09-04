@@ -17,7 +17,7 @@ export const Container = styled.div`
   ${mq.fromTabletMd} {
     position: relative;
     width: auto;
-    gap: 3.2rem;
+    gap: 2rem;
     padding: 0;
     margin-bottom: 0;
     margin-left: calc(22rem + 2rem);
@@ -33,7 +33,6 @@ export const Continue = styled(Button)`
   width: 100%;
 
   ${mq.fromTabletMd} {
-    width: 24rem;
     align-self: flex-end;
   }
 `;
