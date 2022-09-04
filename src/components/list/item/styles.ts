@@ -6,17 +6,19 @@ import { mq } from "constants/theme";
 interface ListItemContainerProps {
   selected?: boolean;
   clickable?: boolean;
+  hideBorder?: boolean;
 }
 export const ListItemContainer = styled.div<ListItemContainerProps>`
-  border: 0.1rem solid
+  border: ${({ hideBorder }) => (hideBorder ? "0" : "0.1rem")} solid
     ${({ selected }) =>
       selected ? "var(--color-primary)" : "var(--color-divider)"};
+  background: var(--color-content);
   border-radius: 1.2rem;
   display: flex;
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  padding: 2rem 1.6rem;
+  padding: 1.6rem;
   display: grid;
   grid-template-areas:
     "startAction"

@@ -16,6 +16,7 @@ const ListItem = ({
   secondary,
   selected,
   onClick,
+  hideBorder,
 }: {
   startAction?: ReactElement;
   endAction?: ReactElement;
@@ -23,6 +24,7 @@ const ListItem = ({
   secondary?: string;
   selected?: boolean;
   onClick?: () => void;
+  hideBorder?: boolean;
 }) => {
   return (
     <ListItemContainer
@@ -30,15 +32,16 @@ const ListItem = ({
       clickable={Boolean(onClick)}
       onClick={onClick}
       selected={selected}
+      hideBorder={hideBorder}
     >
       {startAction && <StartAction>{startAction}</StartAction>}
       <PrimaryText variant="subtitle-1">{primary}</PrimaryText>
+      {endAction && <EndAction>{endAction}</EndAction>}
       {secondary && (
         <SecondaryText color="textSecondary" variant="body-2">
           {secondary}
         </SecondaryText>
       )}
-      {endAction && <EndAction>{endAction}</EndAction>}
     </ListItemContainer>
   );
 };

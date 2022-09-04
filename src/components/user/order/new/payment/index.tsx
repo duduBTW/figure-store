@@ -6,11 +6,13 @@ import useNewOrderState from "state/newOrder";
 import { Continue } from "./styles";
 
 const OrderNewPayment = () => {
-  const { payment, setPayment } = useNewOrderState((state) => ({
+  const { payment, setPayment, setActiveStep } = useNewOrderState((state) => ({
     payment: state.payment,
     setPayment: state.setPayment,
+    setActiveStep: state.setActiveStep,
   }));
   const changePayment = (id: string) => () => setPayment(id);
+  const nextStep = () => setActiveStep("confirm");
 
   return (
     <>
@@ -58,7 +60,9 @@ const OrderNewPayment = () => {
           />
         )}
       </RadioList>
-      <Continue dense>Continue</Continue>
+      <Continue onClick={nextStep} dense>
+        Continue
+      </Continue>
     </>
   );
 };

@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import { mq } from "constants/theme";
 import SearchLineIcon from "remixicon-react/SearchLineIcon";
 
-export const Container = styled.nav``;
-export const UserNavContainer = styled.div`
+export const Container = styled.div``;
+export const UserNavContainer = styled.nav`
   position: sticky;
   top: 0;
   z-index: 2;

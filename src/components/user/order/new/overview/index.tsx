@@ -1,3 +1,4 @@
+import { PropsWithChildren } from "react";
 import useNewOrderState from "state/newOrder";
 
 // components
@@ -15,13 +16,16 @@ import {
 import { FigureApiResponse } from "server/client/figures";
 import usePrice from "utils/usePrice";
 
-const UserOrderNewOverview = () => {
+const UserOrderNewOverview = ({
+  confirm,
+  children,
+}: PropsWithChildren<{ confirm: boolean }>) => {
   const figures = useNewOrderState((state) => state.figures);
   const total = useNewOrderState((state) => state.total);
   const deliver = useNewOrderState((state) => state.deliverPrice);
 
   return (
-    <Container>
+    <Container confirm={confirm}>
       <Text variant="subtitle-1">Order overview</Text>
       <Divider />
       {figures.map((figure) => (
@@ -30,6 +34,7 @@ const UserOrderNewOverview = () => {
       <InfoOverview label="Deliver" value={deliver} />
       <Divider />
       <InfoOverview label="Total" value={total} />
+      {children}
     </Container>
   );
 };
@@ -51,7 +56,7 @@ const FigureOverview = ({ figure }: { figure: FigureApiResponse }) => {
   return (
     <FigureOverviewContainer>
       <FigureOverviewMiniature src="https://placewaifu.com/image/40/40" />
-      <FigureOverviewName variant="body-2" color={figure.color}>
+      <FigureOverviewName variant="subtitle-1" color={figure.color}>
         {figure.name}
       </FigureOverviewName>
       <Text variant="subtitle-2">{formattedPrice}</Text>

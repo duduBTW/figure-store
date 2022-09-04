@@ -89,8 +89,7 @@ model Order {
     payment   Payment @relation(fields: [paymentId], references: [id])
     paymentId String
 
-    product   Product @relation(fields: [productId], references: [id])
-    productId String
+    product Product[]
 }
 
 model Adress {

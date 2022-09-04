@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as figureServices from "./figures";
 import * as cartServices from "./cart";
-import { getOrderList } from "./order";
+import * as orderServices from "./order";
 
 export const api = axios.create({
   baseURL: "http://localhost:3000/",
@@ -10,7 +10,7 @@ export const api = axios.create({
 const service = {
   ...figureServices,
   ...cartServices,
-  getOrderList,
+  ...orderServices,
 };
 
 export type { OrderListApiResponse } from "./order";

@@ -2,14 +2,19 @@ import styled from "@emotion/styled";
 import Text from "components/text";
 import { mq } from "constants/theme";
 
-export const Container = styled.div`
+interface ContainerProps {
+  confirm: boolean;
+}
+export const Container = styled.div<ContainerProps>`
+  transition: background 0.2s ease;
   box-sizing: border-box;
   width: 100%;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background: var(--color-background);
+  background: ${({ confirm }) =>
+    confirm ? "var(--color-content)" : "var(--color-background)"};
 
   ${mq.fromTabletMd} {
     position: relative;

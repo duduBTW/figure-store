@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import ListItem from "components/list/item";
 import RadioList from "components/radio/list";
 import RadioButtonLineIcon from "remixicon-react/RadioButtonLineIcon";
+import AddCircleLineIcon from "remixicon-react/RadioButtonFillIcon";
 
 const AdressList = () => {
   const { mutate } = useMutation(() => {
@@ -34,7 +35,7 @@ const AdressList = () => {
             selected ? (
               <RadioButtonLineIcon color="var(--color-primary)" />
             ) : (
-              <RadioButtonLineIcon />
+              <AddCircleLineIcon />
             )
           }
           primary={name}

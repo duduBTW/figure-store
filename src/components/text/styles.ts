@@ -69,9 +69,15 @@ export const title5 = css`
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 1.8rem;
-  line-height: 2.8rem;
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+  font-weight: 600;
   letter-spacing: 0.02em;
+
+  ${mq.fromMobileLg} {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+  }
 `;
 
 export const body2Styles = css`
