@@ -24,5 +24,5 @@ export const Miniature = styled.img`
   object-fit: cover;
   border-radius: 1.2rem;
   margin-bottom: 0.8rem;
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 6 / 7;
 `;

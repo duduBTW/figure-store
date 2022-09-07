@@ -17,6 +17,10 @@ export const getOrder = async ({
     },
     include: {
       adress: true,
-      product: true,
+      product: {
+        include: {
+          images: true,
+        },
+      },
     },
   });

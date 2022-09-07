@@ -29,9 +29,15 @@ const UserOderNewComplete = ({ order }: { order: OrderApiResponse }) => {
         </Title>
         <Divider />
         <ProductList>
-          {order.product.map(({ id, name, color }) => (
+          {order.product.map(({ id, name, color, images }) => (
             <ProductContainer key={id}>
-              <ProductMiniature src="https://placewaifu.com/image/80/80" />
+              <ProductMiniature
+                src={
+                  images.length > 0
+                    ? `/figure/${images[0]?.medium}`
+                    : "/waifu-placeholder.png"
+                }
+              />
               <Text variant="title-5" color={color}>
                 {name}
               </Text>

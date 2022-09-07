@@ -10,6 +10,7 @@ export const getProduct = async (id: string) =>
     include: {
       details: true,
       description: true,
+      images: true,
     },
   });
 
@@ -100,3 +101,19 @@ export const updateProduct = async (id: string, data: any) => {
     },
   });
 };
+export const addImageFigure = async (figureId: string, imageName: string) =>
+  prisma.product.update({
+    where: {
+      id: figureId,
+    },
+    data: {
+      images: {
+        create: {
+          default: imageName,
+          large: imageName,
+          medium: imageName,
+          small: imageName,
+        },
+      },
+    },
+  });

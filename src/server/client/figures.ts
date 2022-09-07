@@ -7,12 +7,20 @@ export interface FigureListApiResponse {
   price: number;
   sold?: number;
   stock?: number;
-  images: string[];
+  images: Image[];
 }
 
 interface EditorContent {
   html: string;
   json: string;
+}
+
+export interface Image {
+  default: string;
+  id: string;
+  large: string;
+  medium: string;
+  small: string;
 }
 
 export interface FigureApiRequest {
@@ -30,6 +38,7 @@ export interface FigureApiResponse {
   price: number;
   description: { html: string };
   details: { html: string };
+  images: Image[];
 }
 
 export const getProductList = async (

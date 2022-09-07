@@ -1,4 +1,4 @@
-import { FileContent, useFilePicker } from "use-file-picker";
+import { FileContent, FilePickerReturnTypes } from "use-file-picker";
 
 // components
 import DeleteBinLineIcon from "remixicon-react/DeleteBinLineIcon";
@@ -14,12 +14,12 @@ import {
   ImageUploadItemMiniature,
 } from "./styles";
 
-const ImageUploadList = () => {
-  const [openFileSelector, { filesContent, clear }] = useFilePicker({
-    readAs: "DataURL",
-    accept: "image/*",
-    multiple: true,
-  });
+const ImageUploadList = ({
+  filePicker,
+}: {
+  filePicker: FilePickerReturnTypes;
+}) => {
+  const [openFileSelector, { filesContent, clear }] = filePicker;
 
   const getImage = (file: FileContent, index: number) => (
     <ImageUploadItemContainer key={file.name}>

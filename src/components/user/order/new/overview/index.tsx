@@ -55,7 +55,13 @@ const FigureOverview = ({ figure }: { figure: FigureApiResponse }) => {
 
   return (
     <FigureOverviewContainer>
-      <FigureOverviewMiniature src="https://placewaifu.com/image/40/40" />
+      <FigureOverviewMiniature
+        src={
+          figure.images.length > 0
+            ? `/figure/${figure.images[0]?.medium}`
+            : "/waifu-placeholder.png"
+        }
+      />
       <FigureOverviewName variant="subtitle-1" color={figure.color}>
         {figure.name}
       </FigureOverviewName>

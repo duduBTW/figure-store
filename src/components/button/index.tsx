@@ -9,10 +9,16 @@ import { Content } from "./styles";
 export type ButtonColor = "primary" | "primary-l" | "secondary" | "error-l";
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   dense?: boolean;
-  loading?: boolean;
+  loading?: boolean | string;
   tooltip?: string;
   color?: ButtonColor;
 }
+
+const getLoadingLabel = (loading: boolean | string) => {
+  if (typeof loading === "string") return loading;
+
+  return "Loading...";
+};
 
 const Button = ({
   children,
@@ -25,8 +31,8 @@ const Button = ({
 
   return (
     <Container placement="bottom" label={tooltip!}>
-      <Content color={color} loading={loading} {...rest}>
-        {loading ? "Loading..." : children}
+      <Content color={color} loading={Boolean(loading)} {...rest}>
+        {loading ? getLoadingLabel(loading) : children}
       </Content>
     </Container>
   );

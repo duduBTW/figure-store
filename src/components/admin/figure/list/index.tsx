@@ -45,7 +45,9 @@ const Figure = ({
   return (
     <FigureContainer data-tcy-id={id} data-tcy="figure-card">
       <FigureMiniature
-        src={images[0] ?? "/waifu-placeholder.png"}
+        src={
+          images[0] ? `/figure/${images[0]?.medium}` : "/waifu-placeholder.png"
+        }
         alt={`Miniature 0 for figure ${name}`}
       />
       <FigureName color={color} variant="title-3">

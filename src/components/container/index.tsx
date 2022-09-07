@@ -6,9 +6,14 @@ const AdminFigureContainer = ({
   children,
   className,
   gap = 0,
-}: PropsWithChildren<{ className?: string; gap?: number }>) => {
+  loading = false,
+}: PropsWithChildren<{
+  className?: string;
+  gap?: number;
+  loading?: boolean;
+}>) => {
   return (
-    <Container gap={gap} className={className}>
+    <Container gap={gap} loading={loading} className={className}>
       {children}
     </Container>
   );

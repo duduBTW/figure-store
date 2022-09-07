@@ -15,10 +15,20 @@ const ProductGrid = ({
   title?: string;
   figures: FigureListApiResponse[];
 }) => {
-  const getFigure = ({ price, color, id, name }: FigureListApiResponse) => (
+  const getFigure = ({
+    price,
+    color,
+    id,
+    name,
+    images,
+  }: FigureListApiResponse) => (
     <ProductCard
       name={name}
-      miniature="https://placewaifu.com/image/400/400"
+      miniature={
+        images.length > 0
+          ? `/figure/${images[0]?.medium}`
+          : "/waifu-placeholder.png"
+      }
       price={price}
       color={color}
       id={id}

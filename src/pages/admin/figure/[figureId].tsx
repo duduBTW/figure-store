@@ -19,18 +19,13 @@ const useFigure = ({
 }: { initialData?: FigureApiResponse; id?: string } = {}) => {
   return useQuery(["figure-item", id], async () => service.getProduct(id), {
     initialData,
-    enabled: false,
   });
 };
 
 const EditFigurePage = ({
   data: { figure: figureInitialData, id },
 }: PageProps) => {
-  const {
-    data: figure,
-    refetch,
-    isFetching,
-  } = useFigure({
+  const { data: figure, refetch } = useFigure({
     initialData: figureInitialData,
     id,
   });
@@ -45,7 +40,7 @@ const EditFigurePage = ({
         tabs={["information", "Images", "Orders"]}
         content={[
           <AdminFigureForm
-            loading={isLoading || isFetching}
+            loading={isLoading}
             key={0}
             submitButtonLabel="Save"
             onSubmit={mutate}
@@ -53,7 +48,12 @@ const EditFigurePage = ({
               defaultValues: figure,
             }}
           />,
-          <AdminFigureImages key={1} />,
+          <AdminFigureImages
+            refetch={refetch}
+            images={figure?.images}
+            id={id}
+            key={1}
+          />,
         ]}
       />
     </>

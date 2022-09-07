@@ -44,6 +44,7 @@ export const FigureOverviewMiniature = styled.img`
   border-radius: 0.4rem;
   object-fit: cover;
   object-position: center;
+  object-fit: cover;
 `;
 
 export const FigureOverviewName = styled(Text)`

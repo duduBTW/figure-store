@@ -38,6 +38,7 @@ export const Title = styled.h2<TitleProps>`
 `;
 export const Miniature = styled.img`
   grid-area: miniature;
+  object-fit: cover;
 
   width: 8rem;
   height: 8rem;

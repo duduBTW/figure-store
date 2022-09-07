@@ -5,7 +5,7 @@ import { mq } from "constants/theme";
 export const UserOderNewCompleteContainer = styled.div``;
 
 export const Banner = styled.img`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;

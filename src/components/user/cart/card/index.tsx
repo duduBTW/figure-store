@@ -28,7 +28,13 @@ const UserCartCard = ({
 
   return (
     <Container>
-      <Miniature src="https://placewaifu.com/image/400/400" />
+      <Miniature
+        src={
+          cart.product.images.length > 0
+            ? `/figure/${cart.product.images[0]?.medium}`
+            : "/waifu-placeholder.png"
+        }
+      />
       <Title color={cart.product.color}>{cart.product.name}</Title>
       <Price variant="body-1">{formatedPrice}</Price>
       <Actions>
