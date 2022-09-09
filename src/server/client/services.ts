@@ -8,7 +8,7 @@ import * as userServices from "./user";
 import { env } from "constants/client.mjs";
 
 export const api = axios.create({
-  baseURL: env,
+  baseURL: env.API_BASE_URL,
 });
 
 const service = {
