@@ -21,4 +21,5 @@ export const Content = styled.div`
 
   background-color: var(--color-content);
   filter: drop-shadow(0px 4px 8px rgba(108, 8, 45, 0.14));
+  z-index: 2;
 `;

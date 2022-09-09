@@ -1,4 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { AdressApiListResponse } from "server/client/adress";
+import { useQuery } from "@tanstack/react-query";
+import service from "server/client/services";
 
 // components
 import RadioList from "components/radio/list";
@@ -6,48 +8,71 @@ import DeleteBin7LineIcon from "remixicon-react/DeleteBin7LineIcon";
 import Edit2LineIcon from "remixicon-react/Edit2LineIcon";
 import Button from "components/button";
 import RadioItem from "components/radio/item";
+import Link from "next/link";
 
-const AdressList = () => {
-  const { mutate } = useMutation(() => {
-    return new Promise((res) => res(""));
+const useAdressList = ({
+  initialData,
+}: { initialData?: AdressApiListResponse[] } = {}) => {
+  return useQuery(["address-list"], service.getAdressList, {
+    initialData,
   });
+};
 
+const AdressList = ({
+  adressList: initialData,
+  checked,
+  onChange,
+  hideActions = false,
+}: {
+  adressList?: AdressApiListResponse[];
+  checked?: string;
+  hideActions?: boolean;
+  onChange?: (address: AdressApiListResponse) => void;
+}) => {
+  const { data: adressList, isLoading } = useAdressList({ initialData });
+
+  if (isLoading) return <div>...</div>;
   return (
     <RadioList
       validadeSelection={({ id }, checked) => checked === id}
-      checked={"1"}
-      items={[
-        {
-          id: "1",
-          name: "Sender name  . Will arrive at your address Friday",
-          price: "R$ 449,99",
-        },
-        {
-          id: "2",
-          name: "Sender name",
-          price: "R$ 249,99",
-        },
-      ]}
+      checked={checked}
+      items={adressList!}
     >
-      {({ name, price, id }, selected) => (
-        <RadioItem
-          key={id}
-          selected={selected}
-          onClick={mutate}
-          primary={name}
-          secondary={price}
-          endAction={
-            <>
-              <Button dense color="primary-l">
-                <Edit2LineIcon />
-              </Button>
-              <Button dense color="error-l">
-                <DeleteBin7LineIcon />
-              </Button>
-            </>
-          }
-        />
-      )}
+      {(address, selected) => {
+        const { id, street, number, state, cep, city } = address;
+
+        return (
+          <RadioItem
+            key={id}
+            selected={selected}
+            onClick={() => onChange?.(address)}
+            primary={`${street}, ${number}`}
+            secondary={`${city}, ${state} - CEP ${cep}`}
+            endAction={
+              hideActions ? undefined : (
+                <>
+                  <Link href={`/user/adress/${id}`}>
+                    <Button
+                      onClick={(e) => e.stopPropagation()}
+                      dense
+                      color="primary-l"
+                    >
+                      <Edit2LineIcon />
+                    </Button>
+                  </Link>
+                  <Button
+                    onClick={(e) => e.stopPropagation()}
+                    dense
+                    color="error-l"
+                  >
+                    <DeleteBin7LineIcon />
+                  </Button>
+                </>
+              )
+            }
+          />
+        );
+      }}
     </RadioList>
   );
 };

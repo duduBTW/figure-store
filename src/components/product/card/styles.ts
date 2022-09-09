@@ -17,10 +17,19 @@ export const Container = styled.div<ContainerProps>`
       color: ${({ figureColor }) => figureColor};
     }
   }
+
+  .swiper-slide {
+    width: 100% !important;
+  }
+
+  .swiper-pagination {
+    bottom: 2rem;
+  }
 `;
 
 export const Miniature = styled.img`
   width: 100%;
+  /* height: 20rem; */
   object-fit: cover;
   border-radius: 1.2rem;
   margin-bottom: 0.8rem;

@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
+import { loadingContainer } from "components/container/styles";
 import { mq } from "constants/theme";
 
 interface ContainerProps {
   confirm: boolean;
+  loading?: boolean;
 }
 export const Container = styled.div<ContainerProps>`
   transition: background 0.2s ease;
@@ -15,4 +17,6 @@ export const Container = styled.div<ContainerProps>`
   ${mq.fromTabletMd} {
     flex-direction: row;
   }
+
+  ${({ loading }) => loading && loadingContainer};
 `;

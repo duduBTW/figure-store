@@ -4,17 +4,21 @@ import {
   FigureActionsCardButton,
 } from "./styles";
 import ShoppingBagLineIcon from "remixicon-react/ShoppingBagLineIcon";
+import { useRouter } from "next/router";
+import useNewOrderState from "state/newOrder";
 
 const FigureActions = ({
   onClick,
+  onBuyClick,
   loading,
 }: {
+  onBuyClick: () => void;
   onClick: () => void;
   loading: boolean;
 }) => {
   return (
     <Container>
-      <FigureActionsButton>Buy now</FigureActionsButton>
+      <FigureActionsButton onClick={onBuyClick}>Buy now</FigureActionsButton>
       <FigureActionsCardButton
         onClick={onClick}
         loading={loading}

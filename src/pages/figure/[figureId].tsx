@@ -6,6 +6,7 @@ import service, {
 import parse from "html-react-parser";
 import { useRouter } from "next/router";
 import { useMutation } from "@tanstack/react-query";
+import useNewOrderState from "state/newOrder";
 
 // components
 import FigureImages from "components/figure/images";
@@ -23,6 +24,7 @@ const FigurePage = ({
   data: { figure: FigureApiResponse; relatedFigures: FigureListApiResponse[] };
 }) => {
   const { push } = useRouter();
+  const addFigures = useNewOrderState((state) => state.addFigures);
   const { mutate, isLoading, isSuccess } = useMutation(service.insertCart, {
     onSuccess: () => {
       push(`/user/cart`);
@@ -37,10 +39,17 @@ const FigurePage = ({
   return (
     <>
       <FigureContainer>
-        <FigureImages />
+        <FigureImages images={figure.images} />
         <FigureName color={figure.color} name={figure.name} />
         <FigurePrice price={figure.price} />
-        <FigureActions onClick={addToCart} loading={isLoading || isSuccess} />
+        <FigureActions
+          onBuyClick={() => {
+            push("/user/order/new");
+            addFigures([figure]);
+          }}
+          onClick={addToCart}
+          loading={isLoading || isSuccess}
+        />
         {figure.description?.html && (
           <FigureHtml color={figure.color}>
             {parse(figure.description.html)}
@@ -72,11 +81,9 @@ export const getServerSideProps = route.public(async ({ query }) => {
       const figure = await service.getProduct(id);
       if (!figure) return 404;
 
-      const relatedFigures = await service.getNewProductList();
-
       return {
         figure,
-        relatedFigures,
+        relatedFigures: await service.getNewProductList(),
       };
     } catch (error) {
       return 404;

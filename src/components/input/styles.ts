@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Text from "components/text";
 
@@ -22,7 +23,7 @@ export const EndIconContainer = styled.div`
   pointer-events: none;
 `;
 
-export const Content = styled.input`
+export const inputStyles = css`
   transition: box-shadow 0.1s ease-in-out;
   border: 0.1rem solid var(--color-divider);
   outline: none;
@@ -42,5 +43,9 @@ export const Content = styled.input`
     border-color: var(--color-primary);
     box-shadow: 0 0 0.2rem var(--color-primary);
   }
+`;
+
+export const Content = styled.input`
+  ${inputStyles}
 `;
 export const Label = styled(Text)``;

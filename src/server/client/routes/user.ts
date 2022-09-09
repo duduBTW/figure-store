@@ -3,6 +3,12 @@ import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "server/session";
 import { api } from "../services";
 import { prisma } from "server/db/client";
+import { User } from "pages/api/user";
+
+export interface UserPage<T> {
+  data: T;
+  user: User;
+}
 
 export function restrictRouteUser<
   P extends { [key: string]: unknown } = { [key: string]: unknown }

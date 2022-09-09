@@ -22,7 +22,7 @@ const Input = ({ label, name, ...rest }: Props) => {
   return (
     <Container>
       <Label variant="subtitle-2">{label}</Label>
-      <Content {...rest} {...register(name)} />
+      <Content autoComplete="off" {...rest} {...register(name)} />
     </Container>
   );
 };

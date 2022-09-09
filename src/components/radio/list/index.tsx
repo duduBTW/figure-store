@@ -9,10 +9,10 @@ const RadioList = <T,>({
   checked,
   validadeSelection,
 }: {
-  checked: string;
+  checked?: string;
   defaultValue?: string;
   items: T[];
-  validadeSelection: (item: T, checked: string) => boolean;
+  validadeSelection: (item: T, checked?: string) => boolean;
   children: (item: T, selected: boolean) => ReactNode;
 }) => {
   return (

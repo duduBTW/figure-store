@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Text from "components/text";
-import { subtitle1, title4, title5 } from "components/text/styles";
+import { title4, title5 } from "components/text/styles";
 import { mq } from "constants/theme";
 
 export const Container = styled.div`
@@ -39,7 +39,7 @@ export const Title = styled.h2<TitleProps>`
 export const Miniature = styled.img`
   grid-area: miniature;
   object-fit: cover;
-
+  object-position: top;
   width: 8rem;
   height: 8rem;
   border-radius: 0.8rem;
@@ -64,6 +64,7 @@ export const Actions = styled.div`
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-top: 1.6rem;
+  margin-left: 1.2rem;
   border-bottom: 0.1rem solid var(--color-divider);
   padding-bottom: 1.6rem;
 

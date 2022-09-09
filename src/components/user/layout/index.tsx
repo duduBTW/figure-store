@@ -17,20 +17,20 @@ import {
   SearchButton,
   Separator,
 } from "./styles";
+import { useUser } from "pages/_app";
 
-const UserLayout = ({
-  children,
-  user,
-}: PropsWithChildren<{ user: User | null }>) => {
+const UserLayout = ({ children }: PropsWithChildren<{ user: User | null }>) => {
   return (
     <Container>
-      <UserNav user={user} />
+      <UserNav />
       {children}
     </Container>
   );
 };
 
-const UserNav = ({ user }: { user: User | null }) => {
+const UserNav = () => {
+  const { data: user } = useUser();
+
   return (
     <UserNavContainer>
       <Link href="/" passHref>

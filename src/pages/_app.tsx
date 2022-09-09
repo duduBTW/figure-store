@@ -2,11 +2,36 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import { ComponentType, PropsWithChildren, useState } from "react";
 import { Global } from "@emotion/react";
 import { User } from "./api/user";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
 
 // styles
 import "../styles/globals.css";
 import globalStyles from "constants/globalStyles";
+import service from "server/client/services";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+const MyApp: AppType = ({ Component, pageProps: { user, ...pageProps } }) => {
+  const [queryClient] = useState(() => new QueryClient());
+
+  const Layout = getLayout(Component);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <UserProvider user={user}>
+        <Layout>
+          <Global styles={globalStyles} />
+          <Component {...pageProps} user={user} />
+        </Layout>
+      </UserProvider>
+    </QueryClientProvider>
+  );
+};
 
 const EmptyLayout = ({ children }: PropsWithChildren) => {
   return <>{children}</>;
@@ -14,22 +39,27 @@ const EmptyLayout = ({ children }: PropsWithChildren) => {
 
 function getLayout(
   Component: ComponentType<any>
-): ComponentType<PropsWithChildren<{ user: User | null }>> {
+): ComponentType<PropsWithChildren> {
   return (Component as any).Layout || EmptyLayout;
 }
 
-const MyApp: AppType = ({ Component, pageProps: { user, ...pageProps } }) => {
-  const [queryClient] = useState(() => new QueryClient());
-  const Layout = getLayout(Component);
+export const useUser = ({ initialData }: { initialData?: any } = {}) => {
+  return useQuery<User>(["user"], service.getUser, {
+    initialData,
+  });
+};
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Layout user={user}>
-        <Global styles={globalStyles} />
-        <Component {...pageProps} />
-      </Layout>
-    </QueryClientProvider>
-  );
+const UserProvider = ({
+  children,
+  user,
+}: PropsWithChildren<{
+  user: any;
+}>) => {
+  useUser({
+    initialData: user,
+  });
+
+  return <>{children}</>;
 };
 
 export default MyApp;

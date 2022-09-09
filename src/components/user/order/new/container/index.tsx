@@ -6,8 +6,13 @@ import { Container } from "./styles";
 const UserOrderNewContainer = ({
   children,
   confirm,
-}: PropsWithChildren<{ confirm: boolean }>) => {
-  return <Container confirm={confirm}>{children}</Container>;
+  loading,
+}: PropsWithChildren<{ confirm: boolean; loading?: boolean }>) => {
+  return (
+    <Container loading={loading} confirm={confirm}>
+      {children}
+    </Container>
+  );
 };
 
 export default UserOrderNewContainer;

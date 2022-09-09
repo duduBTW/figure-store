@@ -24,11 +24,7 @@ const ProductGrid = ({
   }: FigureListApiResponse) => (
     <ProductCard
       name={name}
-      miniature={
-        images.length > 0
-          ? `/figure/${images[0]?.medium}`
-          : "/waifu-placeholder.png"
-      }
+      miniatures={images}
       price={price}
       color={color}
       id={id}

@@ -3,6 +3,8 @@ import * as figureServices from "./figures";
 import * as cartServices from "./cart";
 import * as orderServices from "./order";
 import * as imagesServices from "./images";
+import * as adressServices from "./adress";
+import * as userServices from "./user";
 
 export const api = axios.create({
   baseURL: "http://localhost:3000/",
@@ -13,6 +15,8 @@ const service = {
   ...cartServices,
   ...orderServices,
   ...imagesServices,
+  ...adressServices,
+  ...userServices,
 };
 
 export type { OrderListApiResponse } from "./order";

@@ -70,11 +70,14 @@ export const ProductMiniature = styled.img`
   display: flex;
   height: 6rem;
   width: 6rem;
+  min-width: 6rem;
+  object-fit: cover;
   border-radius: 0.8rem;
 
   ${mq.fromTabletMd} {
-    height: 8rem;
-    width: 8rem;
+    height: 10rem;
+    width: 10rem;
+    min-width: 10rem;
   }
 `;
 

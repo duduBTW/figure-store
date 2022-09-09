@@ -2,10 +2,11 @@ import { FigureApiResponse } from "server/client/figures";
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-export type NewOrderSteps = "adress" | "payment" | "confirm";
+export type NewOrderSteps = "adress" | "payment" | "deliver" | "confirm";
 interface NewOder {
   total: number;
   deliverPrice: number;
+  address: string;
   deliver: string;
   payment: string;
   activeStep: NewOrderSteps;
@@ -13,6 +14,7 @@ interface NewOder {
   addFigures: (figures: FigureApiResponse[]) => void;
   setDeliver: (deliver: string) => void;
   setPayment: (payment: string) => void;
+  setAddress: (address: string) => void;
   setActiveStep: (activeStep: NewOrderSteps) => void;
 }
 
@@ -23,6 +25,7 @@ const useNewOrderState = create(
       total: 0,
       deliverPrice: 0,
       deliver: "",
+      address: "",
       activeStep: "adress",
       payment: "",
       addFigures: (figures) => {
@@ -40,6 +43,7 @@ const useNewOrderState = create(
           deliverPrice,
           deliver: "1",
           payment: "1",
+          address: undefined,
         });
       },
       setDeliver: (deliver) => set({ deliver }),
@@ -50,6 +54,7 @@ const useNewOrderState = create(
           top: 0,
         });
       },
+      setAddress: (address) => set({ address }),
       setPayment: (payment) => set({ payment }),
     }),
     {

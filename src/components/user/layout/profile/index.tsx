@@ -3,7 +3,9 @@ import { User } from "pages/api/user";
 
 // components
 import UserLayout from "components/user/layout";
-import { SideNav, Spacer, Content, Container } from "./styles";
+
+// styles
+import { SideNav, Spacer, Content, Container, SideItem } from "./styles";
 
 const UserLayoutProfile = ({
   children,
@@ -15,7 +17,12 @@ const UserLayoutProfile = ({
     <>
       <UserLayout user={user} />
       <Container>
-        <SideNav />
+        <SideNav>
+          <SideItem>Profile</SideItem>
+          <SideItem>Orders</SideItem>
+          <SideItem>Payment</SideItem>
+          <SideItem>Address</SideItem>
+        </SideNav>
         <Content>{children}</Content>
         <Spacer />
       </Container>

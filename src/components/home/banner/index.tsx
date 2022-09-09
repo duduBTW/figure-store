@@ -5,9 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // styles
 import { Content, Container } from "./styles";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 
 const HomeBanner = ({ slides }: { slides: string[] }) => {
   const getSlide = (slide: string) => (

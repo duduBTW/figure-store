@@ -26,6 +26,7 @@ export const Content = styled.div`
       "images description"
       "images details";
     margin: 0 auto;
+    grid-template-rows: auto auto auto auto 1fr;
   }
 
   ${mq.fromDesktopSm} {
