@@ -17,7 +17,6 @@ export const serverSchema = z.object({
  */
 export const clientSchema = z.object({
   // NEXT_PUBLIC_BAR: z.string(),
-  API_BASE_URL: z.string(),
 });
 
 /**
@@ -27,5 +26,5 @@ export const clientSchema = z.object({
  * @type {{ [k in keyof z.infer<typeof clientSchema>]: z.infer<typeof clientSchema>[k] | undefined }}
  */
 export const clientEnv = {
-  API_BASE_URL: process.env.API_BASE_URL,
+  // NEXT_PUBLIC_BAR: process.env.NEXT_PUBLIC_BAR,
 };
