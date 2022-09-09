@@ -5,9 +5,10 @@ import * as orderServices from "./order";
 import * as imagesServices from "./images";
 import * as adressServices from "./adress";
 import * as userServices from "./user";
+import { env } from "constants/client.mjs";
 
 export const api = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: env,
 });
 
 const service = {
