@@ -15,26 +15,13 @@ import Link from "next/link";
 import useNewOrderState from "state/newOrder";
 import { useRouter } from "next/router";
 
-const useCartList = ({
-  initialData,
-}: { initialData?: CartApiListResponse } = {}) => {
-  return useQuery(["cart-list"], service.getCartLit, {
-    initialData,
-  });
-};
+const useCartList = () => 
+   useQuery(["cart-list"], service.getCartLit)
 
-const UserCartPage = ({
-  data: { cart: initialData },
-}: {
-  data: {
-    cart: CartApiListResponse;
-  };
-}) => {
+const UserCartPage = () => {
   const { push } = useRouter();
   const addFigures = useNewOrderState((state) => state.addFigures);
-  const { data, isLoading, refetch } = useCartList({
-    initialData,
-  });
+  const { data, isLoading, refetch } = useCartList();
 
   const startOder = () => {
     addFigures(data!.cartList.map((cart) => cart.product));
@@ -70,12 +57,9 @@ const UserCartPage = ({
 
 UserCartPage.Layout = UserLayout;
 
-export const getServerSideProps = route.user(async () => {
-  const cart = await service.getCartLit();
-
-  return {
-    cart,
-  };
-});
+export const getServerSideProps = route.user(
+  async (_, queryClient) =>
+    await queryClient.prefetchQuery(["cart-list"], service.getCartLit)
+);
 
 export default UserCartPage;

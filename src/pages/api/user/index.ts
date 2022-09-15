@@ -22,11 +22,18 @@ export default apiRoute.user(async (req, res) => {
 
 export type UserSession = {
   userId: string;
-  userRole: "admin" | "user";
+  userRole: string;
 };
 
 export type User = {
   id: string;
   profilePicture?: string;
   activeAdressId?: string;
+  activePaymentId?: string;
+  name: string;
+  email: string;
+  phone: number;
+  role: string;
+  document: number;
+  nacionalitty: string;
 };

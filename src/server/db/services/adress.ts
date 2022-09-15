@@ -30,15 +30,12 @@ export const getAdress = async ({
 };
 
 export const adressScheme = z.object({
-  cep: z
-    .number()
-    .or(z.string().regex(/\d+/).transform(Number))
-    .refine((n) => n >= 0),
+  cep: z.number(),
   state: z.string(),
   city: z.string(),
   neighborhood: z.string(),
   street: z.string(),
-  number: z.string(),
+  number: z.number(),
 });
 
 export const insertAdress = async ({

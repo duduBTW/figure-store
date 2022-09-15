@@ -1,14 +1,16 @@
+import { AdressApiResponse } from "./adress";
 import { api, FigureApiResponse } from "./services";
 
 export interface OrderListApiRequest {
   address: string;
+  payment: string;
   figures: string[];
 }
 export interface OrderListApiResponse {}
 export interface OrderApiResponse {
   id: string;
   product: FigureApiResponse[];
-  adress: any;
+  adress: AdressApiResponse;
 }
 
 export const getOrder = async (id: string) => {

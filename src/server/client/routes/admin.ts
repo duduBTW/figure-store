@@ -1,21 +1,33 @@
 import type { GetServerSidePropsContext } from "next";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "server/session";
-import { api } from "server/client/services";
+import service, { api } from "server/client/services";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 
 export function restrictRouteAdmin<
   P extends { [key: string]: unknown } = { [key: string]: unknown }
->(handler: (context: GetServerSidePropsContext) => any) {
+>(
+  handler: (
+    context: GetServerSidePropsContext,
+    queryClient: QueryClient
+  ) => Promise<P | void | 404>
+) {
   return withIronSessionSsr(async (context) => {
-    const user = context.req.session.user;
-    if (!user?.userId || user.userRole !== "admin") {
+    const userSession = context.req.session.user;
+
+    if (!userSession?.userId || userSession.userRole !== "admin") {
       return {
         notFound: true,
       };
     }
 
     api.defaults.headers.common["Cookie"] = context.req.headers.cookie ?? "";
-    const data = await handler(context);
+
+    // Hydratete user
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery(["user"], service.getUser);
+
+    const data = await handler(context, queryClient);
     if (data === 404)
       return {
         notFound: true,
@@ -23,7 +35,8 @@ export function restrictRouteAdmin<
 
     return {
       props: {
-        data,
+        ...(data ?? {}),
+        dehydratedState: dehydrate(queryClient),
       },
     };
   }, sessionOptions);

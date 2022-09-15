@@ -1,4 +1,4 @@
-import { Pagination, Navigation } from "swiper";
+import { Pagination, Navigation, Autoplay } from "swiper";
 
 // components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,7 +14,7 @@ const HomeBanner = ({ slides }: { slides: string[] }) => {
         maxWidth: "120rem",
       }}
     >
-      <Content src={slide} />
+      {({ isActive }) => <Content isActive={isActive} src={slide} />}
     </SwiperSlide>
   );
 
@@ -27,7 +27,11 @@ const HomeBanner = ({ slides }: { slides: string[] }) => {
         navigation={{
           enabled: true,
         }}
-        modules={[Pagination, Navigation]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: true,
+        }}
+        modules={[Pagination, Navigation, Autoplay]}
         slidesPerView={"auto"}
         spaceBetween={16}
         centeredSlides

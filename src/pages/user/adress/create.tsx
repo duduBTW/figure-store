@@ -10,6 +10,7 @@ import Text from "components/text";
 import UserAdressForm from "components/user/adress/form";
 import ButtonIcon from "components/button/icon";
 import Link from "next/link";
+import Container from "components/container";
 
 const UserAdressCreatePage = () => {
   const { push } = useRouter();
@@ -18,7 +19,7 @@ const UserAdressCreatePage = () => {
   });
 
   return (
-    <>
+    <Container>
       <Link href="/user/adress">
         <ButtonIcon>
           <ArrowLeftLineIcon />
@@ -26,13 +27,13 @@ const UserAdressCreatePage = () => {
       </Link>
       <div style={{ height: "1.2rem" }} />
       <Text variant="title-3">Add new address</Text>
-      <div style={{ height: "4rem" }} />
+      <div style={{ height: "3.2rem" }} />
       <UserAdressForm
         loading={isLoading}
         onSubmit={mutate}
         submitLabel="Create"
       />
-    </>
+    </Container>
   );
 };
 
@@ -40,6 +41,4 @@ UserAdressCreatePage.Layout = UserLayoutProfile;
 
 export default UserAdressCreatePage;
 
-export const getServerSideProps = route.user(async () => {
-  return {};
-});
+export const getServerSideProps = route.user();

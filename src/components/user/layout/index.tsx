@@ -1,9 +1,11 @@
 import { User } from "pages/api/user";
+import { useUser } from "pages/_app";
 import { PropsWithChildren } from "react";
 
 // components
 import Link from "next/link";
 import ShoppingBagLineIcon from "remixicon-react/ShoppingBagLineIcon";
+import UserLayoutMenu from "./menu";
 import ButtonIcon from "components/button/icon";
 
 // styles
@@ -12,12 +14,11 @@ import {
   UserNavContainer,
   Logo,
   Spacer,
-  UserProfilePicture,
   SearchInputContent,
   SearchButton,
   Separator,
+  UserProfilePicture,
 } from "./styles";
-import { useUser } from "pages/_app";
 
 const UserLayout = ({ children }: PropsWithChildren<{ user: User | null }>) => {
   return (
@@ -53,11 +54,11 @@ const UserNav = () => {
               <ShoppingBagLineIcon color="var(--color-primary)" />
             </ButtonIcon>
           </Link>
-          <Link href={"/user/profile"} passHref>
+          <UserLayoutMenu>
             <UserProfilePicture
               src={user.profilePicture ?? "https://placewaifu.com/image/48/48"}
             />
-          </Link>
+          </UserLayoutMenu>
         </>
       )}
     </UserNavContainer>

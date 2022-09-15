@@ -50,7 +50,7 @@ const Figure = ({
         }
         alt={`Miniature 0 for figure ${name}`}
       />
-      <FigureName color={color} variant="title-3">
+      <FigureName color={color} variant="title-4">
         {name}
       </FigureName>
       {sold && (

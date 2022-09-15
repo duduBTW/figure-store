@@ -1,12 +1,10 @@
-import type { GetServerSideProps } from "next";
 import { useMemo, useState } from "react";
 import route from "server/client/routes";
 import debounce from "lodash.debounce";
 import { useQuery } from "@tanstack/react-query";
 
 // server
-import service, { FigureListApiResponse } from "server/client/services";
-import got from "got";
+import service from "server/client/services";
 
 // components
 import AdminFigureList from "components/admin/figure/list";
@@ -14,32 +12,17 @@ import AdminFigureListLoading from "components/admin/figure/list/loading";
 import AdminFigureListError from "components/admin/figure/list/error";
 import AdminLayout from "components/admin/layout";
 import AdminFigureListHeader from "components/admin/figure/list/header";
-import AdminTabs from "components/admin/figure/tabs";
 import Container from "components/container";
 
-interface PageProps {
-  data: { figures: FigureListApiResponse[] };
-}
-
-const useFigureList = ({
-  initialData,
-  search,
-}: { initialData?: FigureListApiResponse[]; search?: string } = {}) => {
-  return useQuery(
-    ["figure-list", search],
-    async () => service.getProductList(search),
-    {
-      initialData,
-    }
+const useFigureList = (search?: string) => {
+  return useQuery(["figure-list", search], async () =>
+    service.getProductList(search)
   );
 };
 
-const AdminFigurePage = ({ data: { figures } }: PageProps) => {
+const AdminFigurePage = () => {
   const [search, setSearch] = useState("");
-  const { data, isLoading, error } = useFigureList({
-    initialData: figures,
-    search,
-  });
+  const { data, isLoading, error } = useFigureList(search);
 
   const onSearchChange = useMemo(
     () =>
@@ -52,7 +35,6 @@ const AdminFigurePage = ({ data: { figures } }: PageProps) => {
   if (error) return <AdminFigureListError />;
   return (
     <Container>
-      <AdminTabs selected="product" />
       <AdminFigureListHeader onSearchChange={onSearchChange} />
       {isLoading ? (
         <AdminFigureListLoading />
@@ -65,12 +47,10 @@ const AdminFigurePage = ({ data: { figures } }: PageProps) => {
 
 AdminFigurePage.Layout = AdminLayout;
 
-export const getServerSideProps = route.admin(async ({ req }) => {
-  const figures = await service.getProductList("");
-
-  return {
-    figures,
-  };
+export const getServerSideProps = route.admin(async (_, queryClient) => {
+  await queryClient.prefetchQuery(["figure-list", ""], async () =>
+    service.getProductList()
+  );
 });
 
 export default AdminFigurePage;

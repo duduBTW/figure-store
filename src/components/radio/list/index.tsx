@@ -17,7 +17,7 @@ const RadioList = <T,>({
 }) => {
   return (
     <RdioListContiner>
-      {items.map((item) => children(item, validadeSelection(item, checked)))}
+      {items?.map((item) => children(item, validadeSelection(item, checked)))}
     </RdioListContiner>
   );
 };

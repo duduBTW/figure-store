@@ -27,7 +27,7 @@ const AdminFigureListHeader = ({
           data-tcy="search"
           onChange={(e) => onSearchChange(e.target.value)}
           name="search"
-          placeholder="Name..."
+          placeholder="Search..."
           endIcon={<Search2LineIcon />}
         />
       </Container>

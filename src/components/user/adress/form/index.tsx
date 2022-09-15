@@ -7,6 +7,8 @@ import Input from "components/input";
 import { UserAdressFormContainer, SubmitButton } from "./styles";
 import { AdressApiRequest } from "server/client/adress";
 import InputSelect from "components/input/select";
+import InputMask from "components/input/mask";
+import InputNumber from "components/input/number";
 
 const states = [
   { value: "AC", label: "Acre" },
@@ -57,20 +59,33 @@ const UserAdressForm = ({
         loading={loading}
         onSubmit={formMethods.handleSubmit(onSubmit)}
       >
-        <Input placeholder="00000-000" label="CEP *" name="cep" />
-        <Input label="Street *" name="street" />
-        <Input placeholder="000" label="Number *" name="number" />
-        <Input label="City *" name="city" />
-        <Input label="Neighborhood *" name="neighborhood" />
-        <InputSelect
-          options={states}
-          label="State *"
-          placeholder="Select a state..."
-          name="state"
-        />
+        <UserAddressFormInputs />
         <SubmitButton loading={loading}>{submitLabel}</SubmitButton>
       </UserAdressFormContainer>
     </FormProvider>
+  );
+};
+
+export const UserAddressFormInputs = () => {
+  return (
+    <>
+      <InputMask
+        format="#####-###"
+        placeholder="00000-000"
+        label="CEP *"
+        name="cep"
+      />
+      <Input label="Street *" name="street" />
+      <InputNumber placeholder="0000" label="Number *" name="number" />
+      <Input label="Neighborhood *" name="neighborhood" />
+      <Input label="City *" name="city" />
+      <InputSelect
+        options={states}
+        label="State *"
+        placeholder="Select a state..."
+        name="state"
+      />
+    </>
   );
 };
 

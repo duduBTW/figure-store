@@ -10,26 +10,18 @@ import Button from "components/button";
 import RadioItem from "components/radio/item";
 import Link from "next/link";
 
-const useAdressList = ({
-  initialData,
-}: { initialData?: AdressApiListResponse[] } = {}) => {
-  return useQuery(["address-list"], service.getAdressList, {
-    initialData,
-  });
-};
+const useAdressList = () => useQuery(["address-list"], service.getAdressList);
 
 const AdressList = ({
-  adressList: initialData,
   checked,
   onChange,
   hideActions = false,
 }: {
-  adressList?: AdressApiListResponse[];
   checked?: string;
   hideActions?: boolean;
   onChange?: (address: AdressApiListResponse) => void;
 }) => {
-  const { data: adressList, isLoading } = useAdressList({ initialData });
+  const { data: adressList, isLoading } = useAdressList();
 
   if (isLoading) return <div>...</div>;
   return (

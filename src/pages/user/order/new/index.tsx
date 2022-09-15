@@ -1,6 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import route from "server/client/routes";
+import service from "server/client/services";
 import useNewOrderState, { NewOrderSteps } from "state/newOrder";
 import dynamic from "next/dynamic";
 
@@ -10,8 +12,6 @@ import OrderNewAdress from "components/user/order/new/adress";
 import OrderNewPayment from "components/user/order/new/payment";
 import UserOrderNewConfirm from "components/user/order/new/confirm";
 import Button from "components/button";
-import { useMutation } from "@tanstack/react-query";
-import service from "server/client/services";
 
 const UserOrderNewContainer = dynamic(
   () => import("components/user/order/new/container"),
@@ -67,6 +67,7 @@ const UserNewOrderPage = () => {
     const newOder = useNewOrderState.getState();
 
     mutate({
+      payment: newOder.payment,
       address: newOder.address,
       figures: newOder.figures.map((figure) => figure.id),
     });
@@ -97,8 +98,9 @@ const UserNewOrderPage = () => {
 
 UserNewOrderPage.Layout = UserLayout;
 
-export const getServerSideProps = route.user(async () => {
-  return {};
+export const getServerSideProps = route.user(async (_, queryClient) => {
+  await queryClient.prefetchQuery(["address-list"], service.getAdressList);
+  await queryClient.prefetchQuery(["payment-list"], service.getPaymentList);
 });
 
 export default UserNewOrderPage;

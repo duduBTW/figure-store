@@ -1,35 +1,41 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import route from "server/client/routes";
 import service from "server/client/services";
-import { AdressApiResponse } from "server/client/adress";
+import toast from "react-hot-toast";
 
 // components
-import ArrowLeftLineIcon from "remixicon-react/ArrowLeftLineIcon";
 import UserLayoutProfile from "components/user/layout/profile";
-import Text from "components/text";
 import UserAdressForm from "components/user/adress/form";
-import ButtonIcon from "components/button/icon";
-import Link from "next/link";
+import Container from "components/container";
+import NotFound from "components/notFound";
+import Header from "components/header";
+import Separator from "components/separator";
 
-const UserAdressCreatePage = ({
-  data: { address, id },
-}: {
-  data: { address: AdressApiResponse; id: string };
-}) => {
+const useAdressItem = (id: string) =>
+  useQuery(["address-item", id], service.getAdress(id), {
+    enabled: false,
+  });
+const UserAdressCreatePage = ({ id }: { id: string }) => {
+  const { data: address } = useAdressItem(id);
   const { mutate, isLoading } = useMutation(service.updateAdress(id), {
-    onSuccess: () => {},
+    onSuccess: () => toast.success("Address changed with success"),
   });
 
+  if (!address)
+    return (
+      <NotFound
+        back={{
+          label: "Return to the address list",
+          url: "/user/adress",
+        }}
+      >
+        Address not found
+      </NotFound>
+    );
   return (
-    <>
-      <Link href="/user/adress">
-        <ButtonIcon>
-          <ArrowLeftLineIcon />
-        </ButtonIcon>
-      </Link>
-      <div style={{ height: "1.2rem" }} />
-      <Text variant="title-3">Edit address</Text>
-      <div style={{ height: "4rem" }} />
+    <Container>
+      <Header backHref="/user/adress">Edit address</Header>
+      <Separator height={3.2} />
       <UserAdressForm
         loading={isLoading}
         onSubmit={mutate}
@@ -38,7 +44,7 @@ const UserAdressCreatePage = ({
         }}
         submitLabel="Save changes"
       />
-    </>
+    </Container>
   );
 };
 
@@ -46,15 +52,16 @@ UserAdressCreatePage.Layout = UserLayoutProfile;
 
 export default UserAdressCreatePage;
 
-export const getServerSideProps = route.user(async ({ query }) => {
+export const getServerSideProps = route.user(async ({ query }, queryClient) => {
   const id = query["addressId"];
   if (typeof id !== "string")
     return {
       notFound: true,
     };
 
+  await queryClient.prefetchQuery(["address-item", id], service.getAdress(id));
+
   return {
-    address: await service.getAdress(id),
     id,
   };
 });

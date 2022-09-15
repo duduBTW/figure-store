@@ -6,11 +6,7 @@ import service from "server/client/services";
 import UserLayout from "components/user/layout";
 import UserOderNewComplete from "components/user/order/new/complete";
 
-const UserOrderNewComplete = ({
-  data: { order },
-}: {
-  data: { order: OrderApiResponse };
-}) => {
+const UserOrderNewComplete = ({ order }: { order: OrderApiResponse }) => {
   return <UserOderNewComplete order={order} />;
 };
 

@@ -1,32 +1,40 @@
 import type { GetServerSidePropsContext } from "next";
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from "server/session";
-import { prisma } from "server/db/client";
+import service, { api } from "../services";
+import { User } from "pages/api/user";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+
+export interface UserPage<T> {
+  data: T;
+  user: User;
+}
 
 export function publicRoute<
   P extends { [key: string]: unknown } = { [key: string]: unknown }
->(handler: (context: GetServerSidePropsContext) => Promise<any>) {
+>(
+  handler: (
+    context: GetServerSidePropsContext,
+    queryClient: QueryClient
+  ) => Promise<P | void | 404>
+) {
   return withIronSessionSsr(async (context) => {
-    const userSession = context.req.session.user;
-    const data = await handler(context);
-    let user = null;
+    api.defaults.headers.common["Cookie"] = context.req.headers.cookie ?? "";
+
+    // Hydratete user
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery(["user"], service.getUser);
+
+    const data = await handler(context, queryClient);
     if (data === 404)
       return {
         notFound: true,
       };
 
-    if (userSession?.userId) {
-      user = await prisma.user.findFirst({
-        where: {
-          id: userSession?.userId,
-        },
-      });
-    }
-
     return {
       props: {
-        data,
-        user,
+        ...(data ?? {}),
+        dehydratedState: dehydrate(queryClient),
       },
     };
   }, sessionOptions);

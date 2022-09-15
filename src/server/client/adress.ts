@@ -37,7 +37,7 @@ export const getAdressList = async () => {
   return response.data;
 };
 
-export const getAdress = async (id: string) => {
+export const getAdress = (id: string) => async () => {
   const response = await api.get<AdressApiResponse>(`/api/user/adress/${id}`);
   return response.data;
 };

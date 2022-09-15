@@ -45,6 +45,7 @@ export const getOrder = async ({
 
 export const orderScheme = z.object({
   address: z.string(),
+  payment: z.string(),
   figures: z.string().array(),
 });
 
@@ -55,7 +56,7 @@ export const insertOrder = async ({
   body: any;
   user: UserSession;
 }) => {
-  const { address, figures } = orderScheme.parse(body);
+  const { address, figures, payment } = orderScheme.parse(body);
 
   return await prisma.order.create({
     data: {
@@ -66,7 +67,9 @@ export const insertOrder = async ({
         },
       },
       payment: {
-        create: {},
+        connect: {
+          id: payment,
+        },
       },
       user: {
         connect: {

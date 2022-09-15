@@ -7,7 +7,6 @@ interface ContainerProps {
   loading?: boolean;
 }
 export const Container = styled.div<ContainerProps>`
-  transition: background 0.2s ease;
   display: flex;
   justify-content: center;
   background: ${({ confirm }) =>

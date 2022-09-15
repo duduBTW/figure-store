@@ -17,24 +17,33 @@ import ProductGrid from "components/product/grid";
 import FigureContainer from "components/figure/container";
 import FigureName from "components/figure/name";
 import UserLayout from "components/user/layout";
+import { useUser } from "pages/_app";
 
 const FigurePage = ({
-  data: { figure, relatedFigures },
+  figure,
+  relatedFigures,
 }: {
-  data: { figure: FigureApiResponse; relatedFigures: FigureListApiResponse[] };
+  figure: FigureApiResponse;
+  relatedFigures: FigureListApiResponse[];
 }) => {
-  const { push } = useRouter();
+  const { push, asPath } = useRouter();
   const addFigures = useNewOrderState((state) => state.addFigures);
+  const { data: user } = useUser();
+
+  const authenticathed = (handler: () => void) => () => {
+    if (!user) {
+      push(`/login?redirect=${encodeURI(asPath)}`);
+      return;
+    }
+
+    handler();
+  };
+
   const { mutate, isLoading, isSuccess } = useMutation(service.insertCart, {
     onSuccess: () => {
       push(`/user/cart`);
     },
   });
-
-  const addToCart = () =>
-    mutate({
-      figureId: figure.id,
-    });
 
   return (
     <>
@@ -43,11 +52,15 @@ const FigurePage = ({
         <FigureName color={figure.color} name={figure.name} />
         <FigurePrice price={figure.price} />
         <FigureActions
-          onBuyClick={() => {
+          onBuyClick={authenticathed(() => {
             push("/user/order/new");
             addFigures([figure]);
-          }}
-          onClick={addToCart}
+          })}
+          onClick={authenticathed(() =>
+            mutate({
+              figureId: figure.id,
+            })
+          )}
           loading={isLoading || isSuccess}
         />
         {figure.description?.html && (
@@ -78,7 +91,7 @@ export const getServerSideProps = route.public(async ({ query }) => {
       };
 
     try {
-      const figure = await service.getProduct(id);
+      const figure = await service.getProduct(id)();
       if (!figure) return 404;
 
       return {

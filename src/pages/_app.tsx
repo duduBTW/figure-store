@@ -6,7 +6,9 @@ import {
   QueryClient,
   QueryClientProvider,
   useQuery,
+  Hydrate,
 } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 
 // styles
 import "../styles/globals.css";
@@ -23,12 +25,13 @@ const MyApp: AppType = ({ Component, pageProps: { user, ...pageProps } }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <UserProvider user={user}>
+      <Hydrate state={pageProps.dehydratedState}>
         <Layout>
           <Global styles={globalStyles} />
           <Component {...pageProps} user={user} />
         </Layout>
-      </UserProvider>
+        <Toaster position="bottom-right" />
+      </Hydrate>
     </QueryClientProvider>
   );
 };
@@ -43,23 +46,6 @@ function getLayout(
   return (Component as any).Layout || EmptyLayout;
 }
 
-export const useUser = ({ initialData }: { initialData?: any } = {}) => {
-  return useQuery<User>(["user"], service.getUser, {
-    initialData,
-  });
-};
-
-const UserProvider = ({
-  children,
-  user,
-}: PropsWithChildren<{
-  user: any;
-}>) => {
-  useUser({
-    initialData: user,
-  });
-
-  return <>{children}</>;
-};
+export const useUser = () => useQuery<User>(["user"], service.getUser);
 
 export default MyApp;

@@ -1,4 +1,3 @@
-import type { GetServerSideProps } from "next";
 import route from "server/client/routes";
 import service, { FigureListApiResponse } from "server/client/services";
 
@@ -9,13 +8,13 @@ import ProductGrid from "components/product/grid";
 import UserLayout from "components/user/layout";
 
 const HomePage = ({
-  data: { alerts, slides, newFigures },
+  alerts,
+  slides,
+  newFigures,
 }: {
-  data: {
-    alerts: string[];
-    slides: string[];
-    newFigures: FigureListApiResponse[];
-  };
+  alerts: string[];
+  slides: string[];
+  newFigures: FigureListApiResponse[];
 }) => {
   return (
     <>
@@ -35,8 +34,9 @@ export const getServerSideProps = route.public(async () => {
   ];
 
   const slides = [
+    "https://pbs.twimg.com/media/FcODsj_aMAAsmAd?format=jpg&name=4096x4096",
     "https://pbs.twimg.com/media/FZjkT28acAEOTBN?format=jpg&name=4096x4096",
-    "https://pbs.twimg.com/media/FbKuuXragAAZ6fu?format=jpg&name=4096x4096",
+    "https://pbs.twimg.com/media/FcI-RiVagAYR2ng?format=jpg&name=4096x4096",
     "https://pbs.twimg.com/media/FbI9FsLUUAAuqkV?format=jpg&name=medium",
   ];
 

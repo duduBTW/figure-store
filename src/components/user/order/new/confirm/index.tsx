@@ -13,19 +13,25 @@ import TruckLineIcon from "remixicon-react/TruckLineIcon";
 import { Section } from "./styles";
 
 const useAdress = ({ id }: { id: string }) => {
-  return useQuery(["address-list", id], () => service.getAdress(id));
+  return useQuery(["address-list", id], service.getAdress(id));
+};
+
+const usePayment = ({ id }: { id: string }) => {
+  return useQuery(["payment-list", id], service.getPayment(id));
 };
 
 const UserOrderNewConfirm = () => {
-  const { setActiveStep, address } = useNewOrderState((state) => ({
+  const { setActiveStep, address, payment } = useNewOrderState((state) => ({
     setActiveStep: state.setActiveStep,
     address: state.address,
+    payment: state.payment,
   }));
   const changeAdress = () => setActiveStep("adress");
   const changeDeliver = () => setActiveStep("deliver");
   const changePayment = () => setActiveStep("payment");
 
   const { data: addressData } = useAdress({ id: address });
+  const { data: paymentData } = usePayment({ id: payment });
 
   return (
     <>
@@ -59,17 +65,19 @@ const UserOrderNewConfirm = () => {
       </Section>
       <Section>
         <Text variant="title-4">Payment details</Text>
-        <ListItem
-          startAction={<MapPinLineIcon color="var(--color-primary)" />}
-          hideBorder
-          primary="Sodexo **** 4321"
-          secondary="10x"
-          endAction={
-            <Button onClick={changePayment} dense color="primary-l">
-              Change
-            </Button>
-          }
-        />
+        {paymentData && (
+          <ListItem
+            startAction={<MapPinLineIcon color="var(--color-primary)" />}
+            hideBorder
+            primary={`${paymentData.name} - ${paymentData.number}`}
+            secondary={`${paymentData.cvc}, ${paymentData.validDate}`}
+            endAction={
+              <Button onClick={changePayment} dense color="primary-l">
+                Change
+              </Button>
+            }
+          />
+        )}
       </Section>
     </>
   );

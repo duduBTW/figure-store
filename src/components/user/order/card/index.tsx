@@ -1,26 +1,37 @@
+import Button from "components/button";
+import Text from "components/text";
 import { OrderApiResponse } from "server/client/order";
 
 // styles
 import {
-  Deliver,
   Miniature,
   Name,
   Status,
   UserOrderCardContainer,
+  UserOrderCardProduct,
 } from "./styles";
 
 const UserOrderCard = ({ order }: { order: OrderApiResponse }) => {
   return (
     <UserOrderCardContainer>
-      <Miniature
-        src={`/figure/${order.product[0]?.images[0]?.medium}` ?? ""}
-        alt="Order miniature"
-      />
-      <Status>Delivered</Status>
-      <Name variant="title-4" color={order.product[0]?.color}>
-        {order.product[0]?.name}
-      </Name>
-      <Deliver>Will arrive at your address Tuesday</Deliver>
+      <Text variant="subtitle-1">
+        Will arrive at {order.adress.street} Tuesday
+      </Text>
+      {order.product.map((product) => (
+        <UserOrderCardProduct key={product.id}>
+          <Miniature
+            src={`/figure/${product.images[0]?.medium}` ?? ""}
+            alt="Order miniature"
+          />
+          <Status>Delivered</Status>
+          <Name variant="title-4" color={product.color}>
+            {product.name}
+          </Name>
+        </UserOrderCardProduct>
+      ))}
+      <Button dense color="primary-l">
+        View order
+      </Button>
     </UserOrderCardContainer>
   );
 };

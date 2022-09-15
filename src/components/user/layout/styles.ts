@@ -29,6 +29,7 @@ export const Spacer = styled.div`
 `;
 
 export const UserProfilePicture = styled.img`
+  cursor: pointer;
   width: 3.6rem;
   height: 3.6rem;
   margin-left: 2.4rem;

@@ -13,19 +13,21 @@ interface IFigureName {
   color: string;
 }
 export const FigureName = styled(Text)<IFigureName>`
-  margin-top: 0.8rem;
+  margin-top: 1.6rem;
   grid-area: name;
   color: ${({ color }) => color};
 
   ${mq.fromMobileLg} {
     margin-top: 2rem;
-    margin-left: 2rem;
     width: 80%;
   }
 `;
 
 // Figure item
 export const FigureContainer = styled.div`
+  padding: 2rem;
+  border-radius: 1.2rem;
+  border: 0.1rem solid var(--color-divider);
   cursor: pointer;
   display: grid;
   grid-template-areas:
@@ -33,23 +35,9 @@ export const FigureContainer = styled.div`
     "name      name"
     "sold      stock";
   grid-template-columns: 1fr 1.6fr;
-  grid-template-rows: 20rem auto auto;
-  padding-bottom: 1.6rem;
+  grid-template-rows: 22rem auto auto;
 
-  position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 0.1rem;
-    width: calc(100% + 4rem);
-    margin: 0 -2rem;
-    background: var(--color-divider);
-  }
-
-  ${mq.fromMobileLg} {
-    padding-bottom: 0rem;
+  ${mq.fromTabletMd} {
     grid-template-areas:
       "miniature name name"
       "miniature sold stock";
@@ -64,11 +52,13 @@ export const FigureContainer = styled.div`
   }
 
   &:hover {
+    background: var(--color-primary-l);
   }
 `;
 export const FigureMiniature = styled.img`
   grid-area: miniature;
   width: 100%;
+  max-width: 20rem;
   height: 100%;
   object-fit: cover;
   object-position: 50% 20%;

@@ -42,7 +42,7 @@ export interface FigureApiResponse {
 }
 
 export const getProductList = async (
-  searchValue?: string
+  searchValue: string = ""
 ): Promise<FigureListApiResponse[]> => {
   const response = await api.get<FigureListApiResponse[]>(
     `/api/figure?name=${searchValue}`
@@ -55,10 +55,11 @@ export const getNewProductList = async (): Promise<FigureListApiResponse[]> => {
   return response.data;
 };
 
-export const getProduct = async (id?: string): Promise<FigureApiResponse> => {
-  const response = await api.get<FigureApiResponse>(`/api/figure/${id}`);
-  return response.data;
-};
+export const getProduct =
+  (id: string) => async (): Promise<FigureApiResponse> => {
+    const response = await api.get<FigureApiResponse>(`/api/figure/${id}`);
+    return response.data;
+  };
 
 export const insertProduct = async (
   newFigure: FigureApiRequest
@@ -72,6 +73,5 @@ export const editProduct =
   (id: string) =>
   async (updatedFaigure: FigureApiRequest): Promise<FigureApiResponse> => {
     const response = await api.put(`/api/figure/${id}/edit`, updatedFaigure);
-
     return response.data;
   };

@@ -10,25 +10,14 @@ import AdminFigureHeader from "components/admin/figure/header";
 import AdminLayout from "components/admin/layout";
 
 interface PageProps {
-  data: { figure: FigureApiResponse; id: string };
+  id: string;
 }
 
-const useFigure = ({
-  initialData,
-  id,
-}: { initialData?: FigureApiResponse; id?: string } = {}) => {
-  return useQuery(["figure-item", id], async () => service.getProduct(id), {
-    initialData,
-  });
-};
+const useFigure = (id: string) =>
+  useQuery(["figure-item", id], service.getProduct(id));
 
-const EditFigurePage = ({
-  data: { figure: figureInitialData, id },
-}: PageProps) => {
-  const { data: figure, refetch } = useFigure({
-    initialData: figureInitialData,
-    id,
-  });
+const EditFigurePage = ({ id }: PageProps) => {
+  const { data: figure, refetch } = useFigure(id);
   const { mutate, isLoading } = useMutation(service.editProduct(id), {
     onSuccess: () => refetch(),
   });
@@ -62,13 +51,16 @@ const EditFigurePage = ({
 
 EditFigurePage.Layout = AdminLayout;
 
-export const getServerSideProps = route.admin(async (context) => {
+export const getServerSideProps = route.admin(async (context, queryClient) => {
   try {
-    const figure = await service.getProduct(String(context.params?.figureId));
+    const id = String(context.params?.figureId);
+    await queryClient.prefetchQuery(
+      ["figure-item", id],
+      service.getProduct(id)
+    );
 
     return {
-      figure,
-      id: String(context.params?.figureId),
+      id,
     };
   } catch (error) {
     return 404;

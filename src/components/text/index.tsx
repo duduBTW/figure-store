@@ -24,14 +24,21 @@ const Text = ({
   color = "textPrimary",
   variant = "body-1",
   children,
+  name,
   className,
 }: PropsWithChildren<{
   variant?: TextVariant;
   className?: string;
+  name?: string;
   color?: ColorVariant;
 }>) => {
   return (
-    <Container className={className} variant={variant} colorText={color}>
+    <Container
+      className={className}
+      name={name}
+      variant={variant}
+      colorText={color}
+    >
       {children}
     </Container>
   );

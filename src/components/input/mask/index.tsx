@@ -1,14 +1,15 @@
 import { useController, useFormContext } from "react-hook-form";
-import { Props as InputMaskProps } from "react-input-mask";
+import { PatternFormat, PatternFormatProps } from "react-number-format";
+import { Content } from "../styles";
 import { Container, Label } from "../styles";
-import { Content } from "./styles";
 
-interface Props extends InputMaskProps {
+interface Props extends PatternFormatProps {
   label?: string;
   name: string;
+  output?: "floatValue" | "value" | "formattedValue";
 }
 
-const InputMask = ({ name, label, ...rest }: Props) => {
+const InputMask = ({ name, label, output = "floatValue", ...rest }: Props) => {
   const { control } = useFormContext();
   const {
     field: { onChange, onBlur, value, ref },
@@ -20,13 +21,15 @@ const InputMask = ({ name, label, ...rest }: Props) => {
   return (
     <Container>
       <Label variant="subtitle-2">{label}</Label>
-      <Content
+      <PatternFormat
         autoComplete="off"
         {...rest}
-        onChange={onChange}
+        name={name}
+        onValueChange={(newValue) => onChange(newValue[output])}
         value={value}
         onBlur={onBlur}
-        inputRef={ref}
+        getInputRef={ref}
+        customInput={Content}
       />
     </Container>
   );

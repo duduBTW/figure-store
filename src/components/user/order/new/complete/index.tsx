@@ -47,9 +47,11 @@ const UserOderNewComplete = ({ order }: { order: OrderApiResponse }) => {
         <Divider />
         <Text variant="subtitle-1">Shipping to</Text>
         <div>
-          <Text variant="body-1">{order.adress.street}</Text>
+          <Text variant="body-1">
+            {order.adress.street}, {order.adress.number}
+          </Text>
           <Text variant="body-2" color="textSecondary">
-            {order.adress.province} - CEP {order.adress.cep}
+            {order.adress.city}, {order.adress.state} - CEP {order.adress.cep}
           </Text>
         </div>
         <Divider />

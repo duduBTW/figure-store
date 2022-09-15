@@ -18,6 +18,7 @@ export const loadingContainer = css`
 `;
 
 export const Container = styled.div<ContainerProps>`
+  transition: margin 0.2s ease, padding 0.2s ease;
   box-sizing: border-box;
   background: var(--color-content);
   width: 100%;
@@ -25,14 +26,12 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   gap: ${({ gap }) => `${gap}rem`};
   flex-direction: column;
+  margin-bottom: 12rem;
 
   ${mq.fromTabletMd} {
     margin: 2rem auto;
     max-width: 80rem;
     border-radius: 1.2rem;
-  }
-
-  ${mq.fromMobileLg} {
     padding: 3.2rem;
   }
 

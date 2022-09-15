@@ -11,7 +11,7 @@ import Text from "components/text";
 import AdressList from "components/user/adress/list";
 
 const OrderNewAdress = () => {
-  const { data } = useUser();
+  const { data: user } = useUser();
   const { setActiveStep, address, setAddress } = useNewOrderState((state) => ({
     setActiveStep: state.setActiveStep,
     address: state.address,
@@ -20,10 +20,10 @@ const OrderNewAdress = () => {
   const nextStep = () => setActiveStep("deliver");
 
   useEffect(() => {
-    if (!address && data?.activeAdressId) {
-      setAddress(data.activeAdressId);
+    if (!address && user?.activeAdressId) {
+      setAddress(user.activeAdressId);
     }
-  }, [data?.activeAdressId, address, setAddress]);
+  }, [user?.activeAdressId, address, setAddress]);
 
   return (
     <>

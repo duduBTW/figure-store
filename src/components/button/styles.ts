@@ -6,7 +6,10 @@ interface Content {
   dense?: boolean;
   color?: ButtonColor;
   loading?: boolean;
+  name?: string;
+  fullWidth?: boolean;
 }
+
 export const Content = styled.button<Content>`
   transition: background 0.14s ease;
   box-sizing: border-box;
@@ -29,6 +32,8 @@ export const Content = styled.button<Content>`
   align-items: center;
   justify-content: center;
 
+  grid-area: ${({ name }) => name ?? "unset"};
+  width: ${({ fullWidth }) => (fullWidth ? "100%" : "unset")};
   ${({ dense }) => {
     if (!dense) return "";
 

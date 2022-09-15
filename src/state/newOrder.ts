@@ -42,7 +42,7 @@ const useNewOrderState = create(
           total,
           deliverPrice,
           deliver: "1",
-          payment: "1",
+          payment: "",
           address: undefined,
         });
       },
