@@ -14,17 +14,13 @@ import ItalicIcon from "remixicon-react/ItalicIcon";
 
 // styles
 import { Content, Container, NavContainer, NavDivider } from "./styles";
+import { Label } from "../styles";
+import Separator from "components/separator";
 
-const InputEditor = ({
-  name,
-  defaultValue,
-}: {
-  name: string;
-  defaultValue?: EditorContent;
-}) => {
+const InputEditor = ({ name, label }: { name: string; label?: string }) => {
   const { control } = useFormContext();
   const {
-    field: { onChange, onBlur, ref },
+    field: { onChange, onBlur, ref, value },
   } = useController({
     control,
     name,
@@ -37,20 +33,26 @@ const InputEditor = ({
         levels: [3, 4],
       }),
     ],
-    content: defaultValue,
     onUpdate: ({ editor }) => {
       onChange({
         json: JSON.stringify(editor.getJSON()),
         html: editor.getHTML(),
       });
     },
+    onCreate: ({ editor }) => {
+      if (value?.json) editor.commands.setContent(JSON.parse(value.json));
+    },
   });
 
   return (
-    <Container>
-      <Nav editor={editor} />
-      <Content onBlur={onBlur} ref={ref} editor={editor} />
-    </Container>
+    <div>
+      {label && <Label variant="subtitle-2">{label}</Label>}
+      <Separator height={0.4} />
+      <Container>
+        <Nav editor={editor} />
+        <Content onBlur={onBlur} ref={ref} editor={editor} />
+      </Container>
+    </div>
   );
 };
 

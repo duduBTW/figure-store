@@ -1,10 +1,17 @@
 import styled from "@emotion/styled";
 import { EditorContent } from "@tiptap/react";
-import { body1Styles, subtitle1 } from "components/text/styles";
+import { body1Styles, subtitle1, title4 } from "components/text/styles";
+import { mq } from "constants/theme";
 
 export const Container = styled.div`
-  border: 0.1rem solid var(--color-divider);
-  border-radius: 1.2rem;
+  margin: 0 -2rem;
+  border-top: 0.1rem solid var(--color-divider);
+
+  ${mq.fromMobileLg} {
+    margin: 0;
+    border: 0.1rem solid var(--color-divider);
+    border-radius: 1.2rem;
+  }
 `;
 
 export const Content = styled(EditorContent)`
@@ -16,6 +23,12 @@ export const Content = styled(EditorContent)`
     p {
       ${body1Styles}
       padding: 0.6rem 0;
+    }
+
+    h3 {
+      ${title4}
+      padding: 0.6rem 0;
+      margin: 0;
     }
 
     h4 {

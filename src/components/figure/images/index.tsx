@@ -49,6 +49,7 @@ const ImageThumbs = ({
       {images.map((image, index) => (
         <ImageThumbsMiniatureContainer
           active={value === index}
+          onMouseEnter={() => onChange(index)}
           onClick={() => onChange(index)}
           key={image.id}
         >

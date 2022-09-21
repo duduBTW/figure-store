@@ -4,14 +4,12 @@ import service from "server/client/services";
 import { useRouter } from "next/router";
 
 // components
-import ArrowLeftLineIcon from "remixicon-react/ArrowLeftLineIcon";
 import UserLayoutProfile from "components/user/layout/profile";
-import Text from "components/text";
-import ButtonIcon from "components/button/icon";
-import Link from "next/link";
 import UserPaymentForm from "components/user/payment/form";
 import Container from "components/container";
 import toast from "react-hot-toast";
+import Separator from "components/separator";
+import Header from "components/header";
 
 const UserPaymentCreatePage = () => {
   const { push } = useRouter();
@@ -26,14 +24,8 @@ const UserPaymentCreatePage = () => {
 
   return (
     <Container>
-      <Link href="/user/payment">
-        <ButtonIcon>
-          <ArrowLeftLineIcon />
-        </ButtonIcon>
-      </Link>
-      <div style={{ height: "1.2rem" }} />
-      <Text variant="title-3">Add new payment</Text>
-      <div style={{ height: "3.2rem" }} />
+      <Header backHref="/user/payment">Add new payment</Header>
+      <Separator height={3.2} />
       <UserPaymentForm
         loading={isLoading || isSuccess}
         onSubmit={mutate}

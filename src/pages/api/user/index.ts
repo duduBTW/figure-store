@@ -5,11 +5,13 @@ export default apiRoute.user(async (req, res) => {
   try {
     switch (req.method) {
       case "GET":
-        return res.send(
-          await dbServices.getUser({
-            user: req.session.user!,
-          })
-        );
+        const user = await dbServices.getUser({
+          user: req.session.user!,
+        });
+
+        return res.send({
+          ...user,
+        });
 
       default:
         return res.status(404).send({});

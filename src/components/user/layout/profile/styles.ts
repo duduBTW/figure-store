@@ -81,6 +81,7 @@ export const BottomNavContainer = styled.div`
   width: 100%;
   background: var(--color-content);
   border-top: 0.1rem solid var(--color-divider);
+  z-index: 3;
 
   ${mq.fromTabletMd} {
     display: none;

@@ -10,7 +10,8 @@ import Link from "next/link";
 import DeleteBin7LineIcon from "remixicon-react/DeleteBin7LineIcon";
 import Edit2LineIcon from "remixicon-react/Edit2LineIcon";
 
-const usePaymentList = () => useQuery(["payment-list"], service.getPaymentList);
+export const usePaymentList = () =>
+  useQuery(["payment-list"], service.getPaymentList);
 
 const PaymentList = ({
   checked,

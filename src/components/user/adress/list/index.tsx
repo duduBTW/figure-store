@@ -6,12 +6,11 @@ import service from "server/client/services";
 import RadioList from "components/radio/list";
 import DeleteBin7LineIcon from "remixicon-react/DeleteBin7LineIcon";
 import Edit2LineIcon from "remixicon-react/Edit2LineIcon";
-import Button from "components/button";
 import RadioItem from "components/radio/item";
 import Link from "next/link";
+import ButtonIcon from "components/button/icon";
 
 const useAdressList = () => useQuery(["address-list"], service.getAdressList);
-
 const AdressList = ({
   checked,
   onChange,
@@ -44,21 +43,21 @@ const AdressList = ({
               hideActions ? undefined : (
                 <>
                   <Link href={`/user/adress/${id}`}>
-                    <Button
+                    <ButtonIcon
+                      tooltip="Edit"
                       onClick={(e) => e.stopPropagation()}
-                      dense
-                      color="primary-l"
                     >
                       <Edit2LineIcon />
-                    </Button>
+                    </ButtonIcon>
                   </Link>
-                  <Button
+                  <ButtonIcon
                     onClick={(e) => e.stopPropagation()}
-                    dense
                     color="error-l"
+                    tooltip="Delete"
+                    variant="contained"
                   >
                     <DeleteBin7LineIcon />
-                  </Button>
+                  </ButtonIcon>
                 </>
               )
             }

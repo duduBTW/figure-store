@@ -8,7 +8,7 @@ interface UserAdressFormContainer {
 export const UserAdressFormContainer = styled.form<UserAdressFormContainer>`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.4rem;
   ${({ loading }) => loading && loadingContainer}
 `;
 

@@ -13,7 +13,8 @@ export const SearchInput = styled(InputBase)`
 `;
 
 export const Filters = styled(Text)`
-  color: var(--color-primary);
-  text-align: right;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
   margin-top: 0.8rem;
 `;

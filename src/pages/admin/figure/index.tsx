@@ -13,6 +13,7 @@ import AdminFigureListError from "components/admin/figure/list/error";
 import AdminLayout from "components/admin/layout";
 import AdminFigureListHeader from "components/admin/figure/list/header";
 import Container from "components/container";
+import Text from "components/text";
 
 const useFigureList = (search?: string) => {
   return useQuery(["figure-list", search], async () =>
@@ -34,8 +35,15 @@ const AdminFigurePage = () => {
 
   if (error) return <AdminFigureListError />;
   return (
-    <Container>
-      <AdminFigureListHeader onSearchChange={onSearchChange} />
+    <Container gap={3.2}>
+      <Text variant="title-3">Products</Text>
+      <AdminFigureListHeader
+        create={{
+          href: "/admin/figure/create",
+          label: "Create new figure",
+        }}
+        onSearchChange={onSearchChange}
+      />
       {isLoading ? (
         <AdminFigureListLoading />
       ) : (

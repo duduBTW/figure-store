@@ -1,5 +1,6 @@
 import Button from "components/button";
 import Text from "components/text";
+import Link from "next/link";
 import { OrderApiResponse } from "server/client/order";
 
 // styles
@@ -29,9 +30,11 @@ const UserOrderCard = ({ order }: { order: OrderApiResponse }) => {
           </Name>
         </UserOrderCardProduct>
       ))}
-      <Button dense color="primary-l">
-        View order
-      </Button>
+      <Link href={`/user/order/${order.id}`}>
+        <Button dense color="primary-l">
+          View order
+        </Button>
+      </Link>
     </UserOrderCardContainer>
   );
 };

@@ -4,6 +4,7 @@ import * as orderEndpoints from "./order";
 import * as adressEndpoints from "./adress";
 import * as userEndpoints from "./user";
 import * as paymentEndpoints from "./payment";
+import * as announcementEndpoints from "./announcement";
 
 const dbServices = {
   ...figureEndpoints,
@@ -12,6 +13,7 @@ const dbServices = {
   ...adressEndpoints,
   ...userEndpoints,
   ...paymentEndpoints,
+  ...announcementEndpoints,
 } as const;
 
 export default dbServices;

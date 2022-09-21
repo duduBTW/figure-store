@@ -14,8 +14,6 @@ export const ListItemContainer = styled.div<ListItemContainerProps>`
       selected ? "var(--color-primary)" : "var(--color-divider)"};
   background: var(--color-content);
   border-radius: 1.2rem;
-  display: flex;
-  align-items: center;
   width: 100%;
   box-sizing: border-box;
   padding: 1.6rem;
@@ -32,8 +30,11 @@ export const ListItemContainer = styled.div<ListItemContainerProps>`
         user-select: none;
         cursor: pointer;
 
-        &:hover {
-          background: var(--color-primary-l);
+        &:hover,
+        &:focus {
+          ${PrimaryText} {
+            text-decoration: underline;
+          }
         }
       `;
   }};

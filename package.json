@@ -16,6 +16,8 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@floating-ui/react-dom-interactions": "^0.9.3",
+    "@hookform/error-message": "^2.0.0",
+    "@hookform/resolvers": "^2.9.8",
     "@next-auth/prisma-adapter": "^1.0.4",
     "@next/bundle-analyzer": "^12.3.0",
     "@prisma/client": "^4.1.1",

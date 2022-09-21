@@ -7,10 +7,10 @@ import Input from "components/input";
 import InputCurrency from "components/input/currency";
 import InputEditor from "components/input/editor";
 import Text from "components/text";
+import InputColor from "components/input/color";
 
 // styles
 import { Container, Section } from "./styles";
-import InputColor from "components/input/color";
 
 const AdminFigureForm = ({
   submitButtonLabel,
@@ -23,8 +23,6 @@ const AdminFigureForm = ({
   onSubmit: (data: FigureApiRequest) => void;
   formProps?: UseFormProps<FigureApiRequest>;
 }) => {
-  const descDefaultValue = formProps?.defaultValues?.description?.json;
-  const detDefaultValue = formProps?.defaultValues?.details?.json;
   const formMethods = useForm<FigureApiRequest>(formProps);
 
   return (
@@ -45,18 +43,12 @@ const AdminFigureForm = ({
 
         <Section data-tcy="form-description-container">
           <Text variant="subtitle-2">Description</Text>
-          <InputEditor
-            defaultValue={descDefaultValue ? JSON.parse(descDefaultValue) : ""}
-            name="description"
-          />
+          <InputEditor name="description" />
         </Section>
 
         <Section data-tcy="form-details-container">
           <Text variant="subtitle-2">Product Details</Text>
-          <InputEditor
-            defaultValue={detDefaultValue ? JSON.parse(detDefaultValue) : ""}
-            name="details"
-          />
+          <InputEditor name="details" />
         </Section>
 
         <Button data-tcy="form-submit-button" loading={loading} type="submit">

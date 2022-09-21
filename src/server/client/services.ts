@@ -7,6 +7,7 @@ import * as imagesServices from "./images";
 import * as adressServices from "./adress";
 import * as userServices from "./user";
 import * as paymentServices from "./payment";
+import * as announcementServices from "./announcement";
 
 export const api = axios.create({
   baseURL: process.env.API_BASE_URL,
@@ -20,6 +21,7 @@ const service = {
   ...adressServices,
   ...userServices,
   ...paymentServices,
+  ...announcementServices,
 };
 
 export type { OrderListApiResponse } from "./order";

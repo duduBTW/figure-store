@@ -8,7 +8,7 @@ import MoneyDollarCircleLineIcon from "remixicon-react/MoneyDollarCircleLineIcon
 import ShoppingCartLineIcon from "remixicon-react/ShoppingCartLineIcon";
 import LogoutCircleLineIcon from "remixicon-react/LogoutCircleLineIcon";
 import Link from "next/link";
-import { useMutation, useQueries, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import service from "server/client/services";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";

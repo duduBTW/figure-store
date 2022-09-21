@@ -15,16 +15,18 @@ export const UserAuthContent = styled.main`
   display: flex;
   flex-direction: column;
   gap: 4rem;
-  padding: 6rem 4rem 3.2rem;
-  min-width: 52rem;
+  padding: 6rem 2rem 3.2rem;
   max-width: 100%;
   width: 100%;
 
-  ${mq.fromTabletMd} {
-    max-width: 62rem;
+  ${mq.fromTabletSm} {
+    padding: 6rem 4rem 3.2rem;
+    min-width: 40rem;
   }
 
-  ${mq.fromTabletSm} {
+  ${mq.fromDesktopSm} {
+    max-width: 62rem;
+    min-width: 62rem;
     padding: 6rem 10rem 3.2rem;
   }
 `;

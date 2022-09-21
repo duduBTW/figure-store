@@ -1,4 +1,5 @@
 import { AdressApiResponse } from "./adress";
+import { PaymentApiResponse } from "./payment";
 import { api, FigureApiResponse } from "./services";
 
 export interface OrderListApiRequest {
@@ -11,6 +12,7 @@ export interface OrderApiResponse {
   id: string;
   product: FigureApiResponse[];
   adress: AdressApiResponse;
+  payment: PaymentApiResponse;
 }
 
 export const getOrder = async (id: string) => {

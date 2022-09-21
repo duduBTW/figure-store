@@ -1,15 +1,19 @@
 import useNewOrderState from "state/newOrder";
 
 // components
-import PaymentList from "components/user/payment/list";
+import PaymentList, { usePaymentList } from "components/user/payment/list";
 import Text from "components/text";
+import AddLineIcon from "remixicon-react/AddLineIcon";
 
 // styles
 import { Continue } from "./styles";
 import { useUser } from "pages/_app";
 import { useEffect } from "react";
+import ListItem from "components/list/item";
+import Link from "next/link";
 
 const OrderNewPayment = () => {
+  const { data: paymentList } = usePaymentList();
   const { data: user } = useUser();
 
   const { payment, setPayment, setActiveStep } = useNewOrderState((state) => ({
@@ -33,9 +37,14 @@ const OrderNewPayment = () => {
         onChange={({ id }) => setPayment(id)}
         hideActions
       />
-      <Continue onClick={nextStep} dense>
-        Continue
-      </Continue>
+      <Link href="/user/adress/create">
+        <ListItem startAction={<AddLineIcon />} primary="Add new address" />
+      </Link>
+      {paymentList && paymentList.length > 0 ? (
+        <Continue onClick={nextStep} dense>
+          Continue
+        </Continue>
+      ) : null}
     </>
   );
 };

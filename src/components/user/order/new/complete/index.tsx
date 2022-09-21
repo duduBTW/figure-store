@@ -72,7 +72,9 @@ const UserOderNewComplete = ({ order }: { order: OrderApiResponse }) => {
           <Text variant="subtitle-1">00</Text>
         </Price>
         <Section>
-          <Button>View order</Button>
+          <Link href={`/user/order/${order.id}`}>
+            <Button>View order</Button>
+          </Link>
           <Link href={"/"}>
             <Button color="primary-l">Back to shopping</Button>
           </Link>

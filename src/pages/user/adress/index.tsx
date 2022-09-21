@@ -46,7 +46,7 @@ const UserAdressPage = () => {
       {separator}
       <AdressList
         onChange={({ id }) => mutate(id)}
-        checked={user!.activeAdressId}
+        checked={user?.activeAdressId}
       />
       {separator}
       <Link href="/user/adress/create">

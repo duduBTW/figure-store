@@ -40,6 +40,7 @@ export const getOrder = async ({
           images: true,
         },
       },
+      payment: true,
     },
   });
 

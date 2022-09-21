@@ -14,7 +14,10 @@ export const Container = styled.div`
 `;
 
 export const Nav = styled.nav`
-  height: 6rem;
+  box-sizing: border-box;
+  padding: 1.5rem 2rem;
   width: 100%;
   background: var(--color-content);
+  display: flex;
+  justify-content: flex-end;
 `;

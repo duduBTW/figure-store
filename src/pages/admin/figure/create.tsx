@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from "next";
+import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import route from "server/client/routes";
 import service from "server/client/services";
@@ -15,6 +15,7 @@ const CreateFigurePage = () => {
   const { mutate, isLoading, isSuccess } = useMutation(service.insertProduct, {
     onSuccess: ({ id }) => {
       push(`/admin/figure/${id}`);
+      toast.success("Figure created!");
     },
   });
 

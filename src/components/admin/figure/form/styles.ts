@@ -14,6 +14,7 @@ export const Container = styled.form<ContainerProps>`
   flex-direction: column;
   gap: 2.8rem;
   border-top: 1px solid var(--color-divider);
+  margin-bottom: 8rem;
   ${mq.fromTabletMd} {
     margin: 2rem auto;
     max-width: 80rem;

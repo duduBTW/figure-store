@@ -2,11 +2,13 @@ import React, { PropsWithChildren } from "react";
 import styled from "@emotion/styled";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { SelectContentProps } from "@radix-ui/react-select";
-import { inputStyles } from "../styles";
 import Text from "components/text";
 import { useController, useFormContext } from "react-hook-form";
 import ArrowDownSLineIcon from "remixicon-react/ArrowDownSLineIcon";
 import ArrowUpSLineIcon from "remixicon-react/ArrowUpSLineIcon";
+
+// styles
+import { Container, inputStyles } from "../styles";
 
 const StyledTrigger = styled(SelectPrimitive.SelectTrigger)`
   ${inputStyles}
@@ -108,15 +110,15 @@ export const InputSelect = ({
   const { control } = useFormContext();
   const {
     field: { onChange, value, ref, onBlur },
+    fieldState: { error },
   } = useController({
     control,
     name,
   });
 
   return (
-    <div>
+    <Container error={Boolean(error)}>
       <Text variant="subtitle-2">{label}</Text>
-      <div style={{ height: "0.4rem" }} />
       <SelectContainer value={value} onValueChange={onChange}>
         <SelectTrigger ref={ref} aria-label={label} onBlur={onBlur}>
           <SelectValue placeholder={placeholder} />
@@ -133,6 +135,11 @@ export const InputSelect = ({
             <ArrowDownSLineIcon color="var(--text-secondary)" />
           </div>
         </SelectTrigger>
+        {error && (
+          <Text variant="caption" color="error">
+            {error.message}
+          </Text>
+        )}
         <SelectContent>
           <SelectScrollUpButton>
             <ArrowUpSLineIcon />
@@ -151,7 +158,7 @@ export const InputSelect = ({
           </SelectScrollDownButton>
         </SelectContent>
       </SelectContainer>
-    </div>
+    </Container>
   );
 };
 

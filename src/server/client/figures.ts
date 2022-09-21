@@ -10,7 +10,7 @@ export interface FigureListApiResponse {
   images: Image[];
 }
 
-interface EditorContent {
+export interface EditorContent {
   html: string;
   json: string;
 }

@@ -7,7 +7,7 @@ const FigureHtml = ({
   children,
   color,
 }: PropsWithChildren<{
-  color: string;
+  color?: string;
 }>) => {
   return <Container figureColor={color}>{children}</Container>;
 };

@@ -5,7 +5,7 @@ import dbServices from ".";
 import { adressScheme } from "./adress";
 
 export const getUser = async ({ user }: { user: UserSession }) => {
-  return await prisma.user.findFirst({
+  const data = await prisma.user.findFirst({
     where: {
       id: user.userId,
     },
@@ -22,6 +22,22 @@ export const getUser = async ({ user }: { user: UserSession }) => {
       nacionalitty: true,
     },
   });
+
+  return {
+    ...data,
+    document:
+      data && data.document
+        ? `***-***-***-${data.document.substr(data.document.length - 2)}`
+        : "",
+    phone:
+      data && data.phone
+        ? `*****-${data.phone.substr(data.phone.length - 4)}`
+        : "",
+    email:
+      data && data.email
+        ? `${data.email.split("")[0]}*****@${data.email.split("@")[1]}`
+        : "",
+  };
 };
 
 export const authenticateScheme = z.object({
@@ -71,7 +87,7 @@ export const registerScheme = z
   .object({
     name: z.string(),
     email: z.string(),
-    phone: z.number(),
+    phone: z.string(),
     password: z.string(),
     document: z.string(),
     nacionalitty: z.string(),

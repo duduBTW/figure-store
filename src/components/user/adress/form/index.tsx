@@ -1,4 +1,5 @@
 import { FormProvider, useForm, UseFormProps } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // components
 import Input from "components/input";
@@ -9,6 +10,7 @@ import { AdressApiRequest } from "server/client/adress";
 import InputSelect from "components/input/select";
 import InputMask from "components/input/mask";
 import InputNumber from "components/input/number";
+import { z } from "zod";
 
 const states = [
   { value: "AC", label: "Acre" },
@@ -40,6 +42,28 @@ const states = [
   { value: "TO", label: "Tocantins" },
 ];
 
+const message = "Field is required";
+export const adressScheme = z.object({
+  cep: z.number().refine((zip) => /^[0-9]{5}[0-9]{3}$/.test(String(zip)), {
+    message: "Invalid CEP",
+  }),
+  street: z.string().min(1, {
+    message,
+  }),
+  state: z.string().min(1, {
+    message,
+  }),
+  city: z.string().min(1, {
+    message,
+  }),
+  neighborhood: z.string().min(1, {
+    message,
+  }),
+  number: z.number().min(0, {
+    message,
+  }),
+});
+
 const UserAdressForm = ({
   onSubmit,
   formProps,
@@ -51,7 +75,10 @@ const UserAdressForm = ({
   submitLabel?: string;
   loading: boolean;
 }) => {
-  const formMethods = useForm<AdressApiRequest>(formProps);
+  const formMethods = useForm<AdressApiRequest>({
+    ...formProps,
+    resolver: zodResolver(adressScheme),
+  });
 
   return (
     <FormProvider {...formMethods}>
@@ -60,7 +87,9 @@ const UserAdressForm = ({
         onSubmit={formMethods.handleSubmit(onSubmit)}
       >
         <UserAddressFormInputs />
-        <SubmitButton loading={loading}>{submitLabel}</SubmitButton>
+        <SubmitButton type="submit" loading={loading}>
+          {submitLabel}
+        </SubmitButton>
       </UserAdressFormContainer>
     </FormProvider>
   );

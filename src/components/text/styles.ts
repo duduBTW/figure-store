@@ -98,7 +98,8 @@ export const buttonOutlined = css`
   line-height: 2.2rem;
   text-underline-offset: 0.2rem;
 
-  &:hover {
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
 `;
@@ -144,8 +145,18 @@ const getStyles = (variant: TextVariant) => {
         font-family: "Poppins";
         font-style: normal;
         font-weight: 600;
-        font-size: 1.6rem;
-        line-height: 2.4rem;
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+      `;
+
+    case "caption":
+      return css`
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+        letter-spacing: 0.02em;
       `;
 
     case "body-1":
@@ -165,7 +176,7 @@ interface ContainerProps {
   name?: string;
 }
 
-export const Container = styled.div<ContainerProps>`
+export const TextContainer = styled.div<ContainerProps>`
   ${({ variant }) => getStyles(variant)};
   grid-area: ${({ name }) => name ?? "unset"};
   color: ${({ colorText }) => {
@@ -178,6 +189,9 @@ export const Container = styled.div<ContainerProps>`
 
       case "primary":
         return "var(--color-primary)";
+
+      case "error":
+        return "var(--color-error)";
 
       default:
         return colorText;

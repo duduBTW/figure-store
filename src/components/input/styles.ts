@@ -2,10 +2,15 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Text from "components/text";
 
-export const Container = styled.div`
+interface ContainerProps {
+  error?: boolean;
+}
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+
+  margin-bottom: ${({ error }) => error && "-1.8rem"};
 `;
 
 export const ContentContainer = styled.div`
@@ -49,3 +54,4 @@ export const Content = styled.input`
   ${inputStyles}
 `;
 export const Label = styled(Text)``;
+export const Error = styled(Text)``;

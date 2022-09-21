@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import { useFormContext } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 // styles
 import {
@@ -8,6 +9,7 @@ import {
   ContentContainer,
   EndIconContainer,
   Label,
+  Error,
 } from "./styles";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -17,12 +19,24 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = ({ label, name, ...rest }: Props) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-    <Container>
+    <Container error={Boolean(errors[name])}>
       <Label variant="subtitle-2">{label}</Label>
       <Content autoComplete="off" {...rest} {...register(name)} />
+      <ErrorMessage
+        errors={errors}
+        name={name}
+        render={({ message }) => (
+          <Error color="error" variant="caption">
+            {message}
+          </Error>
+        )}
+      />
     </Container>
   );
 };

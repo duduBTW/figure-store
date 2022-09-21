@@ -7,7 +7,7 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 export function restrictRouteAdmin<
   P extends { [key: string]: unknown } = { [key: string]: unknown }
 >(
-  handler: (
+  handler?: (
     context: GetServerSidePropsContext,
     queryClient: QueryClient
   ) => Promise<P | void | 404>
@@ -15,11 +15,18 @@ export function restrictRouteAdmin<
   return withIronSessionSsr(async (context) => {
     const userSession = context.req.session.user;
 
-    if (!userSession?.userId || userSession.userRole !== "admin") {
+    if (!userSession?.userId)
+      return {
+        redirect: {
+          destination: "/login",
+          permanent: false,
+        },
+      };
+
+    if (userSession.userRole !== "admin")
       return {
         notFound: true,
       };
-    }
 
     api.defaults.headers.common["Cookie"] = context.req.headers.cookie ?? "";
 
@@ -27,7 +34,7 @@ export function restrictRouteAdmin<
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery(["user"], service.getUser);
 
-    const data = await handler(context, queryClient);
+    const data = await handler?.(context, queryClient);
     if (data === 404)
       return {
         notFound: true,

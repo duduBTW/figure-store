@@ -1,26 +1,42 @@
 import route from "server/client/routes";
+import { AnnouncementResponse } from "server/client/announcement";
 import service, { FigureListApiResponse } from "server/client/services";
+import { useState } from "react";
 
 // components
 import HomeBanner from "components/home/banner";
 import AlertList from "components/alert/list";
 import ProductGrid from "components/product/grid";
 import UserLayout from "components/user/layout";
+import HomeContainer from "components/home/container";
+import HomeAnnouncementDialog from "components/home/announcementDialog";
 
 const HomePage = ({
   alerts,
   slides,
   newFigures,
 }: {
-  alerts: string[];
+  alerts: AnnouncementResponse[];
   slides: string[];
   newFigures: FigureListApiResponse[];
 }) => {
+  const [dialogAnnouncement, setDialogAnnouncement] =
+    useState<AnnouncementResponse | null>(null);
+
   return (
     <>
       <HomeBanner slides={slides} />
-      <AlertList alerts={alerts} />
+      <HomeContainer>
+        <AlertList
+          alerts={alerts}
+          onAlertClcik={(alert) => setDialogAnnouncement(alert)}
+        />
+      </HomeContainer>
       <ProductGrid figures={newFigures} title="New" />
+      <HomeAnnouncementDialog
+        dialogAnnouncement={dialogAnnouncement}
+        onDialogAnnouncementChange={setDialogAnnouncement}
+      />
     </>
   );
 };
@@ -28,11 +44,6 @@ const HomePage = ({
 HomePage.Layout = UserLayout;
 
 export const getServerSideProps = route.public(async () => {
-  const alerts = [
-    "Shipping method suspension and resumption updates (Updated Jul 29, 2022)",
-    "COVID-19 shipping restrictions (Updated Mar 10, 2022)",
-  ];
-
   const slides = [
     "https://pbs.twimg.com/media/FcODsj_aMAAsmAd?format=jpg&name=4096x4096",
     "https://pbs.twimg.com/media/FZjkT28acAEOTBN?format=jpg&name=4096x4096",
@@ -40,6 +51,7 @@ export const getServerSideProps = route.public(async () => {
     "https://pbs.twimg.com/media/FbI9FsLUUAAuqkV?format=jpg&name=medium",
   ];
 
+  const alerts = await service.getAnnouncementListHome();
   const newFigures = await service.getNewProductList();
 
   return {

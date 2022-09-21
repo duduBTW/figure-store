@@ -1,14 +1,22 @@
 import styled from "@emotion/styled";
 import { mq } from "constants/theme";
-import AdminFigureContainer from "../../../container";
 import ArrowLeftLineIcon from "remixicon-react/ArrowLeftLineIcon";
 
-export const Container = styled(AdminFigureContainer)`
+export const Container = styled.div`
+  transition: margin 0.2s ease, padding 0.2s ease;
+  box-sizing: border-box;
+  background: var(--color-content);
+  width: 100%;
+  padding: 3.2rem 2rem;
+  display: flex;
+  flex-direction: column;
   gap: 0.8rem;
   padding: 2rem;
 
-  ${mq.fromMobileLg} {
-    margin-top: 0;
+  ${mq.fromTabletMd} {
+    margin: 0rem auto 2rem;
+    max-width: 80rem;
+    border-radius: 1.2rem;
     padding: 2rem 3.2rem;
   }
 `;

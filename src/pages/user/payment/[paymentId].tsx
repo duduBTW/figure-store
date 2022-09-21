@@ -4,12 +4,8 @@ import service from "server/client/services";
 import toast from "react-hot-toast";
 
 // components
-import ArrowLeftLineIcon from "remixicon-react/ArrowLeftLineIcon";
 import UserLayoutProfile from "components/user/layout/profile";
-import Text from "components/text";
 import UserPaymentForm from "components/user/payment/form";
-import ButtonIcon from "components/button/icon";
-import Link from "next/link";
 import Container from "components/container";
 import NotFound from "components/notFound";
 import Header from "components/header";

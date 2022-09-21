@@ -28,9 +28,10 @@ const ListItem = ({
   onClick,
   hideBorder,
 }: ListItemProps) => {
+  // const Container = ListItemContainer.withComponent(onClick ? "button" : "div");
+
   return (
     <ListItemContainer
-      tabIndex={onClick ? 0 : -1}
       clickable={Boolean(onClick)}
       onClick={onClick}
       selected={selected}

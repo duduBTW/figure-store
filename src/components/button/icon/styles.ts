@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { ButtonIconVariant } from ".";
 
 interface ContentProps {
   active?: boolean;
+  variant?: ButtonIconVariant;
 }
 export const Content = styled.button<ContentProps>`
   cursor: pointer;
